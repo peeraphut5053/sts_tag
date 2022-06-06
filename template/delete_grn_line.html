@@ -1,0 +1,163 @@
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<script type="text/javascript">
+    function ValidateJob(e) {
+        //alert('xx');
+        var keycode;
+        if (window.event)
+            keycode = window.event.keyCode; //  IE
+        else if (e)
+            keycode = e.which; //  Firefox 		
+        if (keycode == 13) {
+            var tag_id = $('#tag_id').val();
+
+
+
+
+            $.ajax({
+                url: `./module/reset_tag_id_shiped_get_tag.php?tag_id=${tag_id}`,
+                dataType: 'json',
+                type: 'get',
+                contentType: 'application/json',
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+
+                    if (data) {
+
+                        console.log(data)
+                        $("#data_tag_id").html(data.id)
+                        $("#data_job").html(data.job)
+                        $("#data_item").html(data.item)
+                        $("#data_lot").html(data.lot)
+                        $("#data_qty1").html(data.qty1)
+                        $("#data_ship_stat").val(data.ship_stat)
+                        $("#notfound").hide();
+
+                    } else {
+                        $("#notfound").show();
+                        $("#tag_id").select();
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+
+            return false;
+        }
+    }
+
+    function LinkUnpost() {
+        var tag_id = $('#tag_id').val();
+        var data_ship_stat = $('#data_ship_stat').val();
+        let updateVal = ""
+        if (data_ship_stat == '1') {
+            updateVal = "0"
+        } else {
+            updateVal = "1"
+        }
+        $.ajax({
+            url: `./module/reset_tag_id_shiped_update_tag.php?tag_id=${tag_id}&updateVal=${updateVal}`,
+            dataType: 'json',
+            type: 'get',
+            contentType: 'application/json',
+            processData: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data) {
+
+                    console.log(data)
+                    $("#data_tag_id").html(data.id)
+                    $("#data_ship_stat").val(data.ship_stat)
+                    $("#notfound").hide();
+
+                } else {
+                    $("#notfound").show();
+                    $("#tag_id").select();
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function clearTextInput() {
+        let grn_num = $("#grn_num").val()
+        console.log(grn_num)
+        let grn_line = $("#grn_line").val()
+        console.log(grn_num)
+
+        $.ajax({
+            type: 'POST',
+            url: `./module/delete_grn_line_delete.php`,
+            data: {"grn_num": grn_num, "grn_line": grn_line},
+            dataType: 'json',
+            error: function (data, textStatus, jQxhr) {
+                alert("ลบสำเร็จ")
+            }
+        });
+        
+        
+//        $.ajax({
+//            url: `./module/delete_grn_line_delete.php`,
+//            dataType: 'json',
+//            type: 'post',
+//            contentType: 'application/json; charset=utf-8',
+//            processData: false,
+//            data: {
+//                grn_num: grn_num,
+//                grn_line: grn_line
+//            },
+//            success: function (data, textStatus, jQxhr) {
+//                if (data) {
+//
+//                    console.log(data)
+//
+//
+//                } else {
+//                    console.log(data)
+//
+//                }
+//            },
+//            error: function (jqXhr, textStatus, errorThrown) {
+//                console.log(errorThrown);
+//            }
+//        });
+    }
+
+//    function clearTextInput() {
+//        $("#tag_id").val("")
+//        $("#tag_id").focus()
+//    }
+
+</script>
+<br>
+<br>
+
+
+<div class="col-xs-3" style="padding:10px">
+    <div class="col-xs-12 row" style="padding:10px">
+        <div class="col-xs-4" >Grn Num :</div>
+        <div class="col-xs-8"><input name="tag_id" type="text" id="grn_num" value="" class="tag_id"  autofocus></div>
+    </div>
+    <div class="col-xs-12 row" style="padding:10px">
+        <div class="col-xs-4" >Grn Line :</div>
+        <div class="col-xs-8"><input name="tag_id" type="text" id="grn_line" value="" class="tag_id"  autofocus></div>
+    </div>
+    <div class="col-xs-12 row" style="padding:10px">
+        <div class="col-xs-4" ></div>
+        <div class="col-xs-8">
+            <!--<button class="ui-button ui-widget ui-corner-all " id="timeWork" onClick="clearTextInput();" type="button"> ลบ GRN Line </button>-->
+        </div>
+    </div>
+    <div class="col-xs-6">
+
+    </div>
+</div>

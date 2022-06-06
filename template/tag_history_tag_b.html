@@ -1,0 +1,335 @@
+<script type="text/javascript">
+<!--
+    /*$(document).ready(function() {
+     $('#tblist tr').click(function(event) {
+     if (event.target.type !== 'checkbox') {			
+     $(':checkbox', this).trigger('click');
+     }
+     });
+     });	*/
+
+    function LinkTagA() {
+        var jobno = $('#job_no').val();
+        var uri_enc = encodeURIComponent(jobno);
+        window.location.href = '?tag_barcode&mode=tagfinishing&jobno=' + uri_enc + '&grade=A';
+    }
+    function LinkTagB() {
+        var jobno = $('#job_no').val();
+        var uri_enc = encodeURIComponent(jobno);
+        window.location.href = '?tag_barcode&mode=tag_b&jobno=' + uri_enc + '&grade=B';
+    }
+    function LinkTagC() {
+        var jobno = $('#job_no').val();
+        var uri_enc = encodeURIComponent(jobno);
+//        window.location.href = '?tag_barcode&mode=tagfinishing&jobno=' + uri_enc + '&grade=C';
+        window.location.href = '?tag_barcode&mode=tag_c&jobno=' + uri_enc + '&grade=C';
+    }
+    function LinkTagR() {
+        var jobno = $('#job_no').val();
+        var uri_enc = encodeURIComponent(jobno);
+        window.location.href = '?tag_barcode&mode=tagfinishing&jobno=' + uri_enc + '&grade=R';
+    }
+
+    function DeleteTag(tag_id) {
+        var r = confirm("ยืนยันการลบข้อมูล ?");
+        if (r == true) {
+            $.post("./module/tagBarcode_delete.php", {"tag_id": tag_id}, function (data) {
+                location.reload(true);
+                //alert(data);
+                return false;
+            }, 'html');
+        }
+    }
+
+    function PrintTag() {
+
+        var jobno = $('#job_no').val();
+        var uri_enc = encodeURIComponent(jobno);
+        var tag_ids = [];
+        //var chk = 0;
+        $("input:checkbox[name=line]:checked").each(function () {
+            tag_ids.push($(this).val());
+            //chk = 1;
+        });
+        //alert(tag_ids);
+        if (tag_ids != "") {
+            $('#printpopup').dialog({
+                modal: true,
+                autoOpen: true,
+                show: 'fade',
+                width: 400,
+                height: 600,
+                title: "ตัวอย่างก่อนพิมพ์"
+            })
+                    .load("./module/tag_print2.php?c=tag_b", {"job_no": uri_enc, "tag_ids": tag_ids});
+        } else {
+            alert('กรุณาเลือกข้อมูลก่อน');
+        }
+        return false;
+    }
+
+    function PrintTag1() {
+        var jobno = $('#job_no').val();
+        var uri_enc = encodeURIComponent(jobno);
+        var tag_ids = [];
+        //var chk = 0;
+        $("input:checkbox[name=line]:checked").each(function () {
+            tag_ids.push($(this).val());
+            //chk = 1;
+        });
+        //alert(tag_ids);
+        if (tag_ids != "") {
+            $('#printpopup').dialog({
+                modal: true,
+                autoOpen: true,
+                show: 'fade',
+                width: 400,
+                height: 600,
+                title: "ตัวอย่างก่อนพิมพ์"
+            })
+                    .load("./module/tag_print2.php?c=aus&cert=sts", {"job_no": uri_enc, "tag_ids": tag_ids});
+        } else {
+            alert('กรุณาเลือกข้อมูลก่อน');
+        }
+        return false;
+    }
+
+    function PrintTag2() {
+        var jobno = $('#job_no').val();
+        var uri_enc = encodeURIComponent(jobno);
+        var tag_ids = [];
+        //var chk = 0;
+        $("input:checkbox[name=line]:checked").each(function () {
+            tag_ids.push($(this).val());
+            //chk = 1;
+        });
+        //alert(tag_ids);
+        if (tag_ids != "") {
+            $('#printpopup').dialog({
+                modal: true,
+                autoOpen: true,
+                show: 'fade',
+                width: 400,
+                height: 600,
+                title: "ตัวอย่างก่อนพิมพ์"
+            })
+                    .load("./module/tag_print2.php?c=aus&cert=win", {"job_no": uri_enc, "tag_ids": tag_ids});
+        } else {
+            alert('กรุณาเลือกข้อมูลก่อน');
+        }
+        return false;
+    }
+
+    function PrintTagSlit() {
+        var tag_ids = [];
+        //var chk = 0;
+        $("input:checkbox[name=line]:checked").each(function () {
+            tag_ids.push($(this).val());
+            //chk = 1;
+        });
+        //alert(tag_ids);
+        if (tag_ids != "") {
+            $('#printpopup2').dialog({
+                modal: true,
+                autoOpen: true,
+                show: 'fade',
+                width: 800,
+                height: 300,
+                title: "ตัวอย่างก่อนพิมพ์"
+            })
+                    .load("./module/print_tag_slit.php", {"tag_ids": tag_ids});
+        } else {
+            alert('กรุณาเลือกข้อมูลก่อน');
+        }
+
+        return false;
+    }
+
+    function inpEditLine(id, qty1, wg, sts_no) {
+        $("#d_qty_" + id).html('<input name="qty1" type="text" id="qty1" style="width:100%" class="default" value="' + qty1 + '">');
+        $("#d_w_" + id).html('<input name="uf_act_Weight" type="text" id="uf_act_Weight" style="width:100%" class="default" value="' + wg + '">');
+        $("#d_sts_no_" + id).html('<input name="edt_sts_no" type="text" id="edt_sts_no" style="width:100%" class="default" value="' + sts_no + '">');
+        $("#edit_b_" + id).hide();
+        $("#edit_c_" + id).show();
+    }
+
+    function scEditLine(id, qty1, wg, sts_no) {
+        var qty2 = $("div[id='d_qty_" + id + "']  #qty1").val();
+        var wg2 = $("div[id='d_w_" + id + "'] #uf_act_Weight").val();
+        var sts_no2 = $("div[id='d_sts_no_" + id + "'] #edt_sts_no").val();
+        wg2.replace(',', '')
+        $.post("./module/tagBarcode_edit.php", {"tag_id": id, "qty1": qty2, "uf_act_Weight": wg2, "sts_no": sts_no2}, function (data) {
+            console.log(data);
+            location.reload(true);
+            //alert(data);
+            //$("#d_qty_"+id).html(qty);
+            //$("#d_w_"+id).html(wg);
+            return false;
+        }, 'html');
+        //$("#edit_b_"+id).show();	
+        //$("#edit_c_"+id).hide();	
+    }
+//-->
+</script>
+<table width="100%" border="0" cellspacing="0" cellpadding="5">
+    <tr>
+        <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
+                <tr>
+                    <td align="right">Job Order: </td>
+                    <td><input name="job_no" type="text" id="job_no" size="20" class="default_view" readonly value="{job_no}">
+                        <input name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000"></td>
+                </tr>
+<!--                <tr>
+                    <td align="right">Customer Order: </td>
+                    <td><input name="co_no" type="text" id="co_no" size="20" class="default_view" readonly value="{co_no}">
+                </tr>
+                <tr>
+                    <td align="right">Uf Ref. No.</td>
+                    <td><input name="uf_ref_no" type="text" id="uf_ref_no" size="20" class="default_view" readonly value="{Uf_refno}">
+                </tr>
+                <tr>
+                    <td align="right">Customer name</td>
+                    <td><input name="custname" type="text" id="custname" size="20" class="default_view" readonly value="{custname}">
+                </tr>
+                <tr>
+                    <td align="right">City</td>
+                    <td><input name="city" type="text" id="city" size="20" class="default_view" readonly value="{city}">
+                </tr>-->
+                <tr>
+                    <td align="right">Item:</td>
+                    <td><input name="item" type="text" id="item" size="32" class="default_view" readonly value="{item}"></td>
+                </tr>
+                <tr>
+                    <td align="right"> </td>
+                    <td><input name="item_desc" type="text" id="item_desc" size="53" class="default_view" readonly value={item_desc}></td>
+                </tr>
+                <tr>
+                    <td align="right">Operation:</td>
+                    <td><input name="oper_num" type="text" id="oper_num" size="5" class="default_view" readonly value="{oper_num}">
+                        &nbsp;&nbsp;WC:
+                        <input name="wc" type="text" id="wc" size="7" class="default_view" readonly value="{wc}">
+                        <input name="description" type="text" id="description" size="25" class="default_view" readonly value="{description}"></td>
+                </tr>
+<tr>
+                                                      
+</tr>
+                <tr>
+                    <td align="right">Qty Issued:</td>
+                    <td><input name="qty_issued" type="text" id="qty_issued" size="7" class="default_view" readonly value="{qty_issued}"> {matl_um}.</td>
+                </tr>   
+<tr>
+                <td>
+                                                                                                                
+</td>
+</tr>   
+            </table>
+<!--            <table hidden width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
+                <tr>
+                    <td align="right">ยอดสั่งผลิต</td>
+                    <td><input name="qty_released" type="text" id="qty_released" value="{qty_released}" size="7" class="default_view" readonly>
+                        เส้น</td>
+                    <td><input name="weight_released" type="text" id="weight_released" value="{weight_released}" size="9" class="default_view" readonly>
+                        KG.</td>
+                    <td><input name="pack_released" type="text" id="pack_released" value="{pack_released}" size="7" class="default_view" readonly>
+                        มัด</td>
+                </tr>
+                <tr>
+                    <td colspan="4" height="10"><hr></td>
+                </tr>
+                <tr>
+                    <td align="right"><strong>Grade A</strong> </td>
+                    <td><input name="qty1_a" type="text" id="qty1_a" value="{qty1_a}" size="7" class="default_view" readonly>
+                        เส้น</td>
+                    <td><input name="qty2_a" type="text" id="qty2_a" value="{qty2_a}" size="9" class="default_view" readonly>
+                        KG.</td>
+                    <td><input name="uf_pack_a" type="text" id="uf_pack_a" value="{uf_pack_a}" size="7" class="default_view" readonly>
+                        มัด</td>
+                </tr>
+                <tr>
+                    <td align="right"><strong>Grade B</strong> </td>
+                    <td><input name="qty1_b" type="text" id="qty1_b" value="{qty1_b}" size="7" class="default_view" readonly>
+                        เส้น</td>
+                    <td><input name="qty2_b" type="text" id="qty2_b" value="{qty2_b}" size="9" class="default_view" readonly>
+                        KG.</td>
+                    <td><input name="uf_pack_b" type="text" id="uf_pack_b" value="{uf_pack_b}" size="7" class="default_view" readonly>
+                        มัด</td>
+                </tr>
+                <tr>
+                    <td align="right"><strong>Grade C</strong> </td>
+                    <td><input name="qty1_c" type="text" id="qty1_c" value="{qty1_c}" size="7" class="default_view" readonly>
+                        เส้น</td>
+                    <td><input name="qty2_c" type="text" id="qty2_c" value="{qty2_c}" size="9" class="default_view" readonly>
+                        KG.</td>
+                    <td><input name="uf_pack_c" type="text" id="uf_pack_c" value="{uf_pack_c}" size="7" class="default_view" readonly>
+                        มัด</td>
+                </tr>
+                <tr>
+                    <td align="right"><strong>Grade R</strong> </td>
+                    <td><input name="qty1_r" type="text" id="qty1_r" value="{qty1_r}" size="7" class="default_view" readonly>
+                        เส้น</td>
+                    <td><input name="qty2_r" type="text" id="qty2_r" value="{qty2_r}" size="9" class="default_view" readonly>
+                        KG.</td>
+                    <td><input name="uf_pack_r" type="text" id="uf_pack_r" value="{uf_pack_r}" size="7" class="default_view" readonly>
+                        มัด</td>
+                </tr>
+                <tr>
+                    <td align="right"><strong>รวม</strong></td>
+                    <td><input name="total_qty1" type="text" id="total_qty1" value="{total_qty1}" size="7" class="default_view" readonly>
+                        เส้น</td>
+                    <td><input name="total_qty2" type="text" id="total_qty2" value="{total_qty2}" size="9" class="default_view" readonly>
+                        KG.</td>
+                    <td><input name="total_pack" type="text" id="total_pack" value="{total_pack}" size="7" class="default_view" readonly>
+                        มัด</td>
+                </tr>
+                <tr>
+                    <td align="right"><strong>qty mat</strong></td>
+                    <td>
+                        <input name="qty_mat" type="text" id="qty_mat" value="{qty_mat}" size="7" class="default_view" readonly>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            </table>-->
+
+</td>
+        <td width="60%" rowspan="2" valign="top"><div style='overflow:auto; height:400px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist">
+                    <tr bgcolor="#c4e1ff">
+                        <td align="center" width="2%"><strong>#</strong></td>
+                        <td align="center"><strong>Tag no.</strong></td>
+                        <td align="center"><strong>Lot</strong></td>
+                        <td align="center"><strong>HeatNo</strong></td>
+                        <td align="center" width="10%"><strong>เส้น/กิโล</strong></td>
+                        <td align="center" width="11%"><strong>น้ำหนักจริง</strong></td>
+                        <td align="center" width="9%"><strong>มัด/แถบ</strong></td>
+                        <td align="center" width="7%"><strong>Grade</strong></td>
+                        <td align="center" width="7%"><strong>สถานะ</strong></td>
+                        <td align="center" width="13%"><strong>วันที่</strong></td>
+                        <!-- <td align="center" width="9%"><strong>โดย</strong></td> -->
+                        <td width="2%"> </td>
+                    </tr>
+                    {list}		
+                </table></div>
+            <table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
+                <tr>
+                    <td align="center" >
+                        <input name="print_tag" type="button" id="print_tag" value=" Reprint " class="ui-button ui-widget ui-corner-all" onClick="{funcprint}();"> 
+<!--                        <input name="print_tag" type="button" id="print_tag" value=" Reprint  Aus Sts" class="ui-button ui-widget ui-corner-all" onClick="PrintTag1();"> 
+                        <input name="print_tag" type="button" id="print_tag" value=" Reprint Aus Wn" class="ui-button ui-widget ui-corner-all" onClick="PrintTag2();"> <input name="del_tag" type="button" id="del_tag" value=" ลบ Tag " class="ui-button ui-widget ui-corner-all" onClick="DeleteTag();"> </td>-->
+
+               
+                        <input name="print_b" type="button" id="print_a" value="พิมพ์ Tag B" class="ui-button ui-widget ui-corner-all" onClick="LinkTagB();">
+<!--                        <input style="display:none;" name="print_b" type="button" id="print_b" value="พิมพ์ B" class="ui-button ui-widget ui-corner-all" onClick="LinkTagB();">-->
+<!--                        <input name="print_c" type="button" id="print_c" value="พิมพ์ C" class="ui-button ui-widget ui-corner-all" onClick="LinkTagC();">-->
+<!--                        <input name="print_r" type="button" id="print_r" value="พิมพ์ R" class="ui-button ui-widget ui-corner-all" onClick="LinkTagR();">-->
+                    </td>
+<td></td>
+
+                </tr>
+            </table>
+</td>
+    </tr>
+
+</table>
+<div id="printpopup"></div>
+<div id="printpopup2"></div>

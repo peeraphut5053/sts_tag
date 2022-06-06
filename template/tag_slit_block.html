@@ -1,0 +1,54 @@
+<style type='text/css'>
+	@font-face{
+	font-family:Code39;
+	src:url('Fonts/3OF9_NEW.ttf') format('truetype');
+	font-weight:normal;
+	font-style:normal;
+}
+</style>
+<table width="99%" border="0" cellspacing="0" cellpadding="5" style="font-family:Tahoma; font-size:14px;" align="center">
+  <tr>
+	<td colspan="4">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align="center" style="font-family:Code39; color: #000000; font-size: 36pt; white-space: nowrap;">*{barcode}*</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-family:Tahoma; font-size:14px;">{barcode}</td>
+			</tr>
+		</table></td>	
+  </tr>
+  <tr>
+	<td colspan="4" height="10"></td>	
+  </tr>
+  <tr>
+    <td width="18%"><strong>Grade</strong>:</td>
+    <td>{Uf_Grade}</td>
+    <td width="19%"><strong>N / W</strong>:</td>
+    <td>{qty_rec}</td>
+  </tr>
+  <tr>
+	<td><strong>ขนาด</strong>:</td>
+    <td>{uf_Width}</td> 
+     <td><strong>วันที่ Slit</strong>:</td>
+    <td>{mdate}</td>
+  </tr>
+  <tr>
+	<td><strong>Lot#</strong>:</td>
+    <td>{lot}</td>  
+     <td><strong>Item Code</strong>:</td>
+    <td>{item}</td>
+  </tr>
+  <tr>
+	<td><strong>จำนวน/แถบ</strong>:</td>
+    <td>{numtab}</td>    
+	<td><strong>STS No.</strong>:</td>
+    <td>{sts_no}</td>
+  </tr>  
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+	<td height="40"></td> 
+  </tr>
+</table>
+{printlist}

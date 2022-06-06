@@ -1,0 +1,45 @@
+<script type="text/javascript">
+<!--	
+	function ValidateJob(e) {
+		//alert('xx');
+		var keycode;
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			var jobno = $('#joborder').val();
+			$.post("./module/validate_jobNo.php", {"jobno": jobno}, function(data) {				
+				if (data == "true") {
+					//alert(data);
+					$("#notfound").hide();
+					LinkUnpost();
+				} else {
+					$("#notfound").show();
+					$("#joborder").select();
+				}
+			}, 'html');
+			return false;
+		}	
+	}
+	
+	function LinkUnpost() {
+		var jobno = $('#joborder').val();
+		var jobno1 = encodeURIComponent(jobno);
+		window.location.href = '?{linkcmd}&jobno='+ jobno1+"&act=start";
+	}
+	
+//-->
+</script><br><br>
+<table width="100%" border="0" cellspacing="0" cellpadding="10" class="font18 green">
+  <tr>
+    <td align="center"><strong>สแกนใบสั่งผลิต</strong></td>
+  </tr>
+  <tr>
+    <td align="center" class="red">&nbsp;<span id="notfound" style="display:none;">ไม่พบข้อมูลที่ต้องการค้นหา</span>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center"><input name="joborder" type="text" id="joborder" value="" class="joborder" onKeyup="ValidateJob();" autofocus></td>
+  </tr>
+  <tr>
+    <td align="center"><button class="ui-button ui-widget ui-corner-all ui-state-disabled" id="timeWork" disabled onClick="LinkUnpost();" type="button"> ตกลง </button></td>
+  </tr>
+</table>

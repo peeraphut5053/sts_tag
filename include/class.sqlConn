@@ -1,0 +1,18 @@
+<?php
+
+class sqlConn {
+    public $conn;
+    public function __construct() {
+        $serverName = $_SESSION["serverName"];
+        $userName = $_SESSION["userName"];
+        $userPass = $_SESSION["userPass"];
+        $dbName = $_SESSION["dbName"];
+        $connectionInfo = array("Database" => $dbName, "UID" => $userName, "PWD" => $userPass, "MultipleActiveResultSets" => true, "CharacterSet" => 'utf-8');
+        $this->conn = sqlsrv_connect($serverName, $connectionInfo);
+        if (!$this->conn) {
+            echo "<pre>";
+            die(print_r(sqlsrv_errors(), true));
+        }
+    }
+
+}

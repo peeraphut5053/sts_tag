@@ -1,0 +1,57 @@
+<script type="text/javascript">
+<!--
+	var action="";
+	var imgact="";
+	function mouseOverImg(m_id, img) {	
+		//alert(action);
+		document.getElementById(m_id).src = img;		
+	}
+ 
+	function mouseOutImg(m_id, img) {		
+		if (action != m_id) {
+			document.getElementById(m_id).src = img;
+		}
+	}
+
+	function LoadSubMenu(m_id, img, img1) {
+		$("div.arrow_sbm").css('display','none');		
+		$('#arfocus'+m_id+'').css('display','');
+		document.cookie="m_id="+ m_id;
+
+		$("#submenu").load("./module/submenu.php?m_id=" + m_id);				
+		if (action != "") {
+			document.getElementById(action).src = imgact;			
+		}
+		action = m_id;		
+		imgact = img1;
+		document.getElementById(m_id).src = img;
+	}
+	
+//-->
+</script>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td width="130" align="center" valign="top" bgcolor="#e2e0e1"><table width="100%" border="0" cellspacing="0" cellpadding="15" class="font12">
+	<tr class="ibutton">
+		<!-- <td class="tdover" align="center" onMouseOver="mouseOverImg('m1','./image/m1.png')" onMouseOut="mouseOutImg('m1', './image/m1_bw.png')" onclick="gotolink('./?scan_jobOrder_start&linkcmd=m1_job');"><img src="./image/m1_bw.png" border="0" id="m1"><br>บันทึกเวลาเริ่มผลิต</td> -->
+		<td class="tdover" align="center" onMouseOver="mouseOverImg('m1','./image/m1.png')" onMouseOut="mouseOutImg('m1', './image/m1_bw.png')" onclick="LoadSubMenu('m1', './image/m1.png', './image/m1_bw.png');"><div class="arrow_sbm" style="display:none;" id="arfocusm1"><img src="./image/arrow_left.png" border="0"></div><img src="./image/m1_bw.png" border="0" id="m1"><br>บันทึกเวลา</td>
+	</tr>
+	<tr class="ibutton">
+		<td class="tdover" align="center" onMouseOver="mouseOverImg('m2','./image/m2.png')" onMouseOut="mouseOutImg('m2', './image/m2_bw.png')" onclick="LoadSubMenu('m2', './image/m2.png', './image/m2_bw.png');"><div class="arrow_sbm" style="display:none;" id="arfocusm2"><img src="./image/arrow_left.png" border="0"></div><img src="./image/m2_bw.png" border="0" id="m2"><br>พิมพ์แท็ก</td>
+	</tr>		
+	<tr class="ibutton">
+		<!-- <td class="tdover" align="center" onMouseOver="mouseOverImg('m3','./image/m3.png')" onMouseOut="mouseOutImg('m3', './image/m3_bw.png')" onclick="gotolink('./?scan_jobOrder_start&linkcmd=unposted_job');"><img src="./image/m3_bw.png" border="0" id="m3"><br>บันทึกผลผลิต</td> -->
+		<td class="tdover" align="center" onMouseOver="mouseOverImg('m3','./image/m3.png')" onMouseOut="mouseOutImg('m3', './image/m3_bw.png')" onclick="LoadSubMenu('m3', './image/m3.png', './image/m3_bw.png');"><div class="arrow_sbm" style="display:none;" id="arfocusm3"><img src="./image/arrow_left.png" border="0"></div><img src="./image/m3_bw.png" border="0" id="m3"><br>บันทึกผลผลิต</td>
+	</tr>	
+	<tr class="ibutton">
+		<td class="tdover" align="center" onMouseOver="mouseOverImg('m4','./image/m4.png')" onMouseOut="mouseOutImg('m4', './image/m4_bw.png')" onclick="LoadSubMenu('m4', './image/m4.png', './image/m4_bw.png');"><div class="arrow_sbm" style="display:none;" id="arfocusm4"><img src="./image/arrow_left.png" border="0"></div><img src="./image/m4_bw.png" border="0" id="m4"><br>แบ่งแท็ก</td>
+		<!-- <td class="tdover" align="center" onMouseOver="mouseOverImg('m4','./image/Break.png')" onMouseOut="mouseOutImg('m4', './image/Break_bw.png')" onclick="gotolink('./?scan_jobOrder_start&linkcmd=break_down');"><img src="./image/Break_bw.png" border="0" id="m4"><br>บันทึกเวลาเริ่มผลิต</td> -->
+	</tr>
+	<tr>
+		<td height="190">&nbsp;</td>
+	</tr>	
+	</table></td>
+    <td valign="top" bgcolor="#ffffff"><div id="submenu" class="bsubmenu"></div></td>
+  </tr>
+</table>
+{loadsubfirst}

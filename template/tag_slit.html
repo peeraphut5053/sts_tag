@@ -1,0 +1,182 @@
+<script type="text/javascript">
+<!--
+    $(function() {
+		$( "#pdate" ).datepicker({
+			dateFormat: 'dd/mm/yy'
+		});
+	});
+
+	function PrintTag() {		
+		var lot = $('#lot').val();
+		var actWeight = $('#uf_act_Weight').val();
+		//var slot = $('#slit_lot').val();		
+		//var slotm = $('#slit_lotm').val();
+
+		/*if (slot == ' ') {
+		   popup('ท่านระบุ <strong>รหัส  Item</strong> ไม่ถูกต้อง');
+			$('#slit_lot').focus();
+		} else if (slotm != '' && slotm.length != 10) {
+			popup('ท่านระบุ <strong>รหัส  Item</strong> ไม่ถูกต้อง')
+			$('#slit_lotm').focus();
+		} else*/ 
+		if (lot == '') {
+			popup('กรุณาระบุ <strong>Lot</strong>');
+			$('#lot').focus();
+		} else if (actWeight == '') {
+			popup('กรุณาระบุ <strong>น้ำหนักชั่งจริง</strong>');
+			$('#uf_act_Weight').focus();
+		} else {
+			$('#printpopup').dialog({
+				modal: true,
+				autoOpen: true,
+				show: 'fade',
+				width: 710,
+				height: 360,
+				title: "ตัวอย่างก่อนพิมพ์"
+			})
+			.load('./module/print_tag_slit.php?'+$('#formB').serialize());
+		}
+		return false;
+	}
+
+	function GotoHistory() {
+		var jobno = $('#job_no').val();
+		var uri_enc = encodeURIComponent(jobno);
+		window.location.href = '?tag_history_slit&jobno='+ uri_enc;
+	}
+
+	/*function GenSlitLot() {
+		$('#slit_lotm').val("");
+		var jobno = $('#job_no').val();
+		var slit_lot = $('#slit_lot').val();
+		var item = $('#item').val();		
+		var t = $('input[name=T]:checked').val();
+		var uf_width = {uf_Width}; //25-10-2017		
+		var act_width = $('#d'+slit_lot+'').val();
+		var act_weight = $('#g'+slit_lot+'').val();
+		var uf_act_Weight = 0;
+		if (act_width != undefined) {
+			uf_act_Weight = act_weight / act_width;
+			uf_act_Weight = uf_act_Weight * uf_width;
+			uf_act_Weight = formatCurrencyEs(uf_act_Weight, 0);
+			$('#uf_act_Weight').val(uf_act_Weight);
+		}
+		$.post("./module/gen_slitlot.php", {"jobno": jobno, "slit_lot": slit_lot, "item": item}, function(data) {				
+			slit_lot = data+t;
+			$('#lot').val(slit_lot);
+		}, 'html');
+		return false;
+	}
+	
+	function GenSlitLot1() {
+		$('#slit_lot').val("");
+		var jobno = $('#job_no').val();
+		var slit_lot = $('#slit_lotm').val();
+		var item = $('#item').val();		
+		var t = $('input[name=T]:checked').val();
+		$.post("./module/gen_slitlot.php", {"jobno": jobno, "slit_lot": slit_lot, "item": item}, function(data) {				
+			slit_lot = data+t;
+			$('#lot').val(slit_lot);
+		}, 'html');
+		return false;
+	}*/
+	
+
+//-->
+</script>
+<form name="formB" method="post" action="" id="formB">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" background="./image/slit.jpg" style="background-repeat:no-repeat; background-position:left;">
+	<tr>
+    <td height="10"><fieldset class="fieldstyle">
+        <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+            <tr>
+              <td width="36%" align="right">Job Order: </td>
+              <td width="64%"><input name="job_no" type="text" id="job_no" size="20" class="default_view" readonly value="{job_no}">
+              <input name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000"></td>
+            </tr>
+            <tr>
+				<td align="right">Item:</td>
+				<td><input name="item" type="text" id="item" size="40" class="default_view" readonly value="{item}"></td>
+			</tr>
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td><input name="item_desc" type="text" id="item_desc" size="62" class="default_view" readonly value={item_desc}></td>
+			</tr>
+            <tr>
+              <td align="right">Operation:</td>
+              <td><input name="oper_num" type="text" id="oper_num" size="9" class="default_view" readonly value="{oper_num}">
+                 &nbsp;&nbsp; WC:
+                  <input name="wc" type="text" id="wc" size="8" class="default_view" readonly value="{wc}">
+                <input name="description" type="text" id="description" size="30" class="default_view" readonly value="{description}"></td>
+            </tr>
+            
+    	</table>
+		<table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
+				<tr>
+				  <td width="36%" align="right">ยอดสั่งผลิต:</td>				  
+				  <td><input name="weight_released" type="text" id="weight_released" value="{weight_released}" size="10" class="default_view" readonly="readonly" />
+				  KG.</td>				  
+				</tr>
+				<tr>
+				  <td align="right">ยอดรายงานผล Slit:</td>				 
+				  <td><input name="qty_complete" type="text" id="qty_complete" value="{qty_complete}" size="10" class="default_view" readonly="readonly"/>
+					KG.</td>				 
+				</tr>
+				<tr>
+				  <td align="right">ยอดพิมพ์ Slit:<br /></td>				 
+				  <td><input name="uf_act_Weight1" type="text" id="uf_act_Weight1" value="{uf_act_Weight1}" size="10" class="default_view" readonly="readonly"/>
+				  KG.</td>				  
+				</tr>
+				<tr>
+				  <td align="right">วันที่พิมพ์:</td>
+				  <td colspan="3"><input type="text" id="pdate" name="pdate" class="default" style="width:100px;" value="{pdate}" readonly="readonly"> &nbsp; &nbsp; STS No.: <input type="text" id="sts_no" name="sts_no" class="default" style="width:100px;" value="{sts_no}" maxlength="10"></td>	
+				</tr>
+	  </table> 
+          
+		<table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
+		<tr>
+			<td width="36%" align="right">Lot:</td>
+			<td width="15%"><input name="lot" type="text" class="default" id="lot" size="18" value="{lot}" style="background: #f2fff9; readonly"/></td>
+			<td width="10%" align="right">น้ำหนัก: </td>
+              <td><input name="uf_act_Weight" type="text" id="uf_act_Weight" size="15" class="default" autofocus/> KG. {hidden_w}
+			  <input name="slit_lotm" type="hidden" id="slit_lotm" value=""/></td>
+		</tr>
+		</table>
+
+        <!-- <table width="100%" border="0" cellpadding="2" cellspacing="0" class="font14">
+            <tr>
+              <td width="36%" align="right" rowspan="2">รหัส  Item: </td>
+              <td width="25%"><select name="slit_lot" id="slit_lot" class="mydefault" style="width:110px;" onchange="GenSlitLot();">
+					{op_slit_lot}
+              </select> 
+			  <input name="lot" type="text" class="default" id="lot" size="10" value="" style="background: #f2fff9;" readonly/></td>
+              <td width="10%" align="right">น้ำหนัก: </td>
+              <td><input name="uf_act_Weight" type="text" id="uf_act_Weight" size="15" class="default" autofocus/> KG. {hidden_w}</td>
+            </tr>
+			<tr>				
+				<td colspan="3"><input name="slit_lotm" type="text" class="default" id="slit_lotm" style="width:110px;" onkeyup="GenSlitLot1();" /></td>
+			</tr>
+            <tr>
+				<td></td>
+				<td colspan="3"><table border="0" cellspacing="0" cellpadding="10" class="font14">
+					  <tr>
+						<td><label>
+						  <input name="T" type="radio" value="L" onclick="GenSlitLot();">(L)</label></td>
+						<td align="center"><label>
+						  <input name="T" type="radio" value="M" checked onclick="GenSlitLot();">(M)</label></td>
+						<td><label>
+						  <input name="T" type="radio" value="R" onclick="GenSlitLot();">(R)</label></td>
+					  </tr>
+					</table></td>
+			</tr>
+      </table> -->
+	  <br><br>
+        <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+			<tr>
+			  <td align="center"><input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print" onclick="GotoHistory();" value=" กลับไปหน้าประวัติ "> <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print" onclick="PrintTag();" value=" แสดง Tag Barcode "><input name="uf_sts_job" type="hidden" id="uf_sts_job" value="{uf_sts_job}"></td></tr>
+      </table>
+        </fieldset></td>
+ 	</tr>
+ </table>
+</form>
+<div id="printpopup"></div>

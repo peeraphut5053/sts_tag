@@ -1,0 +1,79 @@
+<style type='text/css'>
+    @font-face{
+        font-family:Code39;
+        src:url('Fonts/Code39Barcode.ttf') format('truetype');
+        font-weight:normal;
+        font-style:normal;
+    }
+    tbbody tr td{
+        font-size:12px;
+    }
+</style>
+<table width="100%" border="0" cellspacing="0" cellpadding="4" style="font-family:Tahoma; font-size:16px;">	
+    <tr>
+        <td colspan="3" style='height:35px;'></td>
+    </tr>
+    <tr>
+        <td colspan = "3">
+            <table width="110%" border="0" cellspacing="0" cellpadding="0">
+                <!--<td width="45"><img src="./image/logo_sts.png" width="45" height="44" border="0" alt=""> </td>-->
+                <td align="center" style='width:110%;'>
+                    <span style="margin-left:-25px;font-family:Code39; color: #000000; font-size: 18pt; white-space: nowrap;">*{barcode}*</span></td>
+                <!--<td width="34">&nbsp;</td>-->
+            </table></td>
+    </tr>	
+    <tr hidden>
+        <td width="10%">STS PO</td>
+        <td width="1%">:</td>
+        <td  width="30%" ><span style="font-size:24px;">{Uf_refno}</span></td>
+        <td width="50%" align="left" >
+            <img style="margin-left:-40px;"  src="./image/logo_sts.png" width="30" height="30" border="0" alt="">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="font-size: 50px;">
+            <div style='text-align: center'>
+                {spec}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>TYPE</td>
+        <td>:</td>
+        <td colspan="2">{Uf_TypeEnd}</td>
+    </tr>
+    <tr>
+        <td>SPEC</td>
+        <td>:</td>
+        <td colspan="2">{spec} &nbsp;{grade} {Uf_tagdesc}</td>
+    </tr>
+    <tr>
+        <td>NPS</td>
+        <td>:</td>
+        <td><span style="font-size:20px;">{Uf_NPS} x {Uf_Schedule} x {Uf_length}</span></td>
+    </tr>
+    <tr>
+        <td>PCS</td>
+        <td>:</td>
+        <td colspan="2">{Uf_pack} &nbsp; PCS. / BUNDLE</td>
+    </tr>
+    <!-- น้ำหนักมาตรฐาน-->    <!-- น้ำหนักจริง-->
+
+    <tr>
+        <td>WEIGHT</td>
+        <td>:</td>
+        <td colspan="2">{unit_weight} &nbsp; KGS. / BUNDLE</td>
+    </tr>
+
+    <tr>
+        <td>BUNDLE</td>
+        <td>:</td>
+        <td colspan="2">{pack_no}</td>
+    </tr>	
+
+    <tr>
+        <td colspan="3">{lot}&nbsp;&nbsp;MADE IN THAILAND</td>
+
+    </tr>
+</table>
+{printlist}

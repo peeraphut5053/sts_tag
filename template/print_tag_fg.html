@@ -1,0 +1,160 @@
+<style type="text/css">
+    <!--
+    .ui-button{  
+        font-size: 18px !important; 
+    }
+
+    input[type='checkbox'] {
+        width: 25px;
+        height: 25px;        
+    }
+    -->
+</style>
+<script type="text/javascript">
+<!--
+    $(document).ready(function () {
+        $('#tblist tr').click(function (event) {
+            if (event.target.type !== 'checkbox') {
+                $(':checkbox', this).trigger('click');
+            }
+        });
+    });
+
+    function FindId(e, n) {
+        var keycode;
+        if (window.event)
+            keycode = window.event.keyCode; //  IE
+        else if (e)
+            keycode = e.which; //  Firefox 		
+        if (keycode == 13 || n == 1) {
+            showProcessing();
+            $("#formS").submit();
+        }
+    }
+
+    function PrintTagFg() {
+        var jobno = $('#job_no').val();
+        var uri_enc = encodeURIComponent(jobno);
+        var tag_ids = [];
+        //var chk = 0;
+        $("input:checkbox[name=line]:checked").each(function () {
+            tag_ids.push($(this).val());
+            //chk = 1;
+        });
+        //alert(tag_ids);
+        if (tag_ids != "") {
+            $('#printpopup').dialog({
+                modal: true,
+                autoOpen: true,
+                show: 'fade',
+                width: 400,
+                height: 600,
+                title: "ตัวอย่างก่อนพิมพ์"
+            })
+                    .load("./module/tag_print.php", {"job_no": uri_enc, "tag_ids": tag_ids});
+        } else {
+            alert('กรุณาเลือกข้อมูลก่อน');
+        }
+
+        return false;
+    }
+
+    function PrintTagFgFinish() {
+        var jobno = $('#job_no').val();
+        var uri_enc = encodeURIComponent(jobno);
+        var tag_ids = [];
+        //var chk = 0;
+        $("input:checkbox[name=line]:checked").each(function () {
+            tag_ids.push($(this).val());
+            //chk = 1;
+        });
+        //alert(tag_ids);
+        if (tag_ids != "") {
+            $('#printpopup').dialog({
+                modal: true,
+                autoOpen: true,
+                show: 'fade',
+                width: 400,
+                height: 600,
+                title: "ตัวอย่างก่อนพิมพ์"
+            })
+                    .load("./module/tag_print2.php", {"job_no": uri_enc, "tag_ids": tag_ids,"c":'usa'});
+        } else {
+            alert('กรุณาเลือกข้อมูลก่อน');
+        }
+
+        return false;
+    }
+
+    function ResetS() {
+        window.location.href = '?print_tag_fg';
+    }
+
+    function inpEditLine(id, item) {
+        $("#d_item_" + id).html('<input name="item" type="text" id="item" style="width:100%" class="default" value="' + item + '">');
+        $("#edit_b_" + id).hide();
+        $("#edit_c_" + id).show();
+    }
+
+    function scEditLine(id) {
+        var item = $("#item").val();
+        $.post("./module/tagBcList_edit.php", {"tag_id": id, "item": item}, function (data) {
+            $("#formS").submit();
+            return false;
+        }, 'html');
+    }
+//-->
+</script>
+<form name="formS" method="post" action="" id="formS">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" align="center" background="./image/pipe.jpg">
+  <tr>
+	<td align="center">Tag Id: <input name="id" type="text" id="id" value="{id}" class="default" size="30" onKeyup="FindId(this, 0);" autofocus/> Uf Spec: <input name="uf_spec" type="text" id="uf_spec" value="{uf_spec}" class="default" size="25" onKeyup="FindId(this, 0);"/> Lot: <input name="lot" type="text" id="lot" value="{lot}" class="default" size="25" onKeyup="FindId(this, 0);"/> เงื่อนไข:
+	<select name="wh2" id="wh2" onchange="FindId(this, 1);" class="mydefault">
+	  <option value="0"{selected0}> </option>
+	  <option value="1"{selected1}>แสดงรายการที่ยังไม่ได้รับ</option>
+	  <option value="2"{selected2}>แสดงรายการที่รับแล้ว</option>
+	  <option value="3"{selected3}>แสดงรายการที่สถานะเป็น 1</option>
+	  <option value="4"{selected4}>แสดงรายการที่สถานะเป็น 0</option>
+	</select>
+	<!-- <label><input type="checkbox" name="recok" id="recok" onClick="FindId(this,1);" value="1"{check}>แสดงเฉพาะรายการที่ยังไม่ได้รับ</label> --> <input type="button" name="Button" value="  Reset  " onClick="ResetS();" class="default"></td>
+  </tr>
+  <tr>    
+    <td><div style='overflow:auto; height:380px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist">
+      <tr bgcolor="#c4e1ff">
+        <td align="center" width="2%" height="40"><strong>#</strong></td>
+        <td align="center"><strong>Tag Id</strong></td>
+		<td align="center"><strong>Job</strong></td>
+		 <td align="center"><strong>Lot</strong></td>
+		<td align="center"><strong>Item</strong></td>
+		<td align="center">E</td>
+		<td align="center"><strong>รับ</strong></td>       
+        <td align="center" width="4%"><strong>เส้น</strong></td>
+        <td align="center" width="5%"><strong>KG.</strong></td>
+        <td align="center" width="4%"><strong>มัดที่</strong></td>
+        <td align="center" width="3%"><strong>Grade</strong></td>
+		<td align="center" width="6%"><strong>Uf Spec</strong></td>
+        <td align="center" width="4%"><strong>สถานะ</strong></td>
+        <td align="center" width="9%"><strong>วันที่</strong></td>
+        <td align="center" width="4%"><strong>โดย</strong></td>
+        </tr>
+		{list}		
+    </table></div>
+<div style="text-align: -webkit-center;">
+   	<table width="30%" border="0" cellpadding="5" cellspacing="0" class="font14">
+		<tr>
+			<td align="center"><input name="print_tag" type="button" id="print_tag" value=" Print Tag ท่อ" class="ui-button ui-widget ui-corner-all" onClick="PrintTagFg();"></td>
+			<td align="center"><input name="print_tag" type="button" id="print_tag_finish" value=" Print Tag finishing" class="ui-button ui-widget ui-corner-all" onClick="PrintTagFgFinish();"></td>
+		</tr>
+	</table></td>                                 
+</div>
+
+  </tr>  
+</table>
+</form>
+<div id="printpopup"></div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+                $('#id').select();
+});
+</script>

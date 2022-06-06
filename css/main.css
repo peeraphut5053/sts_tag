@@ -1,0 +1,182 @@
+body{
+	font-family: "Tahoma", "MS Sans Serif", sans-serif;
+	margin: 0px;	
+}
+
+.font9 {
+	font-size:9px;
+}
+.font10 {
+	font-size:10px;
+}
+.font11 {
+	font-size:12px;
+}
+.font12 {
+	font-size:12px;
+}
+.font13 {
+	font-size:14px;
+}
+.font14 {
+	font-size:14px;
+}
+.font16 {
+	font-size:16px;
+}
+.font18 {
+	font-size:18px;
+}
+.font24 {
+	font-size:24px;
+}
+.font32 {
+	font-size:36px;
+}
+.black {
+	color:#000000;
+}
+.white {
+	color:#ffffff;
+}
+.red {
+	color:#FF0000;
+}
+.blue {
+	color:#4637FF;
+}
+.d_blue {
+	color:#071578;
+}
+.green {
+	color:#33CC00;
+}
+.d_green {
+	color:#006600;
+}
+.yellow {
+	color:#FFFF00;
+}
+.d_yellow {
+	color:#C4C400;
+}
+.orange {
+	color:#FFA980;
+}
+.d_orange {
+	color:#FF9900
+}
+.pink {
+	color:#FFCCFF;
+}
+.d_pink {
+	color:#510041;
+}
+.brown {
+	color:#804000;
+}
+.gray {
+	color:#c7c7c7;
+}
+.purple {
+	color:#d706d1;
+}
+
+input.joborder {
+	border: 1px solid #C7CEFE;
+	border-radius: 0.4em;
+	height: 40px;
+	padding-left: 5px;
+	font-size:18px;
+	width:430px;
+}
+
+input.default {
+	border: 1px solid #C7CEFE;
+	border-radius: 0.4em;
+	font-size:14px;
+	height: 35px;	
+	padding-left: 5px;
+}
+
+input.default_view {
+	border: 1px solid #C7CEFE;
+	border-radius: 0.4em;
+	font-size:14px;
+	height: 28px;	
+	background: #e5e5e5;
+	padding-left: 5px;
+}
+
+select.mydefault {
+	border: 1px solid #C7CEFE;
+	border-radius: 0.4em;
+	height: 34px;
+	padding:3px;
+	font-size:14px;
+}
+
+fieldset.fieldstyle {
+	border-radius: 0.4em;
+	border: 1px solid #c0c0c0;
+}
+
+td.borderall {
+	border-radius: 0.2em;
+	border: 1px solid black;
+}
+
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+} 
+
+td.tdover:hover {
+  background-color: #E4E4E4;
+  color:#000080;
+  /*text-decoration: underline;*/
+}
+
+.ibutton {
+	border:none;
+	cursor:pointer;
+	vertical-align:middle;
+}
+
+div.submenufull {
+	float:left; 
+	cursor:pointer; 
+	height:95px;
+	width:260px;
+	margin:2px;		
+}
+
+div.bsubmenu {	
+	border: 1px solid #e2dedf;
+	/*border-radius: 0.7em;*/
+	background-color: #ffffff;
+	height:99%;
+	width:99%;
+	overflow: auto; 
+	padding:5px;	
+}
+
+td.submenuover:hover {
+	color: #4f004f;
+	background-color: #dfdfdf;
+}
+
+div.arrow_sbm {	
+	position: absolute;		
+	left:134px;	
+	margin-top:20px;
+}
+
+div.clear{
+	clear:both
+}

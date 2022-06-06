@@ -1,0 +1,128 @@
+<style type="text/css">
+<!--
+.ui-button{  
+	font-size: 18px !important; 
+}
+
+input[type='checkbox'] {
+    width: 25px;
+    height: 25px;        
+}
+-->
+</style>
+<script type="text/javascript">
+<!--
+	$(document).ready(function() {
+      $('#tblist tr').click(function(event) {
+		if (event.target.type !== 'checkbox') {			       
+          $(':checkbox', this).trigger('click');
+        }
+      });
+    });	
+
+	function FindId(e) {
+		var keycode;
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			$("#formS").submit();			
+		}
+	}
+
+	function PrintTagCoil() {
+		var tag_ids = [];		
+		//var chk = 0;
+		$("input:checkbox[name=line]:checked").each(function(){
+			tag_ids.push($(this).val());
+			//chk = 1;
+		});
+		//alert(tag_ids);
+		if (tag_ids != "") {
+			$('#printpopup').dialog({
+				modal: true,
+				autoOpen: true,
+				show: 'fade',
+				width: 800,
+				height: 400,
+				title: "ตัวอย่างก่อนพิมพ์"
+			})
+			.load("./module/print_tag_coil.php", {"coil_ids": tag_ids});
+		} else {
+			popup('<font size="18" color="#ff0000">กรุณาเลือกข้อมูลก่อน</font>');
+		}
+		
+		return false;
+	}	
+
+	function CheckAllItem(){        
+		var checkboxes = document.getElementById('tblist').getElementsByTagName('input');
+		//alert(checkboxes.length);
+		if(top.document.getElementById('allitem').checked == true){
+			for(i=0;i<checkboxes.length;i++){
+				checkboxes[i].checked = true;
+			} 
+		}else{
+			for(i=0;i<checkboxes.length;i++){
+				checkboxes[i].checked = false;
+			} 
+		}
+	}
+
+	function DeleteTag(tag_id) {		
+		var r = confirm("ยืนยันการลบข้อมูล ?");
+		if (r == true) {
+			$.post("./module/tagBarcode_delete.php", {"tag_id": tag_id}, function(data) {		
+				location.reload(true);
+				//alert(data);
+				return false;
+			}, 'html');
+		} 		
+	}
+
+	function ResetS() {
+		window.location.href = '?coil_list';
+	}	
+//-->
+</script>
+<form name="formS" method="post" action="" id="formS">
+<table width="98%" border="0" cellspacing="0" cellpadding="5" align="center">
+  <tr>
+	<td><table width="100%" border="0" cellspacing="0" cellpadding="5">
+			<tr>
+			<td align="center">Tag Id: <input name="id" type="text" id="id" value="{id}" class="default" size="20" onKeyup="FindId(this);" autofocus/> &nbsp; GRN: <input name="grn" type="text" id="grn" value="{grn}" class="default" size="20" onKeyup="FindId(this);"/> &nbsp; Lot: <input name="lot" type="text" id="lot" value="{lot}" class="default" size="20" onKeyup="FindId(this);"/> &nbsp; Coil: <input name="coil" type="text" id="coil" value="{coil}" class="default" size="20" onKeyup="FindId(this);"/> <input type="button" name="Button" value="  Reset  " onClick="ResetS();" class="default"></td>
+			</tr>
+	</table>
+  </td></tr>
+  <tr>    
+    <td><div style='overflow:auto; height:380px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist">
+      <tr bgcolor="#c4e1ff">
+        <td align="center" width="3%"><input name="allitem" type="checkbox" id="allitem" value="1" onclick="CheckAllItem();"></td>
+        <td align="center"><strong>Tag Id</strong></td>
+        <td align="center"><strong>GRN</strong></td>
+		<td align="center"><strong>Lot</strong></td>		
+        <td align="center" ><strong>น้ำหนัก</strong></td>
+        <td align="center" ><strong>Vender</strong></td>
+       <td align="center" ><strong>Coil No.</strong></td> 
+        <td align="center"><strong>Spec</strong></td>
+        <td align="center"width="5%"><strong>สถานะ</strong></td>
+        <td align="center"><strong>วันที่</strong></td>
+        <td align="center" width="3%">#</td>
+        </tr>
+		{list}		
+    </table></div>
+	<table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
+		<tr>
+			<td align="center"><input name="print_tag" type="button" id="print_tag" value=" Print Tag" class="ui-button ui-widget ui-corner-all" onClick="PrintTagCoil();"></td>
+		</tr>
+	</table></td>
+  </tr>  
+</table>
+</form>
+<div id="printpopup"></div>
+<script type="text/javascript">
+<!--
+	$(document).ready(function() {
+      $('#id').select();
+    });
+//-->
+</script>

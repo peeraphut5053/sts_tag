@@ -1,0 +1,182 @@
+<style type="text/css">
+<!--
+.ui-button{  
+	font-size: 18px !important; 
+}
+-->
+</style>
+<script type="text/javascript">
+	function FindId(e) {
+		var keycode;
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			$("#formS").submit();			
+		}
+	}	
+
+	function SplitTag() {
+		var id = $("#id").val();
+		var qtyn = $("#qtyn").val();
+		var qtys = $("#qtys").val();
+		var tag = "{tag}";
+		if (qtyn == '') {
+			popup('กรุณาระบุจำนวนที่ต้องการแบ่ง Tag');
+			//$("#qtyn").focus();
+		} else if (qtys < 0) {
+			popup('ท่านใส่ข้อมูลไม่ถูกต้อง');
+			//$("#qtyn").select();
+		} else {
+			$.post("./module/split_tag_save.php", {"id": id, "qtyn": qtyn, "qtys": qtys}, function(data) {				
+				//alert(data);
+				data1 = data.split("||");
+				if (data1[1] == '11') {				
+					if (tag == "coil") {
+						window.location.href = '?coil_list&id='+ data1[0];
+					} else if (tag == "slit") {
+						window.location.href = '?slit_list&id='+ data1[0];
+					} else if (tag == "fg") {
+						window.location.href = '?print_tag_fg&id='+ data1[0];
+					}
+				} else {
+					popup(data);
+				}
+				//window.location.href = '?print_tag_fg&id='+ data;
+				//location.reload(true);
+				return false;
+			}, 'html');  
+		}
+	}
+        
+        function LotBarcode() {
+            let url = "";
+            if (window.location.host == '172.18.1.194') {
+            url = '172.18.1.194'
+            } else {
+                url = '61.90.156.165'
+            }
+            window.open(`http://${url}/sts_tag/?print_tag_fg`, '_blank');
+	}
+
+	function SplitQty() {
+		$("#qtyn").val($("#qtyn").val().replace(/[^0-9.]/g, ''));
+		var qtyn = $("#qtyn").val();
+		qtyn = qtyn.replace(",", ""); 
+		var qty1 = $("#qty1").val();
+		qty1 = qty1.replace(",", ""); 
+		var qty2 = qty1-qtyn;		
+		$("#qtys").val(qty2);
+	}
+        
+        function UpdateQtyTag(){
+            var id = $("#id").val();
+		var qtyUpdate = $("#qtyUpdate").val();
+                
+                var pass = prompt('password', '')
+                
+                if(pass=='123456'){
+                   if (qtyUpdate == '') {
+			popup('กรุณาระบุจำนวนที่ต้องการUpdate Tag');
+			//$("#qtyn").focus();
+                    }else {
+			$.post("./module/split_tag_updateqty.php", {"id": id, "qtyUpdate": qtyUpdate }, function(data) {				
+				//alert(data);
+				data1 = data.split("||");
+				if(1==1){
+					popup(data);
+                                        location.reload();
+				}
+				//window.location.href = '?print_tag_fg&id='+ data;
+				//location.reload(true);
+				return false;
+			}, 'html');  
+                    } 
+                }
+                
+		
+            
+            
+        }
+</script>
+<form name="formS" method="post" action="" id="formS">
+  <table width="90%" border="0" cellspacing="0" cellpadding="5" class="font14" align="center">
+    <tr>
+      <td><table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+        <tr>
+          <td width="39%" align="right">Tag ID: </td>
+          <td width="61%"><input name="id" type="text" id="id" value="{id}" class="default" size="30" onKeyup="FindId(this);" {atf1}/></td>
+        </tr>
+        <tr>
+          <td align="right">Item:</td>
+          <td><input name="item" type="text" id="item" value="{item}" class="default_view" size="30" readonly/></td>
+        </tr>
+        <tr>
+          <td align="right">Lot:</td>
+          <td><input name="lot" type="text" id="lot" value="{lot}" class="default_view" size="30" readonly/></td>
+        </tr>
+        <tr>
+          <td align="right">Ref. No.: </td>
+          <td><input name="job" type="text" id="job" value="{job}" class="default_view" readonly/>
+            <input name="suffix" type="text" id="suffix" value="{suffix}" class="default_view" size="5" readonly/></td>
+        </tr>
+        <tr>
+          <td align="right">Qty:</td>
+          <td><input name="qty1" type="text" id="qty1" value="{qty1}" class="default_view" size="10" readonly/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prod. Date: 
+            <input name="mfg_date" type="text" id="mfg_date" value="{mfg_date}" class="default_view" readonly/></td>
+        </tr>
+      </table></td>
+    </tr>
+    <tr>
+      <td><fieldset class="fieldstyle"><legend>Split to</legend>
+	      <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+            <tr>
+              <td width="49%" align="right">จำนวนที่ต้องการแบ่ง:</td>
+              <td width="51%"><input name="qtyn" type="text" id="qtyn" class="default" size="15" onBlur="SplitQty();" onKeyup="SplitQty();" {atf2}/></td>
+            </tr>
+            <tr>
+              <td align="right">จำนวนคงเหลือ Tag เดิม:</td>
+              <td><input name="qtys" type="text" id="qtys" value="{qty1}" class="default_view" size="15" readonly/></td>
+            </tr>
+            <tr>
+              <td height="10" colspan="2"></td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center">
+                  <button class="ui-button ui-widget ui-corner-all {cdis}" id="split" {dis} onClick="SplitTag();" type="button">Split</button>
+                  <button class="ui-button ui-widget ui-corner-all" onClick="LotBarcode();" type="button">Lot barcode</button>
+              
+              </td>
+            </tr>
+          </table>
+      </fieldset>&nbsp;</td>
+    </tr>
+
+<tr>
+      <td><fieldset class="fieldstyle"><legend>Update Qty</legend>
+	      <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+            <tr>
+              <td align="right">จำนวนคงเหลือ Tag เดิม:</td>
+              <td><input type="text"  value="{qty1}" class="default_view" size="15" readonly/></td>
+           </tr>
+            <tr>
+              <td width="49%" align="right">จำนวนที่ต้องการ Update:</td>
+              <td width="51%"><input name="qtyUpdate" type="text" id="qtyUpdate" class="default" size="15" onBlur="" /></td>
+            </tr>
+            <tr>
+              <td height="10" colspan="2"></td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center">
+                  <button class="ui-button ui-widget ui-corner-all" onClick="UpdateQtyTag();" type="button">Update Qty Tag</button>
+                  <button class="ui-button ui-widget ui-corner-all" onClick="window.open('http://172.18.1.194/sts_tag/module/gen_tag_new_rzi.php');" type="button">Gen new RZI</button>
+
+              
+              </td>
+            </tr>
+          </table>
+      </fieldset>&nbsp;</td>
+    </tr>
+  </table>
+</form>
+{sc}

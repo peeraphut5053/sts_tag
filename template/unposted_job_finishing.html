@@ -1,0 +1,310 @@
+<script type="text/javascript">
+<!--
+	function SaveData() {
+		var emp_code = $('#emp_code').val();
+		var resnum = $('#resnum').val();
+		var endtime = $('#end_time').val();	
+		//var grade_a = $('#grade_a').val();
+		//var grade_b = $('#grade_b').val();
+		//var grade_c = $('#grade_c').val();	
+		//var WGradeA = $('#Uf_WGradeA').val();
+		//var WGradeB = $('#Uf_WGradeB').val();
+		//var WGradeC = $('#Uf_WGradeC').val();
+		//var scrap = $('#scrap').val();
+		if (endtime == "") {
+			
+		} else {
+			if (emp_code == '') {
+				popup('กรุณาระบุรหัสพนักงาน');
+				$('#emp_num').focus();
+			} else if (resnum == '') {
+				popup('กรุณาระบุรหัสเครื่องจักร');
+				$('#resid').focus();
+			} else {
+				/*if (grade_a == '' || grade_b == '' || grade_c == '') {
+					alert('กรุณาใส่ค่าลงในช่อง ถ้าไม่ทราบให้ใส่ 0');
+				} else {
+					if (grade_c > 0 && scrap == '') {
+						alert('กรุณาเลือกเหตุผล');
+					} else if (grade_a > 0 && WGradeA == '')	{
+						alert('กรุณาใส่น้ำหนัก');
+						$('#Uf_WGradeA').focus();
+					} else if (grade_b > 0 && WGradeB == '')	{
+						alert('กรุณาใส่น้ำหนัก');
+						$('#Uf_WGradeB').focus();
+					} else if (grade_c > 0 && WGradeC == '')	{
+						alert('กรุณาใส่น้ำหนัก');
+						$('#Uf_WGradeC').focus();
+					} else {*/
+						$.post("./module/unposted_c_save.php", $("#form1").serialize(), function(data) {
+							//alert(data);
+							//$('#txtError').val(data);
+							//location.reload(true);
+							//window.location.href = '?scan_jobOrder_end';
+							if (data == "11") {
+								popupgoto("บันทึกข้อมูลเสร็จสมบูรณ์",'?scan_jobOrder_start&linkcmd=unposted_job_slit')
+								//window.location.href = '?scan_jobOrder_end';
+							} else {
+								popup(data);
+								return false;
+							}
+						}, 'html');	
+					/*}
+				}*/
+			}
+		}		
+	}
+	
+	function ValidateEmp(e) {		
+		var keycode;
+		var data1;		
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			var emp_num = $('#emp_num').val();
+			$.post("./module/validate_employee.php", {"emp_num": emp_num}, function(data) {				
+				if (data) {		
+					//alert(data);
+					data1 = data.split('||');					
+					$('#emp_code').val(data1[0]);
+					$('#emp_name').val(data1[1]);		
+					$('#shift').val(data1[2]);	
+					if (data1[0] != '') {
+						$("#emp_img").attr("src","./image/no-image.png");
+						$("#resid").prop("disabled", false);		
+						$("#resid").removeClass('ui-state-disabled');
+						$("#resid").focus();
+					} else {
+						$("#resid").prop("disabled", true);								
+						$("#resid").addClass('ui-state-disabled');
+						$("#emp_num").select();
+						popup('ไม่พบข้อมูลพนักงานที่ระบุ');
+					}
+				} 
+			}, 'html');			
+			return false;
+		}	
+	}
+	
+	function ValidateRes(e) {		
+		var keycode;
+		var data1;		
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			var resid = $('#resid').val();
+			$.post("./module/validate_res.php", {"resid": resid}, function(data) {				
+				if (data) {		
+					//alert(data);
+					data1 = data.split('||');					
+					$('#resnum').val(data1[0]);
+					$('#descr').val(data1[1]);											
+					if (data1[0] != '') {
+						$.post("./module/unposted_save.php", $("#form1").serialize(), function(data2) {
+							//$('#txtError').val(data2);	
+							//alert(data2);
+							if (data2 == "insok") {
+								popupgoto('กรุณาบันทึกเวลาเข้างานก่อน','?scan_jobOrder_start&linkcmd=clockin_job');
+							} else {
+								data3 = data2.split('||');
+								if (data3[0] == "true") {
+									$('#start_time').val(data3[1]);
+									$('#start_time_s').val(data3[2]);
+									//alert(data3[3]);
+									if (data3[3] == "1") {
+										$("#end_time").prop("readonly", false);
+										$("#end_time").removeClass('default_view');
+										$("#end_time").addClass('default');		
+										$("#extime").show();
+									} else {
+										$("#end_time").prop("readonly", true);
+										$("#end_time").removeClass('default');
+										$("#end_time").addClass('default_view');
+										$("#extime").hide();
+									}
+									$('#trans_date').val(data3[4]);
+									$("#rekey").val(data3[3]);
+								}
+							}
+						}, 'html');							
+					} else {
+						$("#resid").select();
+						popup('ไม่พบข้อมูลเครื่องจักรที่ระบุ');
+					}
+				}
+			}, 'html');			
+			return false;
+		}	
+	}
+
+	function getTime() {
+		today = new Date();
+		intHours = today.getHours();
+		intMinutes = today.getMinutes();
+		intSeconds = today.getSeconds();
+		
+	   hours = intHours + ":";	   
+
+	   if (intMinutes < 10) {
+		  minutes = "0"+intMinutes;
+	   } else {
+		  minutes = intMinutes;
+	   }
+		time = hours + minutes;
+		if ($('#end_time').val() == "") {
+			$('#end_time').val(time);	
+		}			
+		//alert(time);
+	}
+
+	function back() {
+		window.location.href = '?scan_jobOrder_start&linkcmd=unposted_job_slit';
+	}
+
+	$(function() {
+		$("#tabs").tabs();
+		$("#tabs").tabs({ fx: { opacity: 'toggle', duration:'fast'} });
+	});	
+//-->
+</script>
+<!-- <textarea name="txtError" cols="60" rows="6" id="txtError"></textarea>  -->
+<form id="form1" name="form1" method="post" action="">
+  <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0" class="font14 d_pink">
+      <tr>
+        <td>&nbsp;&nbsp;<strong>รหัสพนักงาน:</strong> 
+          <input name="emp_num" type="text" id="emp_num" class="default" style="width:300px" onKeyup="ValidateEmp();" autofocus>
+		  &nbsp;&nbsp;<strong>รหัสเครื่องจักร:</strong> 
+          <input name="resid" type="text" id="resid" class="default ui-state-disabled" style="width:300px" onKeyup="ValidateRes();" disabled></td>
+		  <td width="11%" align="right"><input type="button" name="Button" value=" บันทึกข้อมูล " class="ui-button ui-widget ui-corner-all" onclick="getTime(); SaveData();"></td>
+        <td width="13%" align="right"><input name="Save" type="button" id="Save" value="กลับไปหน้าแสกน" onClick="back();" class="ui-button ui-widget ui-corner-all"></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
+      <tr>
+        <td width="25%" align="center" valign="top"><table width="98%" border="0" cellspacing="0" cellpadding="5" class="font14">
+          <tr>
+            <td height="250" class="borderall" align="center"><img src="./image/blank.png" id="emp_img"></td>
+          </tr>
+          <tr>
+            <td align="center"><input name="emp_code" type="text" id="emp_code" style="width:28%" class="default_view" readonly>              
+              <input name="emp_name" type="text" id="emp_name" style="width:65%" class="default_view" readonly>
+			  <input name="shift" type="hidden" id="shift" value="{shift}"></td>
+          </tr>
+		  <tr>
+			<td><strong>เครื่องจักร:</strong></td>
+		  </tr>
+		  <tr>
+            <td align="center"><input name="resnum" type="text" id="resnum" style="width:35%" class="default_view" readonly>              
+              <input name="descr" type="text" id="descr" style="width:60%" class="default_view" readonly></td>
+          </tr>
+        </table></td>
+        <td><div id="tabs" style="width:99%; height:90%">
+			<ul>
+				<li><a href="#tabs-1" class="font14">บันทึกเวลางาน</a></li>
+                <li><a href="#tabs-2" class="font14">บันทึกผล Grade A</a></li>
+                <li style="display: none;"><a href="#tabs-3" class="font14">บันทึกผล Grade B</a></li>
+                <li><a href="#tabs-4" class="font14">บันทึกผล Grade B</a></li>
+                <li><a href="#tabs-5" class="font14">บันทึกผล Grade R</a></li>
+				<li><a href="#tabs-6" class="font14">บันทึกผล Scrap</a></li>
+			</ul>
+
+			<div id="tabs-1" style="background-color:#ffffff; height:410px; overflow: auto;"> 
+				<fieldset class="fieldstyle"><legend class="font12"><strong>ข้อมูลการทำงาน</strong></legend>
+				<table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+					<tr>
+					  <td width="25%" align="right">Job Order: </td>
+					  <td><input name="job_no" type="text" id="job_no" size="20" class="default_view" readonly value="{job_no}">
+						<input name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000"></td>
+					</tr>
+					<tr>
+					  <td align="right">Item:</td>
+					  <td><input name="item" type="text" id="item" size="40" class="default_view" readonly value="{item}"></td>
+					</tr>
+					<tr>
+					  <td align="right">&nbsp;</td>
+					  <td><input name="item_desc" type="text" id="item_desc" size="54" class="default_view" readonly value={item_desc}></td>
+					</tr>
+					<tr>
+					  <td align="right">Operation:</td>
+					  <td><input name="oper_num" type="text" id="oper_num" size="8" class="default_view" readonly value="{oper_num}">
+						&nbsp;&nbsp;&nbsp;WC:&nbsp;
+						  <input name="wc" type="text" id="wc" size="8" class="default_view" readonly value="{wc}">
+						<input name="description" type="text" id="description" size="30" class="default_view" readonly value="{description}"></td>
+					</tr>
+					<tr>
+					  <td height="10" colspan="2" align="right"></td>
+					  </tr>
+					<tr>
+					  <td align="right">Trans. Date: </td>
+					  <td><input name="trans_date" type="text" id="trans_date" size="15" class="default_view" readonly value="{trans_date}" style="text-align:center;"></td>
+					</tr>
+					<tr>
+					  <td>&nbsp;</td>	
+					  <td><fieldset class="fieldstyle" style="background-color:#ccff99; width:150px; font16"><legend class="font12"><strong>Start Time:</strong></legend>
+							<input name="start_time" type="text" id="start_time" size="15" class="default_view" readonly value="{start_time}">
+						</fieldset></td>
+					</tr>
+					<tr>
+					  <td>&nbsp;</td>
+					  <td><fieldset class="fieldstyle" style="background-color:#ffcc99; width:150px; font16"><legend class="font12"><strong>End Time:</strong></legend>
+							<input name="end_time" type="text" id="end_time" size="15" class="default_view" readonly>
+					  </fieldset>&nbsp;<span id="extime" style="display:none;" class="purple font14">ต้องใส่เวลาเป็นแบบ 24 ชั่วโมง เช่น 21:00</span>
+						<!-- <input name="start_time_s" type="hidden" id="start_time_s" value="{start_time_s}"> -->
+						<input name="start_time_s" type="hidden" id="start_time_s" value="">
+						<input name="rekey" type="hidden" id="rekey" value="">
+						</td>
+					</tr>
+				  </table></fieldset>
+			  </div>
+
+			  <div id="tabs-2" style="background-color:#ffffff; height:410px; overflow: auto;"> 
+				  <fieldset class="fieldstyle"><legend class="font12"><strong>Grade A:</strong></legend>
+				  <table width="70%" border="0" cellspacing="0" cellpadding="5" class="font14">
+					<tr>
+					  <td width="50%"><input name="grade_a" type="text" id="grade_a" size="20" class="default" value="{qty1_a}" onClick="this.select();"> {u_m}</td>
+					  <td><input name="Uf_WGradeA" type="text" id="Uf_WGradeA" size="20" class="default" value="{qty2_a}" onClick="this.select();"> KG.</td>
+					</tr>
+				  </table></fieldset>
+			  </div>
+
+			  <div id="tabs-3" style="background-color:#ffffff; height:410px; overflow: auto;"> 
+			  <fieldset class="fieldstyle"><legend class="font12"><strong>Grade B:</strong></legend>
+				  <table width="100%" border="0" cellspacing="0" cellpadding="1" class="font14">
+					{input_b}
+				  </table></fieldset>
+			  </div>
+
+			  <div id="tabs-4" style="background-color:#ffffff; height:410px; overflow: auto;"> 
+				<fieldset class="fieldstyle"><legend class="font12"><strong>Grade C:</strong></legend>
+				<table width="100%" border="0" cellspacing="0" cellpadding="1" class="font14">
+					{input_c}
+				</table></fieldset>
+			  </div>
+
+			<div id="tabs-5" style="background-color:#ffffff; height:410px; overflow: auto;"> 
+				<fieldset class="fieldstyle"><legend class="font12"><strong>Grade R:</strong></legend>
+				<table width="100%" border="0" cellspacing="0" cellpadding="1" class="font14">
+					{input_r}			
+				</table></fieldset>
+			</div>
+			
+			<div id="tabs-6" style="background-color:#ffffff; height:410px; overflow: auto;"> 
+				<fieldset class="fieldstyle"><legend class="font12"><strong>Scrap:</strong></legend>
+				<table width="100%" border="0" cellspacing="0" cellpadding="1" class="font14">
+					{input_s}			
+				</table></fieldset>
+			</div>
+
+		</div></td>
+      </tr>
+	  <!-- <tr>
+		<td colspan="2" align="right"><input type="button" name="Button" value="บันทึกข้อมูล" class="ui-button ui-widget ui-corner-all" onclick="getTime(); SaveData();"></td>
+	  </tr> -->
+    </table></td>
+  </tr>
+</table>
+</form>

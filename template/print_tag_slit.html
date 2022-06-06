@@ -1,0 +1,39 @@
+<script type="text/javascript">
+<!--
+	function PrintElem() {
+		var mywindow = window.open('', 'PRINT', '');
+        mywindow.document.write('<html><head><title>' + document.title  + '</title>');		
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(document.getElementById("printTag").innerHTML);
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+
+        mywindow.print();
+        mywindow.close();		
+		
+		$.post("./module/tag_slit_save.php", $('#formB').serialize(), function(data) {				
+			//alert(data);
+			$('#printpopup').dialog('close');
+			if (data == "1") {
+				location.reload(true);
+			} else if(data == "2") {
+				return false;
+			} else {
+				popup(data);
+			}
+			return false;
+		}, 'html');  
+	}	
+//-->
+</script>
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+	<tr>
+		<td align="center"><input name="print_a" type="button" id="print_a" value=" พิมพ์ Tag Barcode " class="ui-button ui-widget ui-corner-all" onClick="PrintElem();"></td>
+	</tr>
+</table>
+<hr>
+<div id="printTag">
+	{printlist}
+</div>

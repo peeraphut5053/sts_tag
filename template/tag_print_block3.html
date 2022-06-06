@@ -1,0 +1,93 @@
+<style type='text/css'>
+	@font-face{
+	font-family:Code39;
+	src:url('Fonts/Code39Barcode.ttf') format('truetype');
+	font-weight:normal;
+	font-style:normal;
+}
+</style>
+<table width="100%" border="0" cellspacing="0" cellpadding="4" style="font-family:Tahoma; font-size:12px;">	
+
+	<tr>
+		<td colspan = "4"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<!--<td width="45"><img src="./image/logo_sts.png" width="45" height="44" border="0" alt=""> </td>-->
+			<td align="center"><span style="font-family:Code39; color: #000000; font-size: 12pt; white-space: nowrap;">*{barcode}*</span></td>
+			<!--<td width="34"><img src="./image/acrs.png" width="34" height="39" border="0" alt=""></td>-->
+		</table></td>
+	</tr>	
+<!--	<tr>
+		<td colspan="3" style="font-family:Tahoma; font-size:9px;" align="right">ACRS CERT : 180503 &nbsp; </td>		
+	</tr>-->
+	<tr>
+		<td width="10%">STS PO</td>
+		<td width="1%">:</td>
+                <td width="35%"><span style="font-size:20px;">{Uf_refno}</span></td>
+		<td width="40%" >
+	<img src="./image/logo_sts.png" width="30" height="30" border="0" alt="">
+	<img src="./image/acrs.png" width="30" height="30" border="0" alt="">
+</td>
+	</tr>
+	<tr>
+		<td>TYPE</td>
+		<td>:</td>
+		<td >{Uf_TypeEnd}</td>
+			<td width="40%" align="left">
+					<h6>ACRS CERT : 180503 </h6>
+			</td>
+    </tr>
+	<tr>
+		<td>SPEC</td>
+		<td>:</td>
+		<td colspan="2">{spec} &nbsp;{grade}</td>
+    </tr>
+	<tr>
+		<td>SIZE</td>
+		<td>:</td>
+                <td colspan="2"><span style="font-size:18px;">{Uf_NPS} x {Uf_Schedule} x {Uf_length}</span></td>
+    </tr>
+	<tr>
+		<td>PCS</td>
+		<td>:</td>
+		<td colspan="2">{Uf_pack} &nbsp; PCS. / BUNDLE</td>
+    </tr>
+	<tr>
+		<td>WEIGHT</td>
+		<td>:</td>
+		<td colspan="2">{unit_weight} &nbsp; KGS. / BUNDLE</td>
+    </tr>
+	<tr>
+		<td>BUNDLE</td>
+		<td>:</td>
+		<td colspan="2">{pack_no}</td>
+	</tr>	
+	<tr>
+		<td>HEAT NO</td>
+		<td>:</td>
+		<td colspan="2"><span style="font-size:20px;">{Heat_no}</span></td>
+	</tr>
+	<tr>
+		<td>CUST</td>
+		<td>:</td>
+		<td colspan="2">{cust_num}</td>
+	</tr>
+	<tr>
+		<td>CUST PO</td>
+		<td>:</td>
+		<td colspan="2">{cust_po}</td>
+	</tr>
+	<tr>
+		<td>PORT</td>
+		<td>:</td>
+		<td colspan="2">{addr##1}</td>
+	</tr>
+	<tr>
+		<!--<td style="font-size:9px;">{mfd}</td>-->
+		<td colspan="3" >{lot}</td>
+		<td colspan="3" >{mfd}</td>
+	</tr>
+	<!-- <tr>
+		<td>&nbsp;</td>
+		<td colspan="2">MADE IN THAILAND</td>
+	</tr> -->
+</table>
+{printlist}

@@ -1,0 +1,143 @@
+<style type="text/css">
+<!--
+.ui-button{  
+	font-size: 18px !important; 
+}
+input[type='checkbox'] {
+    width: 25px;
+    height: 25px;        
+}
+-->
+</style>
+<script type="text/javascript">
+<!--
+	$(document).ready(function() {
+      $('#tblist tr').click(function(event) {
+        if (event.target.type !== 'checkbox') {			
+          $(':checkbox', this).trigger('click');
+        }
+      });
+    });	
+
+	function FindId(e, n) {
+		var keycode;
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13 || n == 1) {
+			showProcessing();
+			$("#formS").submit();			
+		}
+	}
+
+	function PrintTagSlit() {
+		var tag_ids = [];		
+		//var chk = 0;
+		$("input:checkbox[name=line]:checked").each(function(){
+			tag_ids.push($(this).val());
+			//chk = 1;
+		});
+		//alert(tag_ids);
+		if (tag_ids != "") {
+			$('#printpopup2').dialog({
+				modal: true,
+				autoOpen: true,
+				show: 'fade',
+				width: 710,
+				height: 360,
+				title: "ตัวอย่างก่อนพิมพ์"
+			})
+			.load("./module/print_tag_slit.php", {"tag_ids": tag_ids});
+		} else {
+			alert('กรุณาเลือกข้อมูลก่อน');
+		}
+		
+		return false;
+	}	
+
+	function CheckAllItem(){        
+		var checkboxes = document.getElementById('tblist').getElementsByTagName('input');
+		//alert(checkboxes.length);
+		if(top.document.getElementById('allitem').checked == true){
+			for(i=0;i<checkboxes.length;i++){
+				checkboxes[i].checked = true;
+			} 
+		}else{
+			for(i=0;i<checkboxes.length;i++){
+				checkboxes[i].checked = false;
+			} 
+		}
+	}
+
+	function ResetS() {
+		window.location.href = '?slit_list';
+	}	
+
+	function inpEditLine(id, item, spec) {
+		$("#d_item_"+id).html('<input name="item" type="text" id="item" style="width:100%" class="default" value="'+item+'">');
+		$("#d_spec_"+id).html('<input name="spec" type="text" id="spec" style="width:100%" class="default" value="'+spec+'">');
+		$("#edit_b_"+id).hide();	
+		$("#edit_c_"+id).show();	
+	}
+
+	function scEditLine(id) {
+		var item = $("#item").val();
+		var spec = $("#spec").val();
+		$.post("./module/tagBcList_edit.php", {"tag_id": id, "item": item, "spec": spec}, function(data) {		
+			$("#formS").submit();
+			return false;
+		}, 'html');		
+	}
+//-->
+</script>
+<form name="formS" method="post" action="" id="formS">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" align="center" background="./image/slit.jpg">
+  <tr>
+	<td><table width="100%" border="0" cellspacing="0" cellpadding="5">
+		<tr>			
+		<td align="center">Tag Id: <input name="id" type="text" id="id" value="{id}" class="default" size="30" onKeyup="FindId(this,0);" autofocus/> Uf Spec: <input name="uf_spec" type="text" id="uf_spec" value="{uf_spec}" class="default" size="25" onKeyup="FindId(this,0);"/> Lot: <input name="lot" type="text" id="lot" value="{lot}" class="default" size="25" onKeyup="FindId(this,0);"/> เงื่อนไข:
+		<select name="wh2" id="wh2" onchange="FindId(this,1);" class="mydefault">
+		  <option value="0"{selected0}> </option>
+		  <option value="1"{selected1}>แสดงรายการที่ยังไม่ได้รับ</option>
+		  <option value="2"{selected2}>แสดงรายการที่รับแล้ว</option>
+		  <option value="3"{selected3}>แสดงรายการที่สถานะเป็น 1</option>
+		  <option value="4"{selected4}>แสดงรายการที่สถานะเป็น 0</option>
+		</select> <input type="button" name="Button" value="  Reset  " onClick="ResetS();" class="default"></td>
+		</tr>
+	</table>
+  </td></tr>
+  <tr>    
+    <td><div style='overflow:auto; height:380px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist">
+      <tr bgcolor="#c4e1ff">
+        <td align="center" width="2%"><input name="allitem" type="checkbox" id="allitem" value="1" onclick="CheckAllItem();"></td>
+		<!-- <td align="center"><strong>No</strong></td> -->
+        <td align="center"><strong>Tag Id</strong></td>
+		<td align="center"><strong>Job</strong></td>		
+        <td align="center"><strong>Lot</strong></td>
+		<td align="center"><strong>Item</strong></td>		
+		<td align="center"><strong>รับ</strong></td>
+        <td align="center" width="6%"><strong>น้ำหนัก</strong></td>
+        <td align="center" width="7%"><strong>Uf Spec</strong></td>
+        <td align="center">E</td>
+		<td align="center" width="4%"><strong>สถานะ</strong></td>
+        <td align="center" width="9%"><strong>วันที่</strong></td>
+        <td align="center" width="4%"><strong>โดย</strong></td>
+        </tr>
+		{list}		
+    </table></div>
+	<table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
+		<tr>
+			<td align="center"><input name="print_tag" type="button" id="print_tag" value=" Print Tag" class="ui-button ui-widget ui-corner-all" onClick="PrintTagSlit();"></td>
+		</tr>
+	</table></td>
+  </tr>  
+</table>
+</form>
+<div id="printpopup"></div>
+<div id="printpopup2"></div>
+<script type="text/javascript">
+<!--
+	$(document).ready(function() {
+      $('#id').select();
+    });
+//-->
+</script>

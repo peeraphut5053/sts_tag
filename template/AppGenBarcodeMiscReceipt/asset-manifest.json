@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/AppGenBarcodeMiscReceipt/static/css/main.d1b05096.chunk.css",
+    "main.js": "/AppGenBarcodeMiscReceipt/static/js/main.ca4aed62.chunk.js",
+    "main.js.map": "/AppGenBarcodeMiscReceipt/static/js/main.ca4aed62.chunk.js.map",
+    "runtime-main.js": "/AppGenBarcodeMiscReceipt/static/js/runtime-main.43126b6d.js",
+    "runtime-main.js.map": "/AppGenBarcodeMiscReceipt/static/js/runtime-main.43126b6d.js.map",
+    "static/js/2.5347b0af.chunk.js": "/AppGenBarcodeMiscReceipt/static/js/2.5347b0af.chunk.js",
+    "static/js/2.5347b0af.chunk.js.map": "/AppGenBarcodeMiscReceipt/static/js/2.5347b0af.chunk.js.map",
+    "index.html": "/AppGenBarcodeMiscReceipt/index.html",
+    "precache-manifest.d3b5566b683ff661144cf959feae4b5c.js": "/AppGenBarcodeMiscReceipt/precache-manifest.d3b5566b683ff661144cf959feae4b5c.js",
+    "service-worker.js": "/AppGenBarcodeMiscReceipt/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/AppGenBarcodeMiscReceipt/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.5347b0af.chunk.js.LICENSE.txt": "/AppGenBarcodeMiscReceipt/static/js/2.5347b0af.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/AppGenBarcodeMiscReceipt/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.43126b6d.js",
+    "static/js/2.5347b0af.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.ca4aed62.chunk.js"
+  ]
+}

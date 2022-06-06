@@ -1,0 +1,166 @@
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<script type="text/javascript">
+    function ValidateJob(e) {
+        //alert('xx');
+        var keycode;
+        if (window.event) keycode = window.event.keyCode; //  IE
+        else if (e) keycode = e.which; //  Firefox 		
+        if (keycode == 13) {
+            var tag_id = $('#tag_id').val();
+
+
+
+
+            $.ajax({
+                url: `./module/reset_tag_id_shiped_get_tag.php?tag_id=${tag_id}`,
+                dataType: 'json',
+                type: 'get',
+                contentType: 'application/json',
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+
+                    if (data) {
+
+                        console.log(data)
+                        $("#data_tag_id").html(data.id)
+                        $("#data_job").html(data.job)
+                        $("#data_item").html(data.item)
+                        $("#data_lot").html(data.lot)
+                        $("#data_qty1").html(data.qty1)
+                        $("#data_ship_stat").val(data.ship_stat)
+                        $("#notfound").hide();
+
+                    } else {
+                        $("#notfound").show();
+                        $("#tag_id").select();
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+
+            return false;
+        }
+    }
+
+    function LinkUnpost() {
+        var tag_id = $('#tag_id').val();
+        var data_ship_stat = $('#data_ship_stat').val();
+        let updateVal = ""
+        if (data_ship_stat == '1') {
+            updateVal = "0"
+        } else {
+            updateVal = "1"
+        }
+        $.ajax({
+            url: `./module/reset_tag_id_shiped_update_tag.php?tag_id=${tag_id}&updateVal=${updateVal}`,
+            dataType: 'json',
+            type: 'get',
+            contentType: 'application/json',
+            processData: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data) {
+
+                    console.log(data)
+                    $("#data_tag_id").html(data.id)
+                    $("#data_ship_stat").val(data.ship_stat)
+                    $("#notfound").hide();
+
+                } else {
+                    $("#notfound").show();
+                    $("#tag_id").select();
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function clearTextInput(){
+        $("#tag_id").val("")
+        $("#tag_id").focus()
+    }
+
+</script>
+<br>
+<br>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" class="font18 green">
+            <tr>
+                <td align="center"><strong>สแกน Tag id</strong></td>
+            </tr>
+            <tr>
+                <td align="center" class="red">&nbsp;<span id="notfound"
+                        style="display:none;">ไม่พบข้อมูลที่ต้องการค้นหา</span>&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center"><input name="tag_id" type="text" id="tag_id" value="" class="tag_id"
+                        onKeyup="ValidateJob();" autofocus>
+                        <button class="ui-button ui-widget ui-corner-all " id="timeWork" onClick="clearTextInput();"
+                        type="button"> ลบ </button></td>
+                <td align="center">
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>.</td>
+            </tr>
+            <tr>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Tag Id</td>
+                        <th>Job</td>
+                        <th>item</td>
+                        <th>Lot</td>
+                        <th>จำนวน</td>
+                        <th>Ship Status</td>
+                        <th>เปลี่ยนสถานะ tag</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span id="data_tag_id"></span>
+                        </td>
+                        <td>
+                            <span id="data_job"></span>
+                        </td>
+                        <td>
+                            <span id="data_item"></span>
+                        </td>
+                        <td>
+                            <span id="data_lot"></span>
+                        </td>
+                        <td>
+                            <span id="data_qty1"></span>
+                        </td>
+                        <td>
+                            <input readonly type="text" id="data_ship_stat">
+                        </td>
+                        <td align="center">
+                            <button class="ui-button ui-widget ui-corner-all " id="timeWork" onClick="LinkUnpost();"
+                                type="button"> เปลี่ยนสถานะ </button>
+                        </td>
+                    </tr>
+
+                </table>
+                <span style="color:red">** Status 1 = Tag ถูก ship ไปแล้ว **</span>
+            </tr>
+
+        </table>
+    </div>
+    <div class="col-xs-6">
+
+    </div>
+</div>

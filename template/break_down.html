@@ -1,0 +1,227 @@
+<style>
+  .custom-combobox {
+    position: relative;
+    display: inline-block;
+  }
+  .custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+  }
+  .custom-combobox-input {
+    margin: 0;
+    padding: 5px 10px;
+	height:35px;
+	background:#ffffff;
+	width:350px;
+  }
+</style>
+<script type="text/javascript">
+<!--
+	function SaveData() {
+		var endtime = $('#end_time').val();	
+		var break_down = $('#break_down').val();			
+		var emp_code = $('#emp_code').val();	
+		var start_time_s = $('#start_time_s').val();
+		//alert(start_time_s);
+		if (start_time_s == "") {		
+			if (emp_code == "") {
+				popup('กรุณาระบุพนักงาน');
+			} else if (break_down == "") {
+				popup('กรุณาระบุเหตุผล Break Down');
+			} else {
+				$.post("./module/break_down_save.php", $("#form1").serialize(), function(data2) {
+					//$('#txtError').val(data2);	
+					//alert(data2)
+					if (data2 == "1") {
+						popupgoto("บันทึกข้อมูลเสร็จสมบูรณ์",'?scan_jobOrder_start&linkcmd=break_down')
+					} else {
+						popup(data2);
+						return false;
+					}
+					//window.location.href = '?scan_jobOrder_end';
+				}, 'html');	
+			}
+		} else {
+			if (endtime == "") {
+				popup('กรุณาระบุเวลา โดยการกดปุ่ม Check Out');
+			} else {
+				if (break_down == "") {
+					popup('กรุณาระบุเหตุผล Break Down');
+				} else {
+					$.post("./module/break_down_c_save.php", $("#form1").serialize(), function(data) {
+						//alert(data);
+						//$('#txtError').val(data);
+						if (data == "1") {
+							popupgoto("บันทึกข้อมูลเสร็จสมบูรณ์",'?scan_jobOrder_start&linkcmd=break_down')
+							//window.location.href = '?scan_jobOrder_end';
+						} else {
+							popup(data);
+							return false;
+						}
+					}, 'html');	
+				}
+			}
+		}
+	}
+	
+	function ValidateEmp(e) {		
+		var keycode;
+		var data1;		
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			var emp_num = $('#emp_num').val();
+			$.post("./module/validate_employee.php", {"emp_num": emp_num}, function(data) {				
+				if (data) {		
+					//alert(data);
+					data1 = data.split('||');					
+					$('#emp_code').val(data1[0]);
+					$('#emp_name').val(data1[1]);		
+					$('#shift').val(data1[2]);	
+					if (data1[0] != '') {
+						$("#emp_img").attr("src","./image/no-image.png");
+					}
+					$.post("./module/break_down_save.php", $("#form1").serialize(), function(data2) {
+						//$('#txtError').val(data2);	
+						//alert(data2);
+						data3 = data2.split('||');
+						if (data3[0] == "true") {
+							$('#start_time').val(data3[1]);
+							$('#start_time_s').val(data3[2]);
+							$('select[name="break_down"]').val(data3[3]);
+							$("#break_down").prop("disabled", true);
+						} else {
+							getTimeStart();
+							$('#start_time_s').val("");
+							$('select[name="break_down"]').val("");
+							$("#break_down").prop("disabled", false);
+						}
+					}, 'html');
+				}
+			}, 'html');
+			$('#emp_num').val("");
+			return false;
+		}	
+	}
+
+	function getTimeEnd() {
+		today = new Date();
+		intHours = today.getHours();
+		intMinutes = today.getMinutes();
+		intSeconds = today.getSeconds();
+		
+	   hours = intHours + ":";	   
+
+	   if (intMinutes < 10) {
+		  minutes = "0"+intMinutes;
+	   } else {
+		  minutes = intMinutes;
+	   }
+		time = hours + minutes;
+		$('#end_time').val(time);		
+		//alert(time);
+	}
+
+	function getTimeStart() {
+		today = new Date();
+		intHours = today.getHours();
+		intMinutes = today.getMinutes();
+		intSeconds = today.getSeconds();
+		
+	   hours = intHours + ":";	   
+
+	   if (intMinutes < 10) {
+		  minutes = "0"+intMinutes;
+	   } else {
+		  minutes = intMinutes;
+	   }
+		time = hours + minutes;
+		$('#start_time').val(time);		
+		//alert(time);
+	}	
+//-->
+</script>
+<!-- <textarea name="txtError" cols="60" rows="6" id="txtError"></textarea>  -->
+<form id="form1" name="form1" method="post" action="">
+  <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14 d_pink">
+      <tr>
+        <td width="50%">รหัสพนักงาน: 
+          <input name="emp_num" type="text" id="emp_num" class="default" style="width:200px" onKeyup="ValidateEmp();" autofocus></td>
+        <td width="50%" align="right"><!-- <input name="Save" type="button" id="Save" value=" บันทึกข้อมูล " onClick="SaveData();" class="ui-button ui-widget ui-corner-all"> --></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="5">
+      <tr>
+        <td width="30%" align="center"><table width="85%" border="0" cellspacing="0" cellpadding="5">
+          <tr>
+            <td height="250" class="borderall" align="center"><img src="./image/blank.png" id="emp_img"></td>
+          </tr>
+          <tr>
+            <td align="center"><input name="emp_code" type="text" id="emp_code" style="width:28%" class="default_view" readonly>              
+              <input name="emp_name" type="text" id="emp_name" style="width:65%" class="default_view" readonly>
+			  <input name="shift" type="hidden" id="shift" value="{shift}"></td>
+          </tr>
+        </table></td>
+        <td><fieldset class="fieldstyle"><legend class="font12"><strong>Unposted Job Transactions</strong></legend>
+          <table width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
+            <tr>
+              <td width="25%" align="right">Job Order: </td>
+              <td><input name="job_no" type="text" id="job_no" size="20" class="default_view" readonly value="{job_no}">
+                <input name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000"></td>
+            </tr>
+            <tr>
+              <td align="right">Item:</td>
+              <td><input name="item" type="text" id="item" size="20" class="default_view" readonly value="{item}">
+                <input name="item_desc" type="text" id="item_desc" size="40" class="default_view" readonly value={item_desc}></td>
+            </tr>
+            <tr>
+              <td align="right">Operation:</td>
+              <td><input name="oper_num" type="text" id="oper_num" size="8" class="default_view" readonly value="{oper_num}">
+                &nbsp;&nbsp;WC:
+                  <input name="wc" type="text" id="wc" size="8" class="default_view" readonly value="{wc}">
+                <input name="description" type="text" id="description" size="30" class="default_view" readonly value="{description}"></td>
+            </tr>
+            <tr>
+              <td height="10" colspan="2" align="right"></td>
+              </tr>
+            <tr>
+              <td align="right">Trans. Date: </td>
+              <td><input name="trans_date" type="text" id="trans_date" size="15" class="default_view" readonly value="{trans_date}" style="text-align:center;"></td>
+            </tr>
+            <tr>
+              <td align="right">Start Time: </td>
+              <td><input name="start_time" type="text" id="start_time" size="10" class="default_view" readonly value="{start_time}">
+			  <input name="start_time_s" type="hidden" id="start_time_s" value="">
+                &nbsp;&nbsp;&nbsp;&nbsp;End Time: 
+                <input name="end_time" type="text" id="end_time" size="10" class="default_view" readonly>
+                &nbsp;
+                <input type="button" name="Button" value="Check Out" class="ui-button ui-widget ui-corner-all" onclick="getTimeEnd();"></td>
+            </tr>
+          </table>
+          <br>
+          <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">           
+            <tr>             
+              <td width="25%" align="right"><strong>Break Down:</strong></td>
+              <td><select name="break_down" id="break_down" class="mydefault">
+					{op_break_down}
+              </select></td>
+            </tr>
+          </table>
+        </fieldset>
+           </td>
+      </tr>
+	  <tr>
+		<td>&nbsp;</td>
+		<td align="center"><input name="Save" type="button" id="Save" value=" บันทึกข้อมูล " onClick="SaveData();" class="ui-button ui-widget ui-corner-all"></td>
+	  </tr>
+    </table></td>
+  </tr>
+</table>
+</form>

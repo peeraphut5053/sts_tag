@@ -1,0 +1,9 @@
+diff a/module/reset_tag_id_shiped_update_tag.php b/module/reset_tag_id_shiped_update_tag.php	(rejected hunks)
+@@ -21,6 +21,7 @@
+ $rs2 = $cSql2->SqlQuery($conn, $sql2);
+ 
+ $sql3 = "delete from ast_tmp_ship where tag_id = '".$tag_id."' ";
++$cSql3 = new SqlSrv();
+ $rs3 = $cSql3->SqlQuery($conn, $sql3);
+        
+         

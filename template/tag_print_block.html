@@ -1,0 +1,99 @@
+<style type='text/css'>
+    @font-face{
+        font-family:Code39;
+        src:url('Fonts/Code39Barcode.ttf') format('truetype');
+        font-weight:normal;
+        font-style:normal;
+    }
+</style>
+<table width="90%" height="100%" border="0" cellpadding="2" cellspacing="0" align="center">
+    <tr>
+        <td height="60%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td align="center" height="5">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center">==<span style="font-family:Code39; color: #000000; font-size: 9pt; white-space: nowrap;">*{barcode}*</span>==</td>
+                </tr>
+                <tr>
+                    <td><table width="100%" border="0" cellspacing="0" cellpadding="5" style="font-family:Tahoma; font-size:9px; font-weight:bold;" align="right">
+                            <tr>
+                                <td colspan="2">{wc}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">{commodity}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">SPEC./มาตราฐาน: {spec} &nbsp;{grade1}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">SIZE/ขนาด: {Uf_NPS} x {Uf_Schedule} x {Uf_length}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">LOT No./รุ่น: {lot}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">MFD./วันผลิต: {mfd}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">NET WT./น้ำหนักสุทธิ(Kgs.): {unwt}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="font-size: 14px">TOTAL (Pcs./Pack): {perpack}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">PACK NO./มัดที่: {pack_no}</td>
+                            </tr>
+                            <tr >
+                                <td colspan="2">H/N: <span style="font-size:22px;">{Heat_no}</span></td>
+                                <!--<td><span style="font-family:Code39;   ">===*{Heat_no}*===</span></td>-->
+                            </tr>
+                            <!-- <tr>
+                                  <td align="center" style="font-family:Code39; color: #000000; font-size: 9pt; font-weight:normal; white-space: nowrap;">*{barcode}*</td>
+                            </tr> -->
+                            <tr>
+                                <td align="center" style="border-bottom:1px solid #000000;">MADE IN THAILAND </td>
+                            </tr>
+                        </table></td>
+                </tr>
+            </table></td>
+    </tr> 
+    <tr>
+        <td valign="top">
+            {qr_tis}
+<!--            <table width="100%" border="0" cellspacing="0" cellpadding="0">    
+                <tr>
+                    <td height="24">&nbsp;</td>  
+                </tr> 
+                <tr>
+                    <td align="center">==<span style="font-family:Code39; color: #000000; font-size: 9pt; white-space: nowrap;">*{barcode}*</span>==</td>
+                </tr>
+                <tr>
+                    <td><table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-family:Tahoma; font-size:9px;" align="right">
+                            <tr>
+                                <td>SPEC./มาตราฐาน: {spec} &nbsp;{grade1}</td>
+                            </tr>
+                            <tr>
+                                <td>SIZE/ขนาด: {Uf_NPS} x {Uf_Schedule} x {Uf_length}</td>
+                            </tr>
+                            <tr>
+                                <td>ACT WT./น้ำหนักจริง(Kgs.): {actwt} &nbsp;({grade})</td>
+                            </tr>
+                            <tr>
+                                <td>LOT No./รุ่น: {lot}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 13px">H/N.: <span style="font-size:22px;">{Heat_no}</span></td>
+                            </tr> 
+                        </table></td>
+                </tr>
+            </table>-->
+        </td>
+    </tr>
+</table>
+<!-- <table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+        <td height="10"></td> 
+  </tr>
+</table> -->
+{printlist}
