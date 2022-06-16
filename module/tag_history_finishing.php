@@ -11,7 +11,7 @@ $temp->setReplace("{content}", $temp->getTemplate("./template/tag_history_finish
 $cSql = new SqlSrv();
 
 $jobm = explode("+", $jobno);
-$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno from MV_Job LEFT JOIN job_mst ON MV_Job.job = job_mst.job where ltrim(MV_Job.job) = '" . $jobm[0] . "' and MV_Job.suffix = '" . $jobm[1] . "' and MV_Job.oper_num = '" . $jobm[2] . "';";
+$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno,job_mst.Mo_job_description from MV_Job LEFT JOIN job_mst ON MV_Job.job = job_mst.job where ltrim(MV_Job.job) = '" . $jobm[0] . "' and MV_Job.suffix = '" . $jobm[1] . "' and MV_Job.oper_num = '" . $jobm[2] . "';";
 $rs = $cSql->SqlQuery($conn, $sql);
 //print_r($rs);
 //print qty_mat 
@@ -29,6 +29,8 @@ $rs3 = $cSql->SqlQuery($conn, $sql3);
 $temp->setReplace("{job_no}", "" . $jobno . "");
 $temp->setReplace("{co_no}", "" . $rs[1]["ord_num"] . "");
 $temp->setReplace("{Uf_refno}", "" . $rs[1]["Uf_refno"] . "");
+$temp->setReplace("{Mo_job_description}", "" . $rs[1]["Mo_job_description"] . "");
+
 if (isset($rs3[1]["city"])) {
     $temp->setReplace("{city}", "" . $rs3[1]["city"] . "");
     $temp->setReplace("{custname}", "" . $rs3[1]["custname"] . "");
