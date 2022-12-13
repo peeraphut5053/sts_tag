@@ -11,7 +11,7 @@ $temp->setReplace("{content}", $temp->getTemplate("./template/tag_history_finish
 $cSql = new SqlSrv();
 
 $jobm = explode("+", $jobno);
-$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno,job_mst.Mo_job_description from MV_Job LEFT JOIN job_mst ON MV_Job.job = job_mst.job where ltrim(MV_Job.job) = '" . $jobm[0] . "' and MV_Job.suffix = '" . $jobm[1] . "' and MV_Job.oper_num = '" . $jobm[2] . "';";
+$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno,job_mst.Uf_remark from MV_Job LEFT JOIN job_mst ON MV_Job.job = job_mst.job where ltrim(MV_Job.job) = '" . $jobm[0] . "' and MV_Job.suffix = '" . $jobm[1] . "' and MV_Job.oper_num = '" . $jobm[2] . "';";
 $rs = $cSql->SqlQuery($conn, $sql);
 //print_r($rs);
 //print qty_mat 
@@ -29,7 +29,7 @@ $rs3 = $cSql->SqlQuery($conn, $sql3);
 $temp->setReplace("{job_no}", "" . $jobno . "");
 $temp->setReplace("{co_no}", "" . $rs[1]["ord_num"] . "");
 $temp->setReplace("{Uf_refno}", "" . $rs[1]["Uf_refno"] . "");
-$temp->setReplace("{Mo_job_description}", "" . $rs[1]["Mo_job_description"] . "");
+$temp->setReplace("{Uf_remark}", "" . $rs[1]["Uf_remark"] . "");
 
 if (isset($rs3[1]["city"])) {
     $temp->setReplace("{city}", "" . $rs3[1]["city"] . "");
@@ -78,11 +78,12 @@ $db = array();
 $dc = array();
 $dr = array();
 
-$sql = " select *, CONVERT(VARCHAR(16), mfg_date, 120)  AS mfg_date "
-        . " from Mv_Bc_tag where ltrim(job) = '" . $jobm[0] . "' "
-        . " and suffix = '" . $jobm[1] . "' "
-        . " and oper_num = '" . $jobm[2] . "' "
-        . " order by uf_pack, uf_grade;";
+$sql = "select *, CONVERT(VARCHAR(16), mfg_date, 120) AS mfg_date"
+            . " from Mv_Bc_tag LEFT JOIN (select distinct job, Uf_pack, unit_weight from MV_Job) MV_Job on MV_Job.job = Mv_Bc_tag.job  where ltrim(Mv_Bc_tag.job) = '" . $jobm[0] . "' "
+            . " and Mv_Bc_tag.suffix = '" . $jobm[1] . "' "
+            . " and Mv_Bc_tag.oper_num = '" . $jobm[2] . "' "
+            . " order by Mv_Bc_tag.uf_pack, Mv_Bc_tag.uf_grade;";
+
 $rs = $cSql->SqlQuery($conn, $sql);
 for ($i = 1; $i <= $rs[0][0]; $i++) {
     $lota = explode("-", $rs[$i]["lot"]);
@@ -161,6 +162,7 @@ for ($i = $rs[0][0]; $i >= 1; $i--) {
 		<td><div id="d_sts_no_' . $rs[$i]["id"] . '">' . $Heat_no . '</div></td>
         <td align="right"><div id="d_qty_' . $rs[$i]["id"] . '">' . total_format($rs[$i]["qty1"]) . '</div></td>
         <td align="right"><div id="d_w_' . $rs[$i]["id"] . '">' . total_format($rs[$i]["uf_act_Weight"], 2) . '</div></td>
+        <td align="right"><div id="' . $rs[$i]["id"] . '">' . total_format($rs[$i]["unit_weight"] * $rs[$i]["Uf_pack"], 2) . '</div></td> 
         <td align="center">' . $rs[$i]["uf_pack"] . '</td>
         <td align="center">' . $rs[$i]["uf_grade"] . '</td>
         <td align="center">' . $rs[$i]["active"] . '</td>

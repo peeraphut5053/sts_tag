@@ -50,17 +50,20 @@ if (isset($_POST["tag_ids"])) {
         
         $img_qrcode = "";
         $img_tis = "";
-        if($TagBarcode->spec == "TIS.107" ||$TagBarcode->spec == "TIS.107 STK290" ||$TagBarcode->spec == "TIS.107 STK400"  ){
+        $desc = "";
+        $Uf_TheoryWeightPerItem  = "";
+        if($TagBarcode->Uf_class == "TIS.107"){
             $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
-        }elseif($TagBarcode->spec == "TIS.276"){
+            $img_tis = "<img src='./image/TIS_107.jpg' width='100' height='100'>";
+        }elseif($TagBarcode->Uf_class == "TIS.276"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
-        } elseif ($TagBarcode->spec == "TIS.1228") {
+            $img_tis = "<img src='./image/TIS_276.jpg' width='100' height='100'>";
+        } elseif($TagBarcode->Uf_class == "TIS.1228") {
             $img_qrcode = "<img src='./image/1612617444.png' width='100' height='100'>"; 
-            $img_tis = "<img src='./image/TIS2.jpg' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS_1228.jpg' width='100' height='100'>";
+            $desc = "เหล็กโครงสร้างรูปพรรณขึ้นรูปเย็นสำหรับงานโครงสร้างทั่วไป เหล็กรูปตัวซีมีขอบ";
+            $Uf_TheoryWeightPerItem ="weight". " : " . number_format($TagBarcode->Uf_TheoryWeightPerItem,2) . " kg / m.";
         }
-        
         
         
         
@@ -68,6 +71,9 @@ if (isset($_POST["tag_ids"])) {
         $temp->setReplace("{Uf_refno}", "" . $TagBarcode->Uf_refno . "");
         $temp->setReplace("{img_qrcode}", "" . $img_qrcode . "");
         $temp->setReplace("{img_tis}", "" . $img_tis . "");
+        $temp->setReplace("{desc}", "" . $desc . "");
+        $temp->setReplace("{Uf_TheoryWeightPerItem}", "" . $Uf_TheoryWeightPerItem . "");
+       
         $temp->setReplace("{spec}", "" . $TagBarcode->spec . "");
         $temp->setReplace("{grade}", $TagBarcode->Uf_Grade);
         $temp->setReplace("{Uf_tagdesc}", $TagBarcode->Uf_tagdesc);
@@ -131,13 +137,13 @@ if (isset($_POST["tag_ids"])) {
         $id_next += 1;
         $id = $idl . sprintf("%'.04d", $id_next);
 
-        if ($_GET["co_type"] == 'IN') {
+        if ($_GET["c"] == 'thai') {
             $uf_act_Weight = $_GET["uf_act_Weight"];
             $WeightShow = $uf_act_Weight;
         } else {
             $WeightShow = $unit_weight * $perpack;
         }
-        $temp->setReplace("{unit_weight}", "" . total_format($WeightShow) . "");
+        $temp->setReplace("{unit_weight}", "" . ($WeightShow) . "");
         if (isset($_GET["pack_no_fix"]))
             $pack = $pack_no_fix;
         else
@@ -156,15 +162,19 @@ if (isset($_POST["tag_ids"])) {
         
         $img_qrcode = "";
         $img_tis = "";
-        if($TagBarcodePreview->spec == "TIS.107" ||$TagBarcodePreview->spec == "TIS.107 STK290" ||$TagBarcodePreview->spec == "TIS.107 STK400"  ){
+        $desc = "";
+        $Uf_TheoryWeightPerItem  = "";
+        if($TagBarcodePreview->Uf_class == "TIS.107"){
             $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
-        }elseif($TagBarcodePreview->spec == "TIS.276"){
+            $img_tis = "<img src='./image/TIS_107.jpg' width='100' height='100'>";
+        }elseif($TagBarcodePreview->Uf_class == "TIS.276"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
-        } elseif ($TagBarcodePreview->spec == "TIS.1228") {
+            $img_tis = "<img src='./image/TIS_276.jpg' width='100' height='100'>";
+        } elseif($TagBarcodePreview->Uf_class == "TIS.1228") {
             $img_qrcode = "<img src='./image/1612617444.png' width='100' height='100'>"; 
-             $img_tis = "<img src='./image/TIS2.jpg' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS_1228.jpg' width='100' height='100'>";
+            $desc = "เหล็กโครงสร้างรูปพรรณขึ้นรูปเย็นสำหรับงานโครงสร้างทั่วไป เหล็กรูปตัวซีมีขอบ";
+            $Uf_TheoryWeightPerItem ="weight". " : " . number_format($TagBarcodePreview->Uf_TheoryWeightPerItem,2) . " kg / m.";
         }
         
         
@@ -174,6 +184,8 @@ if (isset($_POST["tag_ids"])) {
         $temp->setReplace("{Uf_refno}", "" . $TagBarcodePreview->Uf_refno . "");
         $temp->setReplace("{img_qrcode}", "" . $img_qrcode . "");
         $temp->setReplace("{img_tis}", "" . $img_tis . "");
+        $temp->setReplace("{desc}", "" . $desc . "");
+        $temp->setReplace("{Uf_TheoryWeightPerItem}", "" . $Uf_TheoryWeightPerItem . "");
         
         $temp->setReplace("{spec}", "" . $TagBarcodePreview->spec . "");
         $temp->setReplace("{grade}", $TagBarcodePreview->Uf_Grade);

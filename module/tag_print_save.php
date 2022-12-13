@@ -192,7 +192,7 @@ for ($i = 1; $i <= $tag_a2; $i++) {
 
         $act_weight = $_POST["uf_act_Weight"];
     } else {
-        $act_weight = round($qty1 * $unit_weight / $tag_a2);
+        $act_weight = $_POST["uf_act_Weight"];  //round($qty1 * $unit_weight / $tag_a2);
     }
     $lot = (explode("-", $lot)[0] . "-" . sprintf("%'.04d", $pack));
 
@@ -216,12 +216,12 @@ for ($i = 1; $i <= $tag_a2; $i++) {
             . " qty1, qty2, uf_act_Weight, uf_grade, uf_pack, mfg_date,"
             . " print_date, ship_stat, active, uf_sts_job, pipeno_1,"
             . " pipeno_2, pipeno_3, pipeno_4, pipeqty_1, pipeqty_2,"
-            . " pipeqty_3, pipeqty_4, um1, um2 ) "
+            . " pipeqty_3, pipeqty_4, um1, um2, tag_status ) "
             . " values ('" . $id . "','" . $sts_no . "','" . $_POST["sts_no2"] . "','" . $_POST["sts_no3"] . "','" . $qty_sts_no . "','" . $qty_sts_no2 . "','" . $qty_sts_no3 . "',"
             . " '" . $jobm[0] . "', '" . $jobm[1] . "', '" . $jobm[2] . "',"
             . " '" . $item . "', '" . $lot . "', '" . $perpack . "', '" . $qty2 . "', '" . $act_weight . "', '" . $grade . "',"
             . " '" . $pack . "', '" . $print_day . "', '" . $print_day . "', '0', '1', '" . $uf_sts_job2 . "'" . $pipe . ","
-            . " '" . $um1 . "', '" . $um2 . "');";
+            . " '" . $um1 . "', '" . $um2 . "', 'Good')";
 
 
     //echo(sprintf("%'.04d", $pack));
@@ -267,12 +267,12 @@ for ($t = 0; $t < $tag_a3; $t++) {
             . " job, suffix, oper_num, item, lot , qty1, qty2, uf_act_Weight, uf_grade,"
             . " uf_pack, mfg_date, print_date, ship_stat, active, uf_sts_job, pipeno_1,"
             . " pipeno_2, pipeno_3, pipeno_4, pipeqty_1, pipeqty_2, pipeqty_3, pipeqty_4,"
-            . " um1, um2  ) values ('" . $id . "','" . $sts_no . "','" . $_POST["sts_no2"] . "','" . $_POST["sts_no3"] . "','" . $qty_sts_no . "','" . $qty_sts_no2 . "','" . $qty_sts_no3 . "',"
+            . " um1, um2, tag_status  ) values ('" . $id . "','" . $sts_no . "','" . $_POST["sts_no2"] . "','" . $_POST["sts_no3"] . "','" . $qty_sts_no . "','" . $qty_sts_no2 . "','" . $qty_sts_no3 . "',"
             . " '" . $jobm[0] . "', '" . $jobm[1] . "', '" . $jobm[2] . "',"
             . " '" . $item . "', '" . $lot . "', '" . $perpack1 . "', '" . $qty2 . "',"
             . " '" . $act_weight . "', '" . $grade . "', '" . $pack . "', '" . $print_day . "',"
             . " '" . $print_day . "', '0', '1', '" . $uf_sts_job . "'" . $pipe . ", '" . $um1 . "',"
-            . " '" . $um2 . "');";
+            . " '" . $um2 . "', 'Good')";
 
     //echo $sql . " ========================#2";
     $rs1 = $cSql->IsUpDel($conn, $sql);

@@ -23,10 +23,12 @@
             </table></td>
     </tr>
     <tr>
-        <td>{img_qrcode}</td>
+        <td align="left">{img_qrcode}</td>
         <td></td>
-        <td>{img_tis}</td>
-        <td colspan="2"></td>
+        <td align="left">{img_tis}</td>
+        <td align="left" >
+            <img style="margin-left:-120px;"  src="./image/LOGO_STS2.jpg" width="90" height="90" border="0" alt="">
+        </td>
     </tr>
 <!--    <tr>
         <td>PORT</td>
@@ -36,10 +38,10 @@
     <tr>
         <td width="10%">STS PO</td>
         <td width="1%">:</td>
-        <td  width="30%" ><span style="font-size:24px;">{Uf_refno}</span></td>
-        <td width="50%" align="left" >
+        <td width="30%" ><span style="font-size:24px;">{Uf_refno}</span></td>
+        <!-- <td width="50%" align="left" >
             <img style="margin-left:-40px;"  src="./image/logo_sts.png" width="30" height="30" border="0" alt="">
-        </td>
+        </td> -->
     </tr>
     <tr>
         <td>TYPE</td>
@@ -87,7 +89,14 @@
     
     <tr>
         <td colspan="3">{lot}&nbsp;&nbsp;SAHATHAI</td>
+    </tr>
 
+    <tr>
+        <td colspan="3">{Uf_TheoryWeightPerItem}</td>
+    </tr>
+
+    <tr>
+        <td align="center" colspan="3">{desc}</td>
     </tr>
 </table>
 {printlist}

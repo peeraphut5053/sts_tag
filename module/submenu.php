@@ -5,7 +5,7 @@ while (list($key, $data) = each($_GET)) {
 
 //echo "<pre>";
 //print_r($_GET);
-$bgcl = array(1=>"#17666a", "#00A400", "#db542d", "#2173ed", "#dd2856", "#b0b000", "#b38313", "#603CBA", "#018FA3", "#00006a", "#8f0901", "#425917", "#a28653", "#9b009b", "#cb07bc", "#47478f", "#868686");
+$bgcl = array(1=>"#17666a", "#00A400", "#db542d", "#2173ed", "#dd2856", "#b0b000", "#b38313", "#603CBA", "#018FA3", "#00006a", "#8f0901", "#425917", "#a28653", "#9b009b", "#cb07bc", "#47478f", "#868686", "#9200c2");
 $menu = "";
 if ($m_id == "m1") {
 	$menu .= blockmenu("บันทึกเวลาเริ่มผลิต", $bgcl[1], "scan_jobOrder_start&linkcmd=clockin_job");
@@ -15,7 +15,8 @@ if ($m_id == "m1") {
 	$menu .= blockmenu("พิมพ์แท็กสลิต", $bgcl[6], "scan_jobOrder_start&linkcmd=tag_history_slit");
 	$menu .= blockmenu("พิมพ์แท็กท่อ", $bgcl[7], "scan_jobOrder_start&linkcmd=tag_history_forming");	
 	$menu .= blockmenu("พิมพ์แท็ก Finishing", $bgcl[8], "scan_jobOrder_start&linkcmd=tag_history_finishing");	
-	$menu .= blockmenu("พิมพ์แท็ก Improvement", $bgcl[9], "scan_jobOrder_start&linkcmd=tag_history_improvement");	
+	$menu .= blockmenu("พิมพ์แท็ก Improvement", $bgcl[9], "scan_jobOrder_start&linkcmd=tag_history_improvement");
+	$menu .= blockmenu_password("Tag Status", $bgcl[18], "tag_status");	
 	$menu .= '<div id="1" class="clear" style="height:5px;">&nbsp;</div>';
 	$menu .= '<div id="2" class="clear" style="height:2px; background-color:#0098e1">&nbsp;</div>';
 	$menu .= '<div id="3" class="clear" style="height:5px;">&nbsp;</div>';
@@ -46,6 +47,26 @@ function blockmenu($tmenu, $bgcl, $link) {
 	$m = '<div class="submenufull" style="background-color:'.$bgcl.';"><table width="100%" height="100%" border="0" cellspacing="0" cellpadding="5" class="font14 white">
 	<tr>
 		<td align="center" class="submenuover" onclick="gotolink(\'./?'.$link.'\');">'.$tmenu.'</td>
+	</tr>
+	</table></div>';
+	return $m;
+}
+
+function blockmenu_password($tmenu, $bgcl, $link) {
+	$m = '
+	<script>
+	function myFunction() {
+		let password = prompt("Please enter your password");
+		if (password == 1234) {
+			gotolink(\'./?'.$link.'\');
+		} else {
+			alert("Incorrect password. Try again."); 
+		}
+	  }
+	</script>
+	<div class="submenufull" style="background-color:'.$bgcl.';"><table width="100%" height="100%" border="0" cellspacing="0" cellpadding="5" class="font14 white">
+	<tr>
+		<td align="center" class="submenuover" onclick="myFunction()">'.$tmenu.'</td>
 	</tr>
 	</table></div>';
 	return $m;

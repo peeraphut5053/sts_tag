@@ -22,7 +22,7 @@ for ($t=0; $t<$gdn; $t++) {
 	$id = $_POST["ids"][$t];
 	$print_day = date("m/d/Y H:i");
 	if (trim($data[12])=="") $data[12] = 0;
-	$sql = "insert into Mv_Bc_tag (id, item, lot, qty1, mfg_date, print_date, ship_stat, active, grn_num, um1, uf_grade, grn_line, Uf_manu, uf_name, uf_coil_no, uf_Tickness, po_num, uf_width, uf_spec, qty2, receipt) values ('".$id."', '".$data[3]."', '".$data[2]."', '".$data[4]."', '".$data[11]."', '".$print_day."', '0', '1', '".$data[0]."', '".$data[5]."', 'A', '".$data[7]."', '".$data[8]."', '".$data[9]."', '".$data[10]."', '".$data[12]."', '".$data[1]."', '".$data[13]."', '".$data[6]."', '".$data[14]."', '1');";
+	$sql = "insert into Mv_Bc_tag (id, item, lot, qty1, mfg_date, print_date, ship_stat, active, grn_num, um1, uf_grade, grn_line, Uf_manu, uf_name, uf_coil_no, uf_Tickness, po_num, uf_width, uf_spec, qty2, receipt, tag_status) values ('".$id."', '".$data[3]."', '".$data[2]."', '".$data[4]."', '".$data[11]."', '".$print_day."', '0', '1', '".$data[0]."', '".$data[5]."', 'A', '".$data[7]."', '".$data[8]."', '".$data[9]."', '".$data[10]."', '".$data[12]."', '".$data[1]."', '".$data[13]."', '".$data[6]."', '".$data[14]."', '1', 'Good');";
 	//echo $sql." =======================";
 	$rs1 = $cSql->IsUpDel($conn, $sql);
 	
