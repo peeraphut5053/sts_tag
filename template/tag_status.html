@@ -1,0 +1,100 @@
+<style type="text/css">
+    .ui-button{  
+        font-size: 17px !important; 
+    }
+
+    </style>
+
+<script type="text/javascript">
+    
+    function UpdateStatus(id,status_value) {
+        // console.log(id)
+        // console.log(status_value)
+        // $("#tag_stat").show();
+        // $("#data_tag_stat").hide();
+        $.ajax({
+                url: "./module/tag_status_get.php",
+                type: 'get',
+                // processData: false,
+                data: {
+                "load": "update_tag",
+                "id": id,
+                "status_value": status_value
+                },
+                success: function () {
+                    // alert("true");
+                }
+            });
+        }
+
+        function SaveDetail(detail_id,detail_value) {
+        // console.log(detail_id)
+        // console.log(detail_value)
+   
+        $.ajax({
+                url: "./module/tag_status_get.php",
+                type: 'get',
+                // processData: false,
+                data: {
+                "load": "save_detail",
+                "detail_id": detail_id,
+                "detail_value": detail_value
+                },
+                success: function () {
+                    // alert("true");
+                }
+            });
+        }
+
+        $(function (){
+			$("#mfg_date").datepicker({ dateFormat: 'yy-mm-dd' });
+					inline: true
+				});
+</script>
+
+    <form name="formS" method="post" action="" id="formS">
+     <table width="98%" border="0" cellspacing="0" cellpadding="5" align="center">
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="5">
+                <tr>
+                <td align="left">
+                    Tag id: <input name="tag_id" type="text" id="tag_id" value="{tag_id}" class="default" size="10" autofocus/>&nbsp;&nbsp;
+                    sts no: <input name="sts_no" type="text" id="sts_no" value="{sts_no}" class="default" size="10" autofocus/>&nbsp;&nbsp;
+                    Job: <input name="job" type="text" id="job" value="{job}" class="default" size="10" autofocus/>&nbsp;&nbsp;
+                    item: <input name="item" type="text" id="item" value="{item}" class="default" size="30" autofocus/>&nbsp;&nbsp;
+                    Lot: <input name="lot" type="text" id="lot" value="{lot}" class="default" size="15" autofocus/>&nbsp;&nbsp;
+                    Status: <select name="tag_status" id="tag_status">
+                                {tag_status}
+                            </select>&nbsp;&nbsp;
+                    <!-- <input name="tag_status" type="text" id="tag_status" value="{tag_status}" class="default" size="5" autofocus/>&nbsp;&nbsp; -->
+                    Date: <input  class="default" name="mfg_date" type="text" id="mfg_date" value="{mfg_date}" size="10" autocomplete="off"/> &nbsp;
+                    <button name="BtnSearch" id="BtnSearch" type="submit" value="SEARCH"  class="ui-button ui-widget ui-corner-all" onClick="" >SEARCH</button>
+                </td>
+                </tr>
+        </table> 
+      </td></tr>
+      <tr>    
+        <td><div style='overflow:auto; height:380px;'><table width="100%" border="0" cellpadding="9" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist">
+          <tr bgcolor="#c4e1ff">
+            <!-- <td align="center" width="2%"><input name="allitem" type="checkbox" id="allitem" value="1" onclick="CheckAllItem();"></td>  -->
+            <td align="center"><strong>Tag id</strong></td>
+            <td align="center"><strong>sts no</strong></td>
+            <td align="center"><strong>Job</strong></td>
+            <td align="center"><strong>item</strong></td>
+            <td align="center"><strong>Lot</strong></td> 
+            <td align="center"><strong>Quantity</strong></td>	
+            <td align="center" width="90px"><strong>Change TagStatus</strong></td>	
+            <td align="center" width="40px"><strong>Detail</strong></td>	
+            {list}
+        </table></div>
+        <br>
+       </td>
+      </tr> 
+    </table>
+</form>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $('#tag_id').select();
+        });
+    </script>
