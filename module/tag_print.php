@@ -114,6 +114,13 @@ if (isset($_POST["tag_ids"])) {
         $temp->setReplace("{grade}", "" . $rs[1]["uf_grade"] . "");
         $temp->setReplace("{grade1}", "" . $rs2[1]["Uf_Grade"] . "");
         $temp->setReplace("{wc}", $rs2_wc[1]["wc"]);
+
+        $grade = $rs[1]["uf_grade"];
+        if ($grade == "A"){
+            $temp->setReplace("{Reject}", "");
+        } else {
+            $temp->setReplace("{Reject}", "Reject and Scrap");
+        }
     }
 } else {
     /* $sql = "select TOP 1 id from Mv_Bc_tag order by id desc;";
@@ -134,7 +141,7 @@ if (isset($_POST["tag_ids"])) {
     $rs_sts_no = $cSql->SqlQuery($conn, $sql_sts_no);
     if(isset($rs_sts_no[1]["sts_no"])){
          if($rs_sts_no[1]["sts_no"]==$_GET['sts_no']){
-         echo '<script>alert("แท็กถูกระงับ พบเลข H/N(1) '.$rs_sts_no[1]["sts_no"].' มีสถานะ ONHOLD ในแทกอื่น '.$_GET['sts_no'].'"); location.reload();</script>';          
+         echo '<script>alert("แท็กถูกระงับ พบเลข H/N(1) '.$rs_sts_no[1]["sts_no"].' มีสถานะ ONHOLD ในแท็กอื่น '.$_GET['sts_no'].'"); location.reload();</script>';          
          }
     }
 
@@ -246,6 +253,12 @@ if (isset($_POST["tag_ids"])) {
         $temp->setReplace("{grade}", "" . $grade . "");
         $temp->setReplace("{grade1}", "" . $rs2[1]["Uf_Grade"] . "");
         $temp->setReplace("{wc}", $_GET['wc']);
+
+        if ($grade == "A"){
+            $temp->setReplace("{Reject}", "");
+        } else {
+            $temp->setReplace("{Reject}", "Reject and Scrap");
+        }
         
         
                 

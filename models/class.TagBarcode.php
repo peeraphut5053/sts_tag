@@ -60,6 +60,7 @@ class TagBarcode extends sqlConn {
         $this->Uf_spec = $rs[1]["Uf_spec"];
         $this->Uf_class = $rs[1]["Uf_class"];
         $this->unit_weight = $rs[1]["unit_weight"];
+        $this->Uf_TheoryWeightPerItem = $rs[1]["Uf_TheoryWeightPerItem"];
 
         $this->cust_num = isset($rs[1]["cust_num"]) ? $rs[1]["cust_num"] : '-';
         $this->cust_seq = isset($rs[1]["cust_seq"]) ? $rs[1]["cust_seq"] : '-';
@@ -108,6 +109,7 @@ class TagBarcode extends sqlConn {
         $this->Uf_spec = $rs2[1]["Uf_spec"];
         $this->Uf_class = $rs2[1]["Uf_class"];
         $this->unit_weight = $rs2[1]["unit_weight"];
+        $this->Uf_TheoryWeightPerItem = $rs2[1]["Uf_TheoryWeightPerItem"];
     }
 
     function GetCoMst($co_num,$item) {

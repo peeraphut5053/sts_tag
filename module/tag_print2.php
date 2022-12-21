@@ -98,7 +98,7 @@ if (isset($_POST["tag_ids"])) {
     $rs_sts_no = $cSql->SqlQuery($conn, $sql_sts_no);
     if(isset($rs_sts_no[1]["sts_no"])){
          if($rs_sts_no[1]["sts_no"]==$_GET['sts_no']){
-         echo '<script>alert("แท็กถูกระงับ พบเลข H/N(1) '.$rs_sts_no[1]["sts_no"].' มีสถานะ ONHOLD ในแทกอื่น '.$_GET['sts_no'].'"); location.reload();</script>';          
+         echo '<script>alert("แท็กถูกระงับ พบเลข H/N(1) '.$rs_sts_no[1]["sts_no"].' มีสถานะ ONHOLD ในแท็กอื่น '.$_GET['sts_no'].'"); location.reload();</script>';          
          }
     }
     $jobm = explode("+", $job_no);
