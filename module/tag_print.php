@@ -136,14 +136,14 @@ if (isset($_POST["tag_ids"])) {
       $id_next = 0;
       } */
     
-    $_GET['sts_no'];
+    /*$_GET['sts_no'];
     $sql_sts_no = "select TOP 1 sts_no from Mv_Bc_tag where sts_no = '" . $_GET['sts_no'] . "' and tag_status = 'onhold' order by id desc;";
     $rs_sts_no = $cSql->SqlQuery($conn, $sql_sts_no);
     if(isset($rs_sts_no[1]["sts_no"])){
          if($rs_sts_no[1]["sts_no"]==$_GET['sts_no']){
          echo '<script>alert("แท็กถูกระงับ พบเลข H/N(1) '.$rs_sts_no[1]["sts_no"].' มีสถานะ ONHOLD ในแท็กอื่น '.$_GET['sts_no'].'"); location.reload();</script>';          
          }
-    }
+    }*/
 
     //Gen Id update 24/5/2560
     $ip = $_SERVER['REMOTE_ADDR']; //Get user IP

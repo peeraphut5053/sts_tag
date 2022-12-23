@@ -94,13 +94,14 @@ if (isset($_POST["tag_ids"])) {
     }
 } else {
 
-    $sql_sts_no = "select TOP 1 sts_no from Mv_Bc_tag where sts_no = '" . $_GET['sts_no'] . "' and tag_status = 'onhold' order by id desc;";
+    /*$sql_sts_no = "select TOP 1 sts_no from Mv_Bc_tag where sts_no = '" . $_GET['sts_no'] . "' and tag_status = 'onhold' order by id desc;";
     $rs_sts_no = $cSql->SqlQuery($conn, $sql_sts_no);
     if(isset($rs_sts_no[1]["sts_no"])){
          if($rs_sts_no[1]["sts_no"]==$_GET['sts_no']){
          echo '<script>alert("แท็กถูกระงับ พบเลข H/N(1) '.$rs_sts_no[1]["sts_no"].' มีสถานะ ONHOLD ในแท็กอื่น '.$_GET['sts_no'].'"); location.reload();</script>';          
          }
-    }
+    }*/
+
     $jobm = explode("+", $job_no);
     $TagBarcodePreview = new TagBarcode();
     $TagBarcodePreview->GetTagBarcodePreview($jobm[0], $item);
