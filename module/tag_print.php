@@ -118,8 +118,10 @@ if (isset($_POST["tag_ids"])) {
         $grade = $rs[1]["uf_grade"];
         if ($grade == "A"){
             $temp->setReplace("{Reject}", "");
+			$temp->setReplace("{import}", "");
         } else {
             $temp->setReplace("{Reject}", "Reject and Scrap");
+			$temp->setReplace("{import}", "เหล็กนำเข้าตามมาตรา 21 ตรี");
         }
     }
 } else {
@@ -256,8 +258,10 @@ if (isset($_POST["tag_ids"])) {
 
         if ($grade == "A"){
             $temp->setReplace("{Reject}", "");
+			$temp->setReplace("{import}", "");
         } else {
             $temp->setReplace("{Reject}", "Reject and Scrap");
+			$temp->setReplace("{import}", "เหล็กนำเข้าตามมาตรา 21 ตรี");
         }
         
         
