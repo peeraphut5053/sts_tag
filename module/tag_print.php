@@ -71,7 +71,6 @@ if (isset($_POST["tag_ids"])) {
         $temp->setReplace("{img_qrcode}", "" . $img_qrcode . "");
         
         $qr_tis = "<table width='100%' border='0' cellspacing='0' cellpadding='0'> "
-                . "<tr><td height='24'> </td></tr> "
                 . "<tr> <td align='center'>==<span style='font-family:Code39; color: #000000; font-size: 9pt; white-space: nowrap;'>*".$id."*</span>==</td> </tr> "
                 . "<tr> <td><table width='100%' border='0' cellspacing='0' cellpadding='0' style='font-family:Tahoma; font-size:9px;' align='right'> <tr><td>SPEC./มาตราฐาน:".$spec." ".$rs2[1]["Uf_Grade"]."</td> </tr>"
                 . "<tr><td>SIZE/ขนาด:". $rs2[1]["Uf_NPS"]." x". $rs2[1]["Uf_Schedule"]." x". $rs2[1]["Uf_length"]."</td> </tr> "
@@ -119,7 +118,7 @@ if (isset($_POST["tag_ids"])) {
         $grade = $rs[1]["uf_grade"];
         if ($grade == "A"){
             $temp->setReplace("{Reject}", "");
-			$temp->setReplace("{import}", "");
+			$temp->setReplace("{Remark}", "");
         } else {
             $temp->setReplace("{Reject}", "Reject and Scrap");
 			$temp->setReplace("{Remark}", "" . $rs2[1]["remark"] . "");
@@ -260,7 +259,7 @@ if (isset($_POST["tag_ids"])) {
 
         if ($grade == "A"){
             $temp->setReplace("{Reject}", "");
-			$temp->setReplace("{import}", "");
+			$temp->setReplace("{Remark}", "");
         } else {
             $temp->setReplace("{Reject}", "Reject and Scrap");
 			$temp->setReplace("{Remark}", "" . $rs2[1]["remark"] . "");
@@ -269,7 +268,6 @@ if (isset($_POST["tag_ids"])) {
         
                 
         $qr_tis = "<table width='100%' border='0' cellspacing='0' cellpadding='0'> "
-                . "<tr><td height='24'> </td></tr> "
                 . "<tr> <td align='center'>==<span style='font-family:Code39; color: #000000; font-size: 9pt; white-space: nowrap;'>*".$id."*</span>==</td> </tr> "
                 . "<tr> <td><table width='100%' border='0' cellspacing='0' cellpadding='0' style='font-family:Tahoma; font-size:9px;' align='right'> <tr><td>SPEC./มาตราฐาน:".$spec." ".$rs2[1]["Uf_Grade"]."</td> </tr>"
                 . "<tr><td>SIZE/ขนาด:". $rs2[1]["Uf_NPS"]." x". $rs2[1]["Uf_Schedule"]." x". $rs2[1]["Uf_length"]."</td> </tr> "
