@@ -29,8 +29,8 @@ if (isset($_POST["tag_ids"])) {
         $sql1 = "select TOP 1 * from MV_Job where item = '" . $rs[1]["item"] . "';";
         $rs1 = $cSql->SqlQuery($conn, $sql1);
 
-        $sql2 = "select * ,case when item_mst.uf_market <> 'ขายใน' then 'เหล็กนำเข้าตามมาตรา 21 ตรี'
-                else '' end as remark from item_mst where item = '" . $rs[1]["item"] . "';";
+        $sql2 = "select * ,case when item_mst.uf_market in ('AUS', 'USA') then 'เหล็กนำเข้าตามมาตรา 21 ตรี'
+                 else '' end as remark from item_mst where item = '" . $rs[1]["item"] . "';";
         $rs2 = $cSql->SqlQuery($conn, $sql2);
         
         $sql2_wc = "select wc FROM matltran_mst where ref_num = '" . $rs[1]["job"] . "'  and wc is not null ;";
@@ -184,8 +184,8 @@ if (isset($_POST["tag_ids"])) {
       $pack_no = 0;
       } */
 
-    $sql2 = "select * ,case when item_mst.uf_market <> 'ขายใน' then 'เหล็กนำเข้าตามมาตรา 21 ตรี'
-            else '' end as remark from item_mst where item = '" . $item . "';";
+     $sql2 = "select * ,case when item_mst.uf_market in ('AUS', 'USA') then 'เหล็กนำเข้าตามมาตรา 21 ตรี'
+              else '' end as remark from item_mst where item = '" . $item . "';";
     $rs2 = $cSql->SqlQuery($conn, $sql2);
     $spec = $rs2[1]["Uf_spec"];
     /* if (isset($rs2[1]["Uf_od_text"])) {
