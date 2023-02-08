@@ -16,7 +16,7 @@ if ($m_id == "m1") {
 	$menu .= blockmenu("พิมพ์แท็กท่อ", $bgcl[7], "scan_jobOrder_start&linkcmd=tag_history_forming");	
 	$menu .= blockmenu("พิมพ์แท็ก Finishing", $bgcl[8], "scan_jobOrder_start&linkcmd=tag_history_finishing");	
 	$menu .= blockmenu("พิมพ์แท็ก Improvement", $bgcl[9], "scan_jobOrder_start&linkcmd=tag_history_improvement");
-	$menu .= blockmenu_password("Tag Status", $bgcl[18], "tag_status");	
+	// $menu .= blockmenu_password("Tag Status", $bgcl[18], "tag_status");	
 	$menu .= '<div id="1" class="clear" style="height:5px;">&nbsp;</div>';
 	$menu .= '<div id="2" class="clear" style="height:2px; background-color:#0098e1">&nbsp;</div>';
 	$menu .= '<div id="3" class="clear" style="height:5px;">&nbsp;</div>';
