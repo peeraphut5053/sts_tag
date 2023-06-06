@@ -67,7 +67,7 @@ if ($flagrejob == 1) {
     $rsUpdate = $cSql->IsUpDel($conn, $sqlUpdateJob);
 
 
-    $sql_INSERT_LOT_LOC_MST = "exec [INSERT_LOT_LOC_MST] @oldlot = '$oldlot', @LOT ='$lot', @ITEM = '$item' , @sts_no = '$sts_no' ";
+    $sql_INSERT_LOT_LOC_MST = "exec [INSERT_LOT_LOC_MST] @oldlot = '$oldlot', @LOT ='$lot', @ITEM = '$item' , @sts_no = '$sts_no', @tagID = '$tag_id' ";
     $rsChk = $cSql->SqlQuery($conn, $sql_INSERT_LOT_LOC_MST);
 
 
