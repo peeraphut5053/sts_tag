@@ -20,7 +20,7 @@ $rs2 = $cSql->SqlQuery($conn, $sql2);
 $qty_mat = $rs2[1]["qty_mat"];
 
 
-$sql3 = "select  custaddr_mst.city,custaddr_mst.name as custname,co_mst.* FROM co_mst LEFT JOIN custaddr_mst ON co_mst.cust_num = custaddr_mst.cust_num and co_mst.cust_seq = custaddr_mst.cust_seq where co_num = '" . $rs[1]["ord_num"] . "' ";
+$sql3 = "select  custaddr_mst.city,isnull(custaddr_mst.addr##2, custaddr_mst.name) as custname,co_mst.* FROM co_mst LEFT JOIN custaddr_mst ON co_mst.cust_num = custaddr_mst.cust_num and co_mst.cust_seq = custaddr_mst.cust_seq where co_num = '" . $rs[1]["ord_num"] . "' ";
 $rs3 = $cSql->SqlQuery($conn, $sql3);
 
 
