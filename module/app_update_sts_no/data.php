@@ -32,7 +32,7 @@ if ($load == "GetStsNo") {
         $rs0 = $cSql0->SqlQuery($conn, $sql0);
 
 
-        $sql = "update lot_mst set sts_no = '$w_sts_no',uf_sts_no2= '$w_sts_no2',uf_sts_no3= '$w_sts_no3',"
+        $sql = "update lot_mst set Uf_lot_sts_no = '$w_sts_no',uf_sts_no2= '$w_sts_no2',uf_sts_no3= '$w_sts_no3',"
                 . " uf_qty_sts_no= $w_qty_sts_no,uf_qty_sts_no2= $w_qty_sts_no2,uf_qty_sts_no3= $w_qty_sts_no3 where lot = '$lot' ";
         $cSql = new SqlSrv();
         $rs = $cSql->SqlQuery($conn, $sql);
