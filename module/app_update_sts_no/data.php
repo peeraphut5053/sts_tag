@@ -11,7 +11,7 @@ if ($load == "GetStsNo") {
             . " ,isnull(qty_sts_no,0) as qty_sts_no "
             . " ,isnull(qty_sts_no2,0) as qty_sts_no2 "
             . " ,isnull(qty_sts_no3,0) as qty_sts_no3 "
-            . " ,lot_mst.sts_no as s_sts_no "
+            . " ,lot_mst.Uf_lot_sts_no as s_sts_no "
             . " ,lot_mst.uf_sts_no2 as s_sts_no2 "
             . " ,lot_mst.uf_sts_no3 as s_sts_no3 "
             . " ,lot_mst.uf_qty_sts_no as s_qty_sts_no "
