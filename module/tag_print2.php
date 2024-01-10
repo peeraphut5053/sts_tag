@@ -59,7 +59,7 @@ if (isset($_POST["tag_ids"])) {
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
             $img_tis = "<img src='./image/TIS_276.jpg' width='100' height='100'>";
         } elseif($TagBarcode->Uf_class == "TIS.1228") {
-            $img_qrcode = "<img src='./image/1612617444.png' width='100' height='100'>"; 
+            $img_qrcode = "<img src='./image/QR_TIS1228_2561.png' width='100' height='100'>"; 
             $img_tis = "<img src='./image/TIS_1228.jpg' width='100' height='100'>";
             $desc = "เหล็กโครงสร้างรูปพรรณขึ้นรูปเย็นสำหรับงานโครงสร้างทั่วไป เหล็กรูปตัวซีมีขอบ";
             $Uf_TheoryWeightPerItem ="weight". " : " . number_format($TagBarcode->Uf_TheoryWeightPerItem,2) . " kg / m.";
@@ -179,7 +179,7 @@ if (isset($_POST["tag_ids"])) {
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
             $img_tis = "<img src='./image/TIS_276.jpg' width='100' height='100'>";
         } elseif($TagBarcodePreview->Uf_class == "TIS.1228") {
-            $img_qrcode = "<img src='./image/1612617444.png' width='100' height='100'>"; 
+            $img_qrcode = "<img src='./image/QR_TIS1228_2561.png' width='100' height='100'>"; 
             $img_tis = "<img src='./image/TIS_1228.jpg' width='100' height='100'>";
             $desc = "เหล็กโครงสร้างรูปพรรณขึ้นรูปเย็นสำหรับงานโครงสร้างทั่วไป เหล็กรูปตัวซีมีขอบ";
             $Uf_TheoryWeightPerItem ="weight". " : " . number_format($TagBarcodePreview->Uf_TheoryWeightPerItem,2) . " kg / m.";
