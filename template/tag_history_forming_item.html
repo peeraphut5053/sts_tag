@@ -96,7 +96,7 @@
 
         return false;
     }
-
+    
     function inpEditLine(id, qty1, wg) {
         $("#d_qty_" + id).html('<input name="qty1" type="text" id="qty1" style="width:100%" class="default" value="' + qty1 + '">');
         $("#d_w_" + id).html('<input name="uf_act_Weight" type="text" id="uf_act_Weight" style="width:100%" class="default" value="' + wg + '">');
@@ -239,16 +239,7 @@
                 </tr>
             </table></td>
 
-            <td width="60%" rowspan="3" valign="top"><div style='overflow:auto; height:450px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tbitem">
-                <tr bgcolor="#c4e1ff">
-                    <td align="center" width="2%"><strong>#</strong></td>
-                    <td align="center"><strong>item</strong></td>
-                    <td align="center"><strong>description</strong></td>
-                </tr>
-                {liist_item}	
-            </table></div>
-
-        <td width="60%" rowspan="3" valign="top"><div style='overflow:auto; height:450px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist">
+        <td width="60%" rowspan="3" valign="top"><div style='overflow:auto; height:450px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist" >
                     <tr bgcolor="#c4e1ff">
                         <td align="center" width="2%"><strong>#</strong></td>
                         <td align="center"><strong>Tag no.</strong></td>
@@ -282,3 +273,4 @@
 </table>
 <div id="printpopup"></div>
 <div id="printpopup2"></div>
+</form>

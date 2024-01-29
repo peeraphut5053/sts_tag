@@ -1,0 +1,21 @@
+
+<td width="60%" rowspan="3" valign="top"><div style='overflow:auto; height:450px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tbitem">
+    <tr bgcolor="#c4e1ff">
+        <td align="center" width="2%"><strong>#</strong></td>
+        <td align="center"><strong>item</strong></td>
+        <td align="center"><strong>description</strong></td>
+        <td align="center"><strong>main_item</strong></td>
+    </tr>
+    {liist_item}	
+</table></div>
+
+<script>
+    function items(id,v){
+        console.log(v)
+        let jobno = id+"%2B0%2B10"
+    
+        // window.location.href = "scan_jobOrder_start&linkcmd=tag_history_forming_item&jobno="+jobno+"&act=start&item="+v;
+        window.location.href ='?tag_history_forming_item&jobno='+jobno+'&act=start&item='+v;
+ 
+    }
+</script>

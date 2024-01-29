@@ -1,7 +1,7 @@
 <?php
 
 while (list($key, $data) = each($_GET) OR list($key, $data) = each($_POST)) {
-    ${$key} = trim($data);
+	${$key} = trim($data);
 }
 
 $temp->setReplace("{crumb}", "พิมพ์แท็กบาร์โค้ด");
@@ -86,8 +86,16 @@ $db = array();
 $dc = array();
 $dr = array();
 
-$sql = "select *, CONVERT(VARCHAR(16), mfg_date, 120)  AS mfg_date from Mv_Bc_tag where ltrim(job) = '" . $jobm[0] . "' and suffix = '" . $jobm[1] . "' and oper_num = '" . $jobm[2] . "' order by lot, uf_grade;";
+$sql = 
+// "select *, CONVERT(VARCHAR(16), mfg_date, 120)  AS mfg_date from Mv_Bc_tag where ltrim(job) = '" . $jobm[0] . "' and suffix = '" . $jobm[1] . "' and oper_num = '" . $jobm[2] . "' order by lot, uf_grade;";
+$sql = "select *, CONVERT(VARCHAR(16), mfg_date, 120)  AS mfg_date 
+from Mv_Bc_tag 
+where ltrim(job) = '$jobm[0]' and suffix = '$jobm[1]'  and oper_num = '$jobm[2]' 
+and item = '".$item."'
+order by item,lot, uf_grade";
+
 $rs = $cSql->SqlQuery($conn, $sql);
+
 for ($i = 1; $i <= $rs[0][0]; $i++) {
     $lota = explode("-", $rs[$i]["lot"]);
     if ($rs[$i]["uf_grade"] == "A") {
@@ -232,21 +240,31 @@ $temp->setReplace("{wc}",  $wc);
 
 
 
-$sqlitem = "select job.item , item.description 
-from jobitem_mst job inner join item_mst item on item.item = job.item
-where job.job = '$jobm[0]' ";
+// $sqlitem = "select job.job, job.item , item.description 
+// , case when mix.item is not null then 'main' else '' end as main_item
+// from jobitem_mst job inner join item_mst item on item.item = job.item
+// left join prod_mix_mst mix on mix.item = job.item
+// where job.job ='TESTCO2401'
+// order by  case when mix.item is not null then 'main' else '' end desc";
+// "select job.item , item.description , mix.item as item_head
+// from jobitem_mst job inner join item_mst item on item.item = job.item
+// left join prod_mix_mst mix on mix.item = job.item
+// where job.job ='$jobm[0]'
+// order by  mix.item desc";
 
-$rsitem = $cSql->SqlQuery($conn, $sqlitem);
+// $rsitem = $cSql->SqlQuery($conn, $sqlitem);
 
-$liist_item = "";
-for ($i = $rsitem[0][0]; $i >= 1; $i--) {
-$liist_item .= '<tr bgcolor="' . $bg_color . '" class="' . $cfont . '">
-<td  align="center"><input name="item" type="checkbox" id="item" value="' . $rsitem[$i]["item"] . '"' . $disable . '></td>
-<td>' .$rsitem[$i]["item"] . '</td>
-<td>' . $rsitem[$i]["description"] . '</td>';
+// $liist_item = "";
+// for ($i = $rsitem[0][0]; $i >= 1; $i--) {
+// $liist_item .= '<tr bgcolor="white" class="">
+// <td  align="center"><input name="item" type="radio" id="' . $rsitem[$i]["job"] . '" value="' . $rsitem[$i]["item"] . '" onclick ="item(value,id)";></td>
+// <td>' .$rsitem[$i]["item"] . '</td>
+// <td>' . $rsitem[$i]["description"] . '</td>
+// <td>' . $rsitem[$i]["main_item"] . '</td>';
 
-$liist_item .= '</tr>';
-}
+// $liist_item .= '</tr>';
+// }
 
-$temp->setReplace("{liist_item}", $liist_item);
+
+// $temp->setReplace("{liist_item}", $liist_item);
 ?>
