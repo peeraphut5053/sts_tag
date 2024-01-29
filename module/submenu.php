@@ -13,7 +13,8 @@ if ($m_id == "m1") {
 } elseif ($m_id == "m2") {
 	$menu .= blockmenu("พิมพ์แท็ก  Item", $bgcl[5], "grn_list&tag=print_tag_coil");
 	$menu .= blockmenu("พิมพ์แท็กสลิต", $bgcl[6], "scan_jobOrder_start&linkcmd=tag_history_slit");
-	$menu .= blockmenu("พิมพ์แท็กท่อ", $bgcl[7], "scan_jobOrder_start&linkcmd=tag_history_forming");	
+	$menu .= blockmenu("พิมพ์แท็กท่อ", $bgcl[7], "scan_jobOrder_start&linkcmd=tag_history_forming");
+	$menu .= blockmenu("พิมพ์แท็กท่อ (item)", $bgcl[7], "scan_jobOrder_start&linkcmd=tag_history_forming_item");	
 	$menu .= blockmenu("พิมพ์แท็ก Finishing", $bgcl[8], "scan_jobOrder_start&linkcmd=tag_history_finishing");	
 	$menu .= blockmenu("พิมพ์แท็ก Improvement", $bgcl[9], "scan_jobOrder_start&linkcmd=tag_history_improvement");
 	// $menu .= blockmenu_password("Tag Status", $bgcl[18], "tag_status");	
