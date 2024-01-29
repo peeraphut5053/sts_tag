@@ -11,7 +11,14 @@ $temp->setReplace("{content}", $temp->getTemplate("./template/tag_history_formin
 $cSql = new SqlSrv();
 
 $jobm = explode("+", $jobno);
-$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark from MV_Job LEFT JOIN job_mst ON MV_Job.job = job_mst.job where ltrim(MV_Job.job) = '" . $jobm[0] . "' and MV_Job.suffix = '" . $jobm[1] . "' and MV_Job.oper_num = '" . $jobm[2] . "';";
+$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark, ji.item as jobitem, item.[description] as jobitem_desc
+from MV_Job 
+LEFT JOIN job_mst ON MV_Job.job = job_mst.job 
+left join jobitem_mst ji on ji.job = job_mst.job
+inner join item_mst item on item.item = ji.item 
+where ltrim(MV_Job.job) = '" . $jobm[0] . "' 
+and MV_Job.suffix = '" . $jobm[1] . "' and MV_Job.oper_num = '" . $jobm[2] . "'
+and ji.item = '$item'";
 
 $rs = $cSql->SqlQuery($conn, $sql);
 //print_r($rs);
@@ -47,14 +54,14 @@ $temp->setReplace("{city}", "" . $city . "");
 $temp->setReplace("{custname}", "" . $custname . "");
 $temp->setReplace("{Uf_remark}", "" . $rs[1]["Uf_remark"] . "");
 
-$temp->setReplace("{item}", "" . $rs[1]["item"] . "");
+$temp->setReplace("{item}", "" . $rs[1]["jobitem"] . ""); //
 //$temp->setReplace("{item_desc}", "".$rs[1]["item_desc"]."");
-if (strpos($rs[1]["item_desc"], '"'))
-    $temp->setReplace("{item_desc}", "'" . $rs[1]["item_desc"] . "'");
-elseif (strpos($rs[1]["item_desc"], "'"))
-    $temp->setReplace("{item_desc}", "\"" . $rs[1]["item_desc"] . "\"");
+if (strpos($rs[1]["jobitem_desc"], '"'))
+    $temp->setReplace("{jobitem_desc}", "'" . $rs[1]["jobitem_desc"] . "'");
+elseif (strpos($rs[1]["jobitem_desc"], "'"))
+    $temp->setReplace("{jobitem_desc}", "\"" . $rs[1]["jobitem_desc"] . "\"");
 else
-    $temp->setReplace("{item_desc}", "\"" . $rs[1]["item_desc"] . "\"");
+    $temp->setReplace("{jobitem_desc}", "\"" . $rs[1]["jobitem_desc"] . "\"");
 $temp->setReplace("{oper_num}", "" . $rs[1]["oper_num"] . "");
 $temp->setReplace("{wc}", "" . $rs[1]["wc"] . "----");
 $wc =  $rs[1]["wc"];
