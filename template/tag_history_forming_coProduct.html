@@ -10,12 +10,11 @@
 </table></div>
 
 <script>
-    function items(id,v){
-        console.log(v)
+    function items(id,v,num){
+        // console.log(v)
+        // console.log(num)
         let jobno = id+"%2B0%2B10"
-    
-        // window.location.href = "scan_jobOrder_start&linkcmd=tag_history_forming_item&jobno="+jobno+"&act=start&item="+v;
-        window.location.href ='?tag_history_forming_item&jobno='+jobno+'&act=start&item='+v;
+            window.location.href ='?tag_history_forming_item&jobno='+jobno+'&act=start&item='+v+'&num='+num;
  
     }
 </script>

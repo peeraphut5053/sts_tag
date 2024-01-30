@@ -54,7 +54,8 @@ $temp->setReplace("{city}", "" . $city . "");
 $temp->setReplace("{custname}", "" . $custname . "");
 $temp->setReplace("{Uf_remark}", "" . $rs[1]["Uf_remark"] . "");
 
-$temp->setReplace("{item}", "" . $rs[1]["jobitem"] . ""); //
+$temp->setReplace("{item}", "" . $rs[1]["jobitem"] . "");
+$temp->setReplace("{num}", "" . $num . ""); //
 //$temp->setReplace("{item_desc}", "".$rs[1]["item_desc"]."");
 if (strpos($rs[1]["jobitem_desc"], '"'))
     $temp->setReplace("{jobitem_desc}", "'" . $rs[1]["jobitem_desc"] . "'");

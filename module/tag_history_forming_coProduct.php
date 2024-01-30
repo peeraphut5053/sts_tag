@@ -17,10 +17,20 @@ $rs = $cSql->SqlQuery($conn, $sql);
 
 $sqlitem = "select job.job, job.item , item.description 
 , case when mix.item is not null then 'main' else '' end as main_item
+, ROW_NUMBER() OVER(ORDER BY case when mix.item is not null then 'main' else '' end desc,job.item) - 1 AS num
 from jobitem_mst job inner join item_mst item on item.item = job.item
 left join prod_mix_mst mix on mix.item = job.item
 where job.job ='$jobm[0]'
 order by  case when mix.item is not null then 'main' else '' end desc";
+
+// "select job.job, job.item , item.description 
+// , case when mix.item is not null then 'main' else '' end as main_item
+// from jobitem_mst job inner join item_mst item on item.item = job.item
+// left join prod_mix_mst mix on mix.item = job.item
+// where job.job ='$jobm[0]'
+// order by  case when mix.item is not null then 'main' else '' end desc";
+
+
 
 $rsitem = $cSql->SqlQuery($conn, $sqlitem);
 
@@ -36,7 +46,7 @@ for ($i = $rsitem[0][0]; $i >= 1; $i--) {
 	}
 
 $liist_item .= '<tr bgcolor="' . $bg_color . '" class="">
-<td  align="center"><input name="item" type="radio" id="' . $rsitem[$i]["job"] . '" value="' . $rsitem[$i]["item"] . '" onclick ="items(this.id,value)";></td>
+<td  align="center"><input name="item" type="radio" id="' . $rsitem[$i]["job"] . '" value="' . $rsitem[$i]["item"] . '" onclick ="items(this.id,value,'. $rsitem[$i]["num"] .')";></td>
 <td>' .$rsitem[$i]["item"] . '</td>
 <td>' . $rsitem[$i]["description"] . '</td>
 <td>' . $rsitem[$i]["main_item"] . '</td>';

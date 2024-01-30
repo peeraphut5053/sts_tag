@@ -157,7 +157,7 @@ if ($qty_remain < 0)
 
 
 if ($grade == "A") {
-    $lot = $lot . "-" . sprintf("%'.04d", ($pack_no + 1));
+    $lot = $lot . "-$num" . sprintf("%'.03d", ($pack_no + 1));
 } elseif ($grade == "C") {
     $lot = $lot . "-B" . sprintf("%'.03d", ($pack_no + 1));
 } elseif ($grade == "R") {
