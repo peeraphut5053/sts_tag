@@ -24,9 +24,18 @@ order by  case when mix.item is not null then 'main' else '' end desc";
 
 $rsitem = $cSql->SqlQuery($conn, $sqlitem);
 
+
+
 $liist_item = "";
 for ($i = $rsitem[0][0]; $i >= 1; $i--) {
-$liist_item .= '<tr bgcolor="white" class="">
+
+	if ($rsitem[$i]["main_item"] == "main"){
+		$bg_color = "yellow";
+	}else {
+		$bg_color = "white";
+	}
+	
+$liist_item .= '<tr bgcolor="' . $bg_color . '" class="">
 <td  align="center"><input name="item" type="radio" id="' . $rsitem[$i]["job"] . '" value="' . $rsitem[$i]["item"] . '" onclick ="items(this.id,value)";></td>
 <td>' .$rsitem[$i]["item"] . '</td>
 <td>' . $rsitem[$i]["description"] . '</td>

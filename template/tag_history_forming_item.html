@@ -7,11 +7,19 @@
      }
      });
      });	*/
-
+    function GotoHistory() {
+        var jobno = $('#job_no').val();
+        var item = $('#item').val(); 
+        var uri_enc = encodeURIComponent(jobno);
+        var uri_enc2 = encodeURIComponent(item);
+        window.location.href = '?tag_history_forming_coProduct&jobno=' + uri_enc+'&act=start';
+    }
     function LinkTagA() {
         var jobno = $('#job_no').val();
+        var item = $('#item').val(); 
         var uri_enc = encodeURIComponent(jobno);
-        window.location.href = '?tag_barcode&jobno=' + uri_enc + '&grade=A';
+        var uri_enc2 = encodeURIComponent(item);
+        window.location.href = '?tag_barcode_coProduct&jobno=' + uri_enc + '&grade=A&item='+uri_enc2;
     }
     function LinkTagB() {
         var jobno = $('#job_no').val();
@@ -265,7 +273,9 @@
         </td>
     </tr>
     <tr>
-        <td align="center" ><input name="print_a" type="button" id="print_a" value="พิมพ์ A" class="ui-button ui-widget ui-corner-all" onClick="LinkTagA();">
+        <td align="center" >
+            <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print" onclick="GotoHistory();" value=" เลือก item ">
+            <input name="print_a" type="button" id="print_a" value="พิมพ์ A" class="ui-button ui-widget ui-corner-all" onClick="LinkTagA();">
             <input style="display:none;" name="print_b" type="button" id="print_b" value="พิมพ์ B" class="ui-button ui-widget ui-corner-all" onClick="LinkTagB();">
             <!--<input name="print_c" type="button" id="print_c" value="พิมพ์ B" class="ui-button ui-widget ui-corner-all" onClick="LinkTagC();">-->
             <!--<input name="print_r" type="button" id="print_r" value="พิมพ์ R" class="ui-button ui-widget ui-corner-all" onClick="LinkTagR();"></td>-->
