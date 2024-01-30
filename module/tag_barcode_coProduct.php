@@ -163,12 +163,13 @@ if ($grade == "A") {
 } elseif ($grade == "R") {
     $lot = $lot . "-R" . sprintf("%'.03d", ($pack_no + 1));
 } else {
-    $lot = $lot . "-" . sprintf("%'.04d", ($pack_no + 1));
+    $lot = $lot . "-$num" . sprintf("%'.03d", ($pack_no + 1));
 }
 //$lot= $sql;
 //print_r(sprintf("%'.04d", ($pack_no + 1)));
 $temp->setReplace("{pack}", "" . $pack_no . "");
 $temp->setReplace("{lot}", "" . $lot . "");
+$temp->setReplace("{num}", "" . $num . "");
 $temp->setReplace("{Uf_Grade}", "" . total_format($Uf_Grade) . "");
 $temp->setReplace("{Uf_WGgrade}", "" . total_format($Uf_WGrade, 2) . "");
 $temp->setReplace("{qty_line}", "" . total_format($qty_line) . "");

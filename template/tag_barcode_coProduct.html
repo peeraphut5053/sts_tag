@@ -37,7 +37,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load('./module/tag_print.php?' + $('#formB').serialize());
+                    .load('./module/tag_print_coProduct.php?' + $('#formB').serialize());
         }
         return false;
     }
@@ -45,9 +45,11 @@
     function GotoHistory() {
         var jobno = $('#job_no').val();
         var item = $('#item').val(); 
+        var num = $('#num').val(); 
         var uri_enc = encodeURIComponent(jobno);
         var uri_enc2 = encodeURIComponent(item);
-        window.location.href = '?tag_history_forming_item&jobno=' + uri_enc+'&item='+uri_enc2;
+        var uri_enc3 = encodeURIComponent(num);
+        window.location.href = '?tag_history_forming_item&jobno=' + uri_enc+'&item='+uri_enc2+'&num='+uri_enc3;
     }
 
     function ChkActWeight() {
@@ -188,6 +190,7 @@
                                 <tr>
                                     <td align="right"><strong>Lot</strong>: </td>
                                     <td><input name="lot" type="text" class="default" id="lot" size="18" value="{lot}" style="background: #f2fff9;"/></td>
+                                    <td hidden><input name="num" type="text" class="default" id="num" size="18" value="{num}" style="background: #f2fff9;"/></td>
                                     <td align="right"><strong>ต้องการพิมพ์</strong>: </td>
                                     <td><input name="qty1" type="text" id="qty1" size="18" class="default" value="{qty1}" style="background: #f2fff9;"/> เส้น</td>
                                     <td></td>

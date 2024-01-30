@@ -17,7 +17,7 @@ $rs = $cSql->SqlQuery($conn, $sql);
 
 $sqlitem = "select job.job, job.item , item.description 
 , case when mix.item is not null then 'main' else '' end as main_item
-, ROW_NUMBER() OVER(ORDER BY case when mix.item is not null then 'main' else '' end desc,job.item) - 1 AS num
+, ROW_NUMBER() OVER(ORDER BY case when mix.item is not null then 'main' else '' end desc,job.item) AS num
 from jobitem_mst job inner join item_mst item on item.item = job.item
 left join prod_mix_mst mix on mix.item = job.item
 where job.job ='$jobm[0]'
