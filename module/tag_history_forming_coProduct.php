@@ -30,11 +30,11 @@ $liist_item = "";
 for ($i = $rsitem[0][0]; $i >= 1; $i--) {
 
 	if ($rsitem[$i]["main_item"] == "main"){
-		$bg_color = "yellow";
+		$bg_color = "#FFFAA0";
 	}else {
 		$bg_color = "white";
 	}
-	
+
 $liist_item .= '<tr bgcolor="' . $bg_color . '" class="">
 <td  align="center"><input name="item" type="radio" id="' . $rsitem[$i]["job"] . '" value="' . $rsitem[$i]["item"] . '" onclick ="items(this.id,value)";></td>
 <td>' .$rsitem[$i]["item"] . '</td>
