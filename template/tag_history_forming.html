@@ -7,6 +7,20 @@
      }
      });
      });	*/
+    
+
+    $(document).ready(function(){
+        var checkCoP = $('#checkCoP').val();
+        var check = encodeURIComponent(checkCoP);
+        // console.log(check)
+
+          if (checkCoP == ''){
+            $('#print_a').show();
+        }else {
+            $('#print_a').hide();
+        }
+
+    });
 
     function LinkTagA() {
         var jobno = $('#job_no').val();
@@ -126,6 +140,7 @@
                     <td align="right">Job Order: </td>
                     <td><input name="job_no" type="text" id="job_no" size="20" class="default_view" readonly value="{job_no}">
                         <input name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000"></td>
+                        <input name="checkCoP" type="text" id="checkCoP" size="20" class="default_view" readonly value="{checkCoP}">
                 </tr>
                 <tr>
                     <td align="right">Customer Order: </td>

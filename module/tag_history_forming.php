@@ -230,4 +230,11 @@ $temp->setReplace("{qty_mat}", $qty_mat);
 $temp->setReplace("{qty_mat_r}", $qty_mat_r);
 $temp->setReplace("{wc}",  $wc);
 
+$sqlcheck = "select job from job_mst
+where job ='" . $jobm[0] . "' 
+and co_product_mix = 1";
+$rscheck = $cSql->SqlQuery($conn, $sqlcheck);
+
+$temp->setReplace("{checkCoP}",  "".$rs[1]["job"] ."");
+
 ?>
