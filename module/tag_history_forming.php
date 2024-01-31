@@ -235,6 +235,6 @@ where job ='" . $jobm[0] . "'
 and co_product_mix = 1";
 $rscheck = $cSql->SqlQuery($conn, $sqlcheck);
 
-$temp->setReplace("{checkCoP}",  "".$rs[1]["job"] ."");
+$temp->setReplace("{checkCoP}",  "".$rscheck [1]["job"] ."");
 
 ?>
