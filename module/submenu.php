@@ -29,7 +29,7 @@ if ($m_id == "m1") {
 	// $menu .= blockmenu("พิมพ์ Tag B", $bgcl[15], "scan_jobOrder_start&linkcmd=tag_history_tag_b");
 	// $menu .= blockmenu("พิมพ์ Tag C", $bgcl[15], "scan_jobOrder_start&linkcmd=tag_history_tag_c");
 	$menu .= blockmenu("พิมพ์ Barcode MiscReceipt", $bgcl[16], "AppGenBarcodeMiscReceipt");
-	$menu .= blockmenu("Move Qty (เวอร์ชั่นเดิม)", $bgcl[17], "sts_move_qty&linkcmd=movestock");
+	// $menu .= blockmenu("Move Qty (เวอร์ชั่นเดิม)", $bgcl[17], "sts_move_qty&linkcmd=movestock");
 	$menu .= blockmenu("Move Qty ", $bgcl[17], "sts_move_qty_new&linkcmd=sts_move_qty_new");
 	$menu .= blockmenu("Reset Tag ID Shipped", $bgcl[17], "reset_tag_id_shiped");
 	$menu .= blockmenu("Delete GRN Line", $bgcl[8], "delete_grn_line");
