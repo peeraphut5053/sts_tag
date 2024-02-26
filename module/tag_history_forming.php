@@ -237,4 +237,19 @@ $rscheck = $cSql->SqlQuery($conn, $sqlcheck);
 
 $temp->setReplace("{checkCoP}",  "".$rscheck [1]["job"] ."");
 
+if ( $rs[1]["wc"]!= ""){
+    $w_c =  $rs[1]["wc"];
+}
+else{
+    $w_c = '----';
+}
+
+$sqlFM = "select * from  STS_forming_operation
+where job = '" . $jobm[0] . "'  
+and w_c = '" . $w_c. "'";
+$rsFM = $cSql->SqlQuery($conn, $sqlFM);
+
+$temp->setReplace("{operationWeight}",  "".$rsFM[1]["operationWeight"] ."");
+$temp->setReplace("{operationSpeed}",  "".$rsFM[1]["operationSpeed"] ."");
+$temp->setReplace("{operationTime}",  "".$rsFM[1]["operationTime"] ."");
 ?>

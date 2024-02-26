@@ -143,6 +143,35 @@
         //$("#edit_c_"+id).hide();	
     }
 //-->
+
+function saveOperation() {
+    let w_c = $('#wc').val();
+    let operationWeight = $('#operationWeight').val();
+    let operationTime = $('#operationTime').val();
+    let job = $('#job_no').val().split("+");
+    let operationJob = job[0]
+
+
+        console.log(operationJob)
+        console.log(w_c)
+        console.log(operationWeight)
+   
+        $.ajax({
+                url: "./module/tag_FM_SaveOperation.php",
+                type: 'get',
+                // processData: false,
+                data: {
+                "load": "save",
+                "w_c": w_c,
+                "operationJob": operationJob,
+                "operationWeight": operationWeight,
+                "operationTime": operationTime
+                },
+                success: function () {
+                    // alert("true");
+                }
+            });
+        }
 </script>
 <table width="100%" border="0" cellspacing="0" cellpadding="5">
     <tr>
@@ -159,14 +188,20 @@
                 <tr>
                     <td align="right">Uf Ref. No.</td>
                     <td><input name="uf_ref_no" type="text" id="uf_ref_no" size="20" class="default_view" readonly value="{Uf_refno}">
+                        น้ำหนักท่อชั่งจริง:
+                        <input name="operationWeight" type="text" id="operationWeight" size="7" class="default_view" value="{operationWeight}" onchange="saveOperation();">
                 </tr>
                 <tr>
                     <td align="right">Customer name</td>
                     <td><input name="custname" type="text" id="custname" size="20" class="default_view" readonly value="{custname}">
+                        ความเร็วในการเดินเครื่อง:
+                        <input name="operationSpeed" type="text" id="operationSpeed" size="7" class="default_view" readonly value="{operationSpeed}">
                 </tr>
                 <tr>
                     <td align="right">City</td>
                     <td><input name="city" type="text" id="city" size="20" class="default_view" readonly value="{city}">
+                        เดินเครื่องจริง:
+                        <input name="operationTime" type="text" id="operationTime" size="7" class="default_view"  value="{operationTime}" onchange="saveOperation();">   
                 </tr>
                 <tr>
                     <td align="right">Item:</td>

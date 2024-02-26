@@ -247,6 +247,22 @@ $temp->setReplace("{qty_mat_r}", $qty_mat_r);
 $temp->setReplace("{wc}",  $wc);
 
 
+if ( $rs[1]["wc"]!= ""){
+    $w_c =  $rs[1]["wc"];
+}
+else{
+    $w_c = '----';
+}
+
+$sqlFM = "select * from  STS_forming_operation
+where job = '" . $jobm[0] . "'  
+and w_c = '" . $w_c. "'";
+$rsFM = $cSql->SqlQuery($conn, $sqlFM);
+
+$temp->setReplace("{operationWeight}",  "".$rsFM[1]["operationWeight"] ."");
+$temp->setReplace("{operationSpeed}",  "".$rsFM[1]["operationSpeed"] ."");
+$temp->setReplace("{operationTime}",  "".$rsFM[1]["operationTime"] ."");
+
 
 // $sqlitem = "select job.job, job.item , item.description 
 // , case when mix.item is not null then 'main' else '' end as main_item
