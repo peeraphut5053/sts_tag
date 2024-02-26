@@ -87,7 +87,7 @@ $temp->setReplace("{unit_weight}", "" . $rs[1]["co_unit_weight"] . "");
 $temp->setReplace("{unit_weight_b}", "" . $rs[1]["co_unit_weight"] . "");
 $temp->setReplace("{unit_weight1}", "" . total_format($rs[1]["co_unit_weight"], 2, "") . "");
 $temp->setReplace("{uf_sts_job}", "" . $rs[1]["uf_sts_job"] . "");
-$temp->setReplace("{qty1}", "" . $rs[1]["Uf_pack"] . "");
+$temp->setReplace("{qty1}", "" . $rs[1]["co_uf_pack"] . "");
 
 $stdpack_weight = $rs[1]["co_unit_weight"] * $rs[1]["co_uf_pack"];
 $temp->setReplace("{stdpack_weight}", "" . total_format($stdpack_weight, 0, "") . "");
