@@ -146,8 +146,8 @@ if ($grade == "A") {
 }
 //echo $sql;
 $rs = $cSql->SqlQuery($conn, $sql);
-if (isset($rs[1]["co_uf_pack"]))
-    $pack_no = $rs[1]["co_uf_pack"];
+if (isset($rs[1]["uf_pack"]))
+    $pack_no = $rs[1]["uf_pack"];
 else
     $pack_no = 0;
 
