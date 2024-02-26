@@ -30,7 +30,8 @@ if (isset($_POST["tag_ids"])) {
         $rs1 = $cSql->SqlQuery($conn, $sql1);
 
         $sql2 = "select * ,case when item_mst.uf_market in ('AUS', 'USA') then 'เหล็กนำเข้าตามมาตรา 21 ตรี'
-                 else '' end as remark from item_mst where item = '" . $rs[1]["item"] . "';";
+        else '' end as remark , substring(item,15,2) as TIS
+        from item_mst where item  = '" . $rs[1]["item"] . "' ";
         $rs2 = $cSql->SqlQuery($conn, $sql2);
         
         $sql2_wc = "select wc FROM matltran_mst where ref_num = '" . $rs[1]["job"] . "'  and wc is not null ;";
@@ -78,15 +79,15 @@ if (isset($_POST["tag_ids"])) {
                 . "<tr><td>LOT No./รุ่น: {lot}</td> </tr> <tr><td style='font-size: 13px'>H/N.: <span style='font-size:22px;'>".$Heat_no."</span></td> </tr> </table></td> </tr> </table>";
         
         
-        if($rs2[1]["Uf_spec"] == "TIS.107" ||$rs2[1]["Uf_spec"] == "TIS.107 STK290" ||$rs2[1]["Uf_spec"] == "TIS.107 STK400"  ){
+        if($rs2[1]["TIS"] == "T1"){
             $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
             $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
-        }elseif($rs2[1]["Uf_spec"] == "TIS.276"){
+        }elseif($rs2[1]["TIS"] == "T6"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
             $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
-        } elseif ($rs2[1]["Uf_spec"] == "TIS.1228") {
+        } elseif ($rs2[1]["TIS"] == "T5") {
             $img_qrcode = "<img src='./image/QR_TIS1228_2561.png' width='100' height='100'>"; 
              $img_tis = "<img src='./image/TIS2.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
@@ -275,15 +276,15 @@ if (isset($_POST["tag_ids"])) {
                 . "<tr><td>LOT No./รุ่น: {lot}</td> </tr> <tr><td style='font-size: 13px'>H/N.: <span style='font-size:22px;'>".$Heat_no."</span></td> </tr> </table></td> </tr> </table>";
         $img_sts = "<img style='margin-left:-1px;'  src='./image/logo_sts.png' width='100' height='100' border='0' alt=''>";
 
-        if($rs2[1]["Uf_spec"] == "TIS.107" ||$rs2[1]["Uf_spec"] == "TIS.107 STK290" ||$rs2[1]["Uf_spec"] == "TIS.107 STK400"  ){
+        if($rs2[1]["TIS"] == "T1"){
             $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
             $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
-        }elseif($rs2[1]["Uf_spec"] == "TIS.276"){
+        }elseif($rs2[1]["TIS"] == "T6"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
             $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
-        } elseif ($rs2[1]["Uf_spec"] == "TIS.1228") {
+        } elseif ($rs2[1]["TIS"] == "T5") {
             $img_qrcode = "<img src='./image/QR_TIS1228_2561.png' width='100' height='100'>"; 
              $img_tis = "<img src='./image/TIS2.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
