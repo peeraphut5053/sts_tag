@@ -150,11 +150,11 @@ function saveOperation() {
     let operationTime = $('#operationTime').val();
     let job = $('#job_no').val().split("+");
     let operationJob = job[0]
+    let operationItem = $('#item').val() 
 
-
-        console.log(operationJob)
-        console.log(w_c)
-        console.log(operationWeight)
+        // console.log(operationJob)
+        // console.log(w_c)
+        // console.log(operationWeight)
    
         $.ajax({
                 url: "./module/tag_FM_SaveOperation.php",
@@ -164,6 +164,7 @@ function saveOperation() {
                 "load": "save",
                 "w_c": w_c,
                 "operationJob": operationJob,
+                "operationItem": operationItem,
                 "operationWeight": operationWeight,
                 "operationTime": operationTime
                 },

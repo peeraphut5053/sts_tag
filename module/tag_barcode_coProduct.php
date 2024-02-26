@@ -32,7 +32,7 @@ $pdate = date("d/m/Y");
 $jobm = explode("+", $jobno);
 
 
-$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark, ji.item as jobitem, item.[description] as jobitem_desc
+$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark, ji.item as jobitem, item.[description] as jobitem_desc, item.uf_pack as co_uf_pack, item.unit_weight as co_unit_weight
 from MV_Job 
 LEFT JOIN job_mst ON MV_Job.job = job_mst.job 
 left join jobitem_mst ji on ji.job = job_mst.job
@@ -75,21 +75,21 @@ $temp->setReplace("{wc}", "" . $rs[1]["wc"] . "");
 $temp->setReplace("{description}", "" . $rs[1]["description"] . "");
 $qty_released = total_format($rs[1]["qty_released"]);
 $temp->setReplace("{qty_released}", "" . $qty_released . "");
-$weight_released = total_format($rs[1]["qty_released"] * $rs[1]["unit_weight"], 2);
+$weight_released = total_format($rs[1]["qty_released"] * $rs[1]["co_unit_weight"], 2);
 $temp->setReplace("{weight_released}", "" . $weight_released . "");
 if (isset($rs[1]["Uf_pack"]) and isset($rs[1]["qty_released"]))
     $pack_released = total_format($rs[1]["qty_released"] / $rs[1]["Uf_pack"]);
 else
     $pack_released = 0;
 $temp->setReplace("{pack_released}", "" . $pack_released . "");
-$temp->setReplace("{Uf_pack}", "" . $rs[1]["Uf_pack"] . "");
-$temp->setReplace("{unit_weight}", "" . $rs[1]["unit_weight"] . "");
-$temp->setReplace("{unit_weight_b}", "" . $rs[1]["unit_weight"] . "");
-$temp->setReplace("{unit_weight1}", "" . total_format($rs[1]["unit_weight"], 2, "") . "");
+$temp->setReplace("{Uf_pack}", "" . $rs[1]["co_uf_pack"] . "");
+$temp->setReplace("{unit_weight}", "" . $rs[1]["co_unit_weight"] . "");
+$temp->setReplace("{unit_weight_b}", "" . $rs[1]["co_unit_weight"] . "");
+$temp->setReplace("{unit_weight1}", "" . total_format($rs[1]["co_unit_weight"], 2, "") . "");
 $temp->setReplace("{uf_sts_job}", "" . $rs[1]["uf_sts_job"] . "");
 $temp->setReplace("{qty1}", "" . $rs[1]["Uf_pack"] . "");
 
-$stdpack_weight = $rs[1]["unit_weight"] * $rs[1]["Uf_pack"];
+$stdpack_weight = $rs[1]["co_unit_weight"] * $rs[1]["co_uf_pack"];
 $temp->setReplace("{stdpack_weight}", "" . total_format($stdpack_weight, 0, "") . "");
 $temp->setReplace("{stdpack_weight1}", "" . total_format($stdpack_weight, 2, "") . "");
 
@@ -146,8 +146,8 @@ if ($grade == "A") {
 }
 //echo $sql;
 $rs = $cSql->SqlQuery($conn, $sql);
-if (isset($rs[1]["uf_pack"]))
-    $pack_no = $rs[1]["uf_pack"];
+if (isset($rs[1]["co_uf_pack"]))
+    $pack_no = $rs[1]["co_uf_pack"];
 else
     $pack_no = 0;
 

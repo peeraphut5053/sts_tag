@@ -13,10 +13,10 @@ if ( $load = "save") {
     $rs1 = $cSql->SqlQuery($conn, $sql1);
 
 	if ($rs1[1]['job'] == $operationJob){
-		$sql = "update STS_forming_operation set operationWeight = '".$operationWeight."' ,operationTime = '".$operationTime."' where job = '" . $operationJob . "' and w_c = '" . $w_c. "'  ";
+		$sql = "update STS_forming_operation set operationWeight = '".$operationWeight."' ,operationTime = '".$operationTime."' where job = '" . $operationJob . "' and w_c = '" . $w_c. "' and item = '" . $operationItem. "'  ";
 	}else {
-		$sql = "insert into STS_forming_operation (operationWeight,operationTime,w_c,job)
-		VALUES ('".$operationWeight."','".$operationTime."','".$w_c."','".$operationJob."')";
+		$sql = "insert into STS_forming_operation (operationWeight,operationTime,w_c,job,item)
+		VALUES ('".$operationWeight."','".$operationTime."','".$w_c."','".$operationJob."','".$operationItem."')"; 
 	}
 
 	$rs = $cSql->SqlQuery($conn, $sql);

@@ -11,11 +11,16 @@ $temp->setReplace("{content}", $temp->getTemplate("./template/tag_history_formin
 $cSql = new SqlSrv();
 
 $jobm = explode("+", $jobno);
-$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark, ji.item as jobitem, item.[description] as jobitem_desc
+$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark, ji.item as jobitem, item.[description] as jobitem_desc,
+convert(varchar,ISNULL(CASE WHEN jr.run_basis_lbr  = 'P' and jrs.run_lbr_hrs <> 0THEN  jrs.pcs_per_lbr_hr ELSE jrs.run_lbr_hrs END , 0) 
+/ isnull(case when substring(MV_Job.item,22,1) = 'F' then
+ (MV_Job.Uf_length_FT * 0.3048) else MV_Job.Uf_length_FT end , 1)) as operationSpeed   
 from MV_Job 
 LEFT JOIN job_mst ON MV_Job.job = job_mst.job 
 left join jobitem_mst ji on ji.job = job_mst.job
 inner join item_mst item on item.item = ji.item 
+LEFT JOIN jobroute_mst jr on job_mst.job = jr.job and jr.wc like '%FM%'
+LEFT JOIN jrt_sch_mst jrs on jrs.job = jr.job and jrs.oper_num = jr.oper_num
 where ltrim(MV_Job.job) = '" . $jobm[0] . "' 
 and MV_Job.suffix = '" . $jobm[1] . "' and MV_Job.oper_num = '" . $jobm[2] . "'
 and ji.item = '$item'";
@@ -53,6 +58,7 @@ $temp->setReplace("{Uf_refno}", "" . $rs[1]["Uf_refno"] . "");
 $temp->setReplace("{city}", "" . $city . "");
 $temp->setReplace("{custname}", "" . $custname . "");
 $temp->setReplace("{Uf_remark}", "" . $rs[1]["Uf_remark"] . "");
+$temp->setReplace("{operationSpeed}",  "".total_format($rs[1]["operationSpeed"], 2, '.', '')."");
 
 $temp->setReplace("{item}", "" . $rs[1]["jobitem"] . "");
 $temp->setReplace("{num}", "" . $num . ""); //
@@ -260,7 +266,6 @@ and w_c = '" . $w_c. "'";
 $rsFM = $cSql->SqlQuery($conn, $sqlFM);
 
 $temp->setReplace("{operationWeight}",  "".$rsFM[1]["operationWeight"] ."");
-$temp->setReplace("{operationSpeed}",  "".$rsFM[1]["operationSpeed"] ."");
 $temp->setReplace("{operationTime}",  "".$rsFM[1]["operationTime"] ."");
 
 
