@@ -11,9 +11,19 @@ $temp->setReplace("{content}", $temp->getTemplate("./template/tag_history_formin
 $cSql = new SqlSrv();
 
 $jobm = explode("+", $jobno);
-$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark ,convert(varchar,ISNULL(CASE WHEN jr.run_basis_lbr  = 'P' and jrs.run_lbr_hrs <> 0THEN  jrs.pcs_per_lbr_hr ELSE jrs.run_lbr_hrs END , 0) 
+$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark   , convert(varchar ,
+ISNULL(CASE 
+WHEN jr.run_basis_lbr  = 'P' and jrs.run_lbr_hrs <> 0
+THEN  jrs.pcs_per_lbr_hr
+ELSE jrs.run_lbr_hrs
+   END , 0) 
 / isnull(case when substring(MV_Job.item,22,1) = 'F' then
- (MV_Job.Uf_length_FT * 0.3048) else MV_Job.Uf_length_FT end , 1)) as operationSpeed
+ (cast(MV_Job.Uf_length_FT as decimal(8,2)) * 0.3048)
+ else
+ cast(MV_Job.Uf_length_FT as decimal(8,2))
+ end , 1)
+) 
+as operationSpeed
  from MV_Job 
  LEFT JOIN job_mst ON MV_Job.job = job_mst.job 
  LEFT JOIN jobroute_mst jr on job_mst.job = jr.job and jr.wc like '%FM%'
