@@ -81,15 +81,15 @@ if (isset($_POST["tag_ids"])) {
         
         if($rs2[1]["TIS"] == "T1"){
             $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS_107.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
         }elseif($rs2[1]["TIS"] == "T6"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS_276.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
         } elseif ($rs2[1]["TIS"] == "T5") {
             $img_qrcode = "<img src='./image/QR_TIS1228_2561.png' width='100' height='100'>"; 
-             $img_tis = "<img src='./image/TIS2.jpg' width='100' height='100'>";
+             $img_tis = "<img src='./image/TIS_1228.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
         }
  
@@ -278,15 +278,15 @@ if (isset($_POST["tag_ids"])) {
 
         if($rs2[1]["TIS"] == "T1"){
             $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS_107.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
         }elseif($rs2[1]["TIS"] == "T6"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS_276.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
         } elseif ($rs2[1]["TIS"] == "T5") {
             $img_qrcode = "<img src='./image/QR_TIS1228_2561.png' width='100' height='100'>"; 
-             $img_tis = "<img src='./image/TIS2.jpg' width='100' height='100'>";
+             $img_tis = "<img src='./image/TIS_1228.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
         }
         
