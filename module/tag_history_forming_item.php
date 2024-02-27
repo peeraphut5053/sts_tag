@@ -61,13 +61,24 @@ if (isset($rs[1]["ord_num"]) ) {
     $custname = $rs3[0]["custname"];
 }
 
+$w_c =  $rs[1]["wc"];
+
+$sqlFM = "select * from  STS_forming_operation
+where job = '" . $jobm[0] . "'  
+and w_c = '" . $w_c. "'
+and item = '" .$rs[1]["jobitem"]. "'";
+$rsFM = $cSql->SqlQuery($conn, $sqlFM);
+
+$temp->setReplace("{operationWeight}",  "".$rsFM[1]["operationWeight"] ."");
+$temp->setReplace("{operationSpeed}",  "".total_format($rs[1]["operationSpeed"])."");
+$temp->setReplace("{operationTime}",  "".$rsFM[1]["operationTime"] ."");
+
 $temp->setReplace("{job_no}", "" . $jobno . "");
 $temp->setReplace("{co_no}", "" . $rs[1]["ord_num"] . "");
 $temp->setReplace("{Uf_refno}", "" . $rs[1]["Uf_refno"] . "");
 $temp->setReplace("{city}", "" . $city . "");
 $temp->setReplace("{custname}", "" . $custname . "");
 $temp->setReplace("{Uf_remark}", "" . $rs[1]["Uf_remark"] . "");
-$temp->setReplace("{operationSpeed}",  "".total_format($rs[1]["operationSpeed"], 2, '.', '')."");
 
 $temp->setReplace("{item}", "" . $rs[1]["jobitem"] . "");
 $temp->setReplace("{num}", "" . $num . ""); //
@@ -79,7 +90,8 @@ elseif (strpos($rs[1]["jobitem_desc"], "'"))
 else
     $temp->setReplace("{jobitem_desc}", "\"" . $rs[1]["jobitem_desc"] . "\"");
 $temp->setReplace("{oper_num}", "" . $rs[1]["oper_num"] . "");
-$temp->setReplace("{wc}", "" . $rs[1]["wc"] . "----");
+$temp->setReplace("{wc}", "" . $rs[1]["wc"] . ""); 
+// "----"
 $wc =  $rs[1]["wc"];
 $temp->setReplace("{description}", "" . $rs[1]["description"] . "");
 $qty_released = total_format($rs[1]["qty_released"]);
@@ -261,21 +273,6 @@ $temp->setReplace("{qty_mat}", $qty_mat);
 $temp->setReplace("{qty_mat_r}", $qty_mat_r);
 $temp->setReplace("{wc}",  $wc);
 
-
-if ( $rs[1]["wc"]!= ""){
-    $w_c =  $rs[1]["wc"];
-}
-else{
-    $w_c = '----';
-}
-
-$sqlFM = "select * from  STS_forming_operation
-where job = '" . $jobm[0] . "'  
-and w_c = '" . $w_c. "'";
-$rsFM = $cSql->SqlQuery($conn, $sqlFM);
-
-$temp->setReplace("{operationWeight}",  "".$rsFM[1]["operationWeight"] ."");
-$temp->setReplace("{operationTime}",  "".$rsFM[1]["operationTime"] ."");
 
 
 // $sqlitem = "select job.job, job.item , item.description 

@@ -58,13 +58,24 @@ if (isset($rs[1]["ord_num"]) ) {
     
 }
 
+$w_c =  $rs[1]["wc"];
+
+$sqlFM = "select * from  STS_forming_operation
+where job = '" . $jobm[0] . "'  
+and w_c = '" . $w_c. "'
+and item = '" .$rs[1]["item"]. "'";
+$rsFM = $cSql->SqlQuery($conn, $sqlFM);
+
+$temp->setReplace("{operationWeight}",  "".$rsFM[1]["operationWeight"] ."");
+$temp->setReplace("{operationSpeed}",  "".total_format($rs[1]["operationSpeed"])."");
+$temp->setReplace("{operationTime}",  "".$rsFM[1]["operationTime"] ."");
+
 $temp->setReplace("{job_no}", "" . $jobno . "");
 $temp->setReplace("{co_no}", "" . $rs[1]["ord_num"] . "");
 $temp->setReplace("{Uf_refno}", "" . $rs[1]["Uf_refno"] . "");
 $temp->setReplace("{city}", "" . $city . "");
 $temp->setReplace("{custname}", "" . $custname . "");
 $temp->setReplace("{Uf_remark}", "" . $rs[1]["Uf_remark"] . "");
-$temp->setReplace("{operationSpeed}",  "".total_format($rs[1]["operationSpeed"])."");
 
 $temp->setReplace("{item}", "" . $rs[1]["item"] . "");
 //$temp->setReplace("{item_desc}", "".$rs[1]["item_desc"]."");
@@ -75,7 +86,8 @@ elseif (strpos($rs[1]["item_desc"], "'"))
 else
     $temp->setReplace("{item_desc}", "\"" . $rs[1]["item_desc"] . "\"");
 $temp->setReplace("{oper_num}", "" . $rs[1]["oper_num"] . "");
-$temp->setReplace("{wc}", "" . $rs[1]["wc"] . "----");
+$temp->setReplace("{wc}", "" . $rs[1]["wc"] . ""); 
+// "----"
 $wc =  $rs[1]["wc"];
 $temp->setReplace("{description}", "" . $rs[1]["description"] . "");
 $qty_released = total_format($rs[1]["qty_released"]);
@@ -257,19 +269,4 @@ $rscheck = $cSql->SqlQuery($conn, $sqlcheck);
 
 $temp->setReplace("{checkCoP}",  "".$rscheck [1]["job"] ."");
 
-if ( $rs[1]["wc"]!= ""){
-    $w_c =  $rs[1]["wc"];
-}
-else{
-    $w_c = '----';
-}
-
-$sqlFM = "select * from  STS_forming_operation
-where job = '" . $jobm[0] . "'  
-and w_c = '" . $w_c. "'";
-$rsFM = $cSql->SqlQuery($conn, $sqlFM);
-
-$temp->setReplace("{operationWeight}",  "".$rsFM[1]["operationWeight"]."");
-
-$temp->setReplace("{operationTime}",  "".$rsFM[1]["operationTime"]."");
 ?>
