@@ -18,8 +18,12 @@ if (!empty($lot)) {
 if (empty($cert)){
     $cert = "";
 };
-
 //echo $lot_tmp;
+
+$jobm = explode("+", $job_no);
+$TagBarcodePreview = new TagBarcode();
+$TagBarcodePreview->GetTagBarcodePreview($jobm[0], $item);
+
 if (isset($_POST["tag_ids"])) {
     $jobm = explode("%2B", $job_no);
     $s_tag = count($_POST["tag_ids"]);
@@ -83,7 +87,13 @@ if (isset($_POST["tag_ids"])) {
         $temp->setReplace("{Uf_length}", $TagBarcode->Uf_length);
         $temp->setReplace("{Uf_pack}", "" . total_format($TagBarcode->qty1) . "");
         $temp->setReplace("{lot}", "" . isset($TagBarcode->lot) ? $TagBarcode->lot : $lot_tmp . "");
-        $temp->setReplace("{unit_weight}", $TagBarcode->uf_act_Weight);
+
+        //echo $lot_tmp;
+        if($_GET["c"] == 'thai'){
+            $temp->setReplace("{unit_weight}", total_format($TagBarcode->uf_act_Weight,2,''));
+        }else{
+            $temp->setReplace("{unit_weight}", total_format($TagBarcodePreview->unit_weight * $TagBarcode->qty1,2,''));
+        }
         $temp->setReplace("{pack_no}", $TagBarcode->uf_pack);
         $temp->setReplace("{Heat_no}", $TagBarcode->Heat_no);
         $temp->setReplace("{sts_no}", $TagBarcode->Heat_no);
@@ -102,9 +112,9 @@ if (isset($_POST["tag_ids"])) {
          }
     }*/
 
-    $jobm = explode("+", $job_no);
-    $TagBarcodePreview = new TagBarcode();
-    $TagBarcodePreview->GetTagBarcodePreview($jobm[0], $item);
+    // $jobm = explode("+", $job_no);
+    // $TagBarcodePreview = new TagBarcode();
+    // $TagBarcodePreview->GetTagBarcodePreview($jobm[0], $item);
     $idl = $TagBarcodePreview->GetGenBarcode_1();
     $id_next = $TagBarcodePreview->GetGenBarcode_2();
     $qty1 = str_replace(",", '', $qty1);

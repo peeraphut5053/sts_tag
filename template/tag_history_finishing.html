@@ -44,6 +44,10 @@
 
         var jobno = $('#job_no').val();
         var uri_enc = encodeURIComponent(jobno);
+
+        var item = $('#item').val();
+        var uri_enc2 = encodeURIComponent(item);
+
         var tag_ids = [];
         //var chk = 0;
         $("input:checkbox[name=line]:checked").each(function () {
@@ -60,7 +64,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load("./module/tag_print2.php?c=usa", {"job_no": uri_enc, "tag_ids": tag_ids});
+                    .load("./module/tag_print2.php?c=usa", {"job_no": jobno, "tag_ids": tag_ids, "item": uri_enc2});
         } else {
             alert('กรุณาเลือกข้อมูลก่อน');
         }
@@ -69,6 +73,10 @@
     function PrintTagThai() {
         var jobno = $('#job_no').val();
         var uri_enc = encodeURIComponent(jobno);
+
+        var item = $('#item').val();
+        var uri_enc2 = encodeURIComponent(item);
+
         var tag_ids = [];
         //var chk = 0;
         $("input:checkbox[name=line]:checked").each(function () {
@@ -85,7 +93,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load("./module/tag_print2.php?c=thai", {"job_no": uri_enc, "tag_ids": tag_ids});
+                    .load("./module/tag_print2.php?c=thai", {"job_no": jobno, "tag_ids": tag_ids, "item": uri_enc2});
         } else {
             alert('กรุณาเลือกข้อมูลก่อน');
         }
@@ -94,6 +102,10 @@
     function PrintTag1() {
         var jobno = $('#job_no').val();
         var uri_enc = encodeURIComponent(jobno);
+
+        var item = $('#item').val();
+        var uri_enc2 = encodeURIComponent(item);
+
         var tag_ids = [];
         //var chk = 0;
         $("input:checkbox[name=line]:checked").each(function () {
@@ -110,7 +122,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load("./module/tag_print2.php?c=aus&cert=sts", {"job_no": uri_enc, "tag_ids": tag_ids});
+                    .load("./module/tag_print2.php?c=aus&cert=sts", {"job_no": jobno, "tag_ids": tag_ids, "item": uri_enc2});
         } else {
             alert('กรุณาเลือกข้อมูลก่อน');
         }
@@ -120,6 +132,10 @@
     function PrintTag2() {
         var jobno = $('#job_no').val();
         var uri_enc = encodeURIComponent(jobno);
+
+        var item = $('#item').val();
+        var uri_enc2 = encodeURIComponent(item);
+
         var tag_ids = [];
         //var chk = 0;
         $("input:checkbox[name=line]:checked").each(function () {
@@ -136,7 +152,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load("./module/tag_print2.php?c=aus&cert=win", {"job_no": uri_enc, "tag_ids": tag_ids});
+                    .load("./module/tag_print2.php?c=aus&cert=win", {"job_no": jobno, "tag_ids": tag_ids, "item": uri_enc2});
         } else {
             alert('กรุณาเลือกข้อมูลก่อน');
         }
