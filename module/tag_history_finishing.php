@@ -162,7 +162,7 @@ for ($i = $rs[0][0]; $i >= 1; $i--) {
 		<td><div id="d_sts_no_' . $rs[$i]["id"] . '">' . $Heat_no . '</div></td>
         <td align="right"><div id="d_qty_' . $rs[$i]["id"] . '">' . total_format($rs[$i]["qty1"]) . '</div></td>
         <td align="right"><div id="d_w_' . $rs[$i]["id"] . '">' . total_format($rs[$i]["uf_act_Weight"], 2) . '</div></td>
-        <td align="right"><div id="' . $rs[$i]["id"] . '">' . total_format($rs[$i]["unit_weight"] * $rs[$i]["Uf_pack"], 2) . '</div></td> 
+        <td align="right"><div id="' . $rs[$i]["id"] . '">' . total_format($rs[$i]["unit_weight"] * $rs[$i]["qty1"], 2) . '</div></td> 
         <td align="center">' . $rs[$i]["uf_pack"] . '</td>
         <td align="center">' . $rs[$i]["uf_grade"] . '</td>
         <td align="center">' . $rs[$i]["active"] . '</td>
