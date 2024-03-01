@@ -18,10 +18,10 @@
 
         if ($("#qty_sts_no").val() > 0 && $("#sts_no").val() == "") {
             alert("กรุณากรอกเลข H/N");
-        } else if ($("#qty_sts_no2").val() > 0 && $("#sts_no2").val() == "") {
-            alert("กรุณากรอกเลข H/N2");
-        } else if (($("#qty_sts_no3").val() > 0 && $("#sts_no3").val() == "")) {
-            alert("กรุณากรอกเลข H/N3");
+        } else if ($("#qty_sts_no2").val() <= 0 && $("#sts_no2").val() != "") {
+            alert("กรุณากรอกจำนวน Qty2");
+        } else if (($("#qty_sts_no3").val() <= 0 && $("#sts_no3").val() != "")) {
+            alert("กรุณากรอกจำนวน Qty3");
         } else if (lot == '') {
             alert('กรุณาระบุ Lot');
             $('#lot').focus();
@@ -56,10 +56,10 @@
 
         if ($("#qty_sts_no").val() > 0 && $("#sts_no").val() == "") {
             alert("กรุณากรอกเลข H/N");
-        } else if ($("#qty_sts_no2").val() > 0 && $("#sts_no2").val() == "") {
-            alert("กรุณากรอกเลข H/N2");
-        } else if (($("#qty_sts_no3").val() > 0 && $("#sts_no3").val() == "")) {
-            alert("กรุณากรอกเลข H/N3");
+        } else if ($("#qty_sts_no2").val() <= 0 && $("#sts_no2").val() != "") {
+            alert("กรุณากรอกจำนวน Qty2");
+        } else if (($("#qty_sts_no3").val() <= 0 && $("#sts_no3").val() != "")) {
+            alert("กรุณากรอกจำนวน Qty3");
         } else if (lot == '') {
             alert('กรุณาระบุ Lot');
             $('#lot').focus();
@@ -91,7 +91,15 @@
         var lot = $('#lot').val();
         var actWeight = $('#uf_act_Weight').val();
         var sts_no = $("#sts_no").val();
-        if (lot == '') {
+
+        
+        if ($("#qty_sts_no").val() > 0 && $("#sts_no").val() == "") {
+            alert("กรุณากรอกเลข H/N");
+        } else if ($("#qty_sts_no2").val() <= 0 && $("#sts_no2").val() != "") {
+            alert("กรุณากรอกจำนวน Qty2");
+        } else if (($("#qty_sts_no3").val() <= 0 && $("#sts_no3").val() != "")) {
+            alert("กรุณากรอกจำนวน Qty3");
+        } else if (lot == '') {
             alert('กรุณาระบุ Lot');
             $('#lot').focus();
         } else if (actWeight == '') {
@@ -117,7 +125,14 @@
     function PrintTag2() {
         var lot = $('#lot').val();
         var actWeight = $('#uf_act_Weight').val();
-        if (lot == '') {
+
+        if ($("#qty_sts_no").val() > 0 && $("#sts_no").val() == "") {
+            alert("กรุณากรอกเลข H/N");
+        } else if ($("#qty_sts_no2").val() <= 0 && $("#sts_no2").val() != "") {
+            alert("กรุณากรอกจำนวน Qty2");
+        } else if (($("#qty_sts_no3").val() <= 0 && $("#sts_no3").val() != "")) {
+            alert("กรุณากรอกจำนวน Qty3");
+        } else if (lot == '') {
             alert('กรุณาระบุ Lot');
             $('#lot').focus();
         } else if (actWeight == '') {
