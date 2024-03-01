@@ -70,7 +70,7 @@ and open the template in the editor.
                         <div class="col-xs-6">
                             <div class="input-group">
                                 <div class="input-group-addon">qty_sts_no2</div>
-                                <input  value="0" type="text" autocomplete="off"  class="form-control txt-filter" id ='w_qty_sts_no2' name ='w_qty_sts_no2' >
+                                <input  value="0" type="number" autocomplete="off"  class="form-control txt-filter" id ='w_qty_sts_no2' name ='w_qty_sts_no2' >
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@ and open the template in the editor.
                         <div class="col-xs-6">
                             <div class="input-group">
                                 <div class="input-group-addon">qty_sts_no3</div>
-                                <input  value="0" type="text" autocomplete="off"  class="form-control txt-filter" id ='w_qty_sts_no3' name ='w_qty_sts_no3'  >
+                                <input  value="0" type="number" autocomplete="off"  class="form-control txt-filter" id ='w_qty_sts_no3' name ='w_qty_sts_no3'  >
                             </div>
                         </div>
                     </div>
@@ -218,29 +218,33 @@ and open the template in the editor.
                 let w_qty_sts_no = $("#w_qty_sts_no").val();
                 let w_qty_sts_no2 = $("#w_qty_sts_no2").val();
                 let w_qty_sts_no3 = $("#w_qty_sts_no3").val();
-                if (tag_id != '' && lot != '') {
-                    $.ajax({
-                        type: "post",
-                        url: url,
-                        dataType: 'json',
-                        data: {
-                            load: "updateStsNo",
-                            lot: lot,
-                            id: tag_id,
-                            w_sts_no: w_sts_no,
-                            w_sts_no2: w_sts_no2,
-                            w_sts_no3: w_sts_no3,
-                            w_qty_sts_no: w_qty_sts_no,
-                            w_qty_sts_no2: w_qty_sts_no2,
-                            w_qty_sts_no3: w_qty_sts_no3,
-                        },
-                        success: function (data) {
-                            console.log(data)
-                            tag_scan();
-                        }
-                    });
+                if ((w_sts_no2 != '' && w_qty_sts_no2 <= 0 ) || (w_sts_no3 != '' && w_qty_sts_no3 <=0)){
+                    alert("กรุณาใส่จำนวนที่ช่อง qty_sts_no2 ให้ตรงกับเลข sts_no2");
                 } else {
-                    alert("กรอกข้อมูลไม่ครบ");
+                    if (tag_id != '' && lot != '')  {
+                        $.ajax({
+                            type: "post",
+                            url: url,
+                            dataType: 'json',
+                            data: {
+                                load: "updateStsNo",
+                                lot: lot,
+                                id: tag_id,
+                                w_sts_no: w_sts_no,
+                                w_sts_no2: w_sts_no2,
+                                w_sts_no3: w_sts_no3,
+                                w_qty_sts_no: w_qty_sts_no,
+                                w_qty_sts_no2: w_qty_sts_no2,
+                                w_qty_sts_no3: w_qty_sts_no3,
+                            },
+                            success: function (data) {
+                                console.log(data)
+                                tag_scan();
+                            }
+                        });
+                    } else {
+                        alert("กรอกข้อมูลไม่ครบ");
+                    }
                 }
 
             }
