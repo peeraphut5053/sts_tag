@@ -106,7 +106,7 @@ if (isset($_POST["tag_ids"])) {
         $unit_weight_cal = isset($rs1[1]["unit_weight"]) ? $rs1[1]["unit_weight"] : 0;
         $qty1_cal = isset($rs[1]["qty1"]) ? $rs[1]["qty1"] : 0;
         $unwt = $unit_weight_cal * $qty1_cal;
-        $temp->setReplace("{unwt}", "" . total_format($unwt, 2) . "");
+        $temp->setReplace("{unwt}", "" .total_format($rs[1]["uf_act_Weight"], 2). "");
         $temp->setReplace("{actwt}", "" . total_format($rs[1]["uf_act_Weight"], 2) . "");
         $temp->setReplace("{mfd}", "" . dateformat($rs[1]["print_date"], "d/m/Y H:i") . "");
         $temp->setReplace("{perpack}", "" . $rs[1]["qty1"] . "");
@@ -240,8 +240,9 @@ if (isset($_POST["tag_ids"])) {
         $temp->setReplace("{lot}", "" . isset($rs2[1]["lot"]) ? $rs2[1]["lot"] : $lot_tmp . "");
         $temp->setReplace("{pack_no}", "" . $pack . "");
         $unwt = $unit_weight * $perpack;
-        $temp->setReplace("{unwt}", "" . total_format($unwt, 2) . "");
         $actwt = $uf_act_Weight;
+        $temp->setReplace("{unwt}", "" .total_format($actwt, 2). "");
+      
         $temp->setReplace("{actwt}", "" . total_format($actwt, 2) . "");
         $temp->setReplace("{mfd}", "" . date("d/m/Y H:i") . "");
         //$temp->setReplace("{mfd}", "" . dateformat($rs[1]["print_date"], "d/m/Y H:i") . "");
@@ -311,8 +312,9 @@ if (isset($_POST["tag_ids"])) {
         $temp->setReplace("{size}", "" . $size . "");
         $temp->setReplace("{lot}", "" . $lot . "");
         $unwt = $unit_weight * $perpack1;
-        $temp->setReplace("{unwt}", "" . total_format($unwt, 2) . "");
         $actwt = $uf_act_Weight;
+        $temp->setReplace("{unwt}", "" .total_format($actwt, 2). "");
+ 
         $temp->setReplace("{actwt}", "" . total_format($actwt, 2) . "");
         $temp->setReplace("{mfd}", "" . $pdate . "");
         $temp->setReplace("{wc}", '1234');
