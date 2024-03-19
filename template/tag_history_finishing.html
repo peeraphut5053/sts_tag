@@ -8,6 +8,31 @@
      });
      });	*/
 
+     $(document).ready(function(){
+        var checkCoP = $('#checkCoP').val();
+        var check = encodeURIComponent(checkCoP);
+        // console.log(check)
+
+        //   if (checkCoP == ""){
+        //     $('#print_a').show();
+        // }else {
+        //     $('#print_a').hide();
+        // }
+
+        var refresh = window.localStorage.getItem('refresh');
+        console.log(refresh);
+
+        localStorage.removeItem('refresh')
+
+        setTimeout(function() {
+        if (refresh===null){
+            window.location.reload();
+            window.localStorage.setItem('refresh', "1");
+        }
+        }, 100); // 100 milliseconds = 0.1 seconds
+
+    });
+
     function LinkTagA() {
         var jobno = $('#job_no').val();
         var uri_enc = encodeURIComponent(jobno);
