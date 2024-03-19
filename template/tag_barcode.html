@@ -38,6 +38,21 @@
                 title: "ตัวอย่างก่อนพิมพ์"
             })
                     .load('./module/tag_print.php?' + $('#formB').serialize());
+
+                    $.post("./module/tag_print_save.php", $('#formB').serialize(), function (data) {
+
+                    // $('#printpopup').dialog('close');
+                    // if (data == "1") {
+                    //     popup(data);
+                    //     location.reload(true);
+                    // } else if (data == "2") {
+                    //     popup(data);
+                    //     return false;
+                    // } else {
+                    //     popup(data);
+                    // }
+                    // return false;
+                    }, 'html');
         }
         return false;
     }

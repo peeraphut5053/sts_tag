@@ -1,5 +1,5 @@
 <script type="text/javascript">
-<!--
+
     $(function() {
 		$( "#pdate" ).datepicker({
 			dateFormat: 'dd/mm/yy'
@@ -35,6 +35,20 @@
 				title: "ตัวอย่างก่อนพิมพ์"
 			})
 			.load('./module/print_tag_slit.php?'+$('#formB').serialize());
+
+			$.post("./module/tag_slit_save.php", $('#formB').serialize(), function(data) {				
+			//alert(data);
+			// $('#printpopup').dialog('close');
+			// if (data == "1") {
+			// 	location.reload(true);
+			// } else if(data == "2") {
+			// 	return false;
+			// } else {
+			// 	popup(data);
+			// }
+			// return false;
+		}, 'html');  
+			
 		}
 		return false;
 	}

@@ -9,20 +9,21 @@
         mywindow.focus(); // necessary for IE >= 10*/
         mywindow.print();
         mywindow.close();
-        $.post("./module/tag_print_save_coProduct.php", $('#formB').serialize(), function (data) {
+        
+        // $.post("./module/tag_print_save_coProduct.php", $('#formB').serialize(), function (data) {
 
-            $('#printpopup').dialog('close');
-            if (data == "1") {
-                popup(data);
-                location.reload(true);
-            } else if (data == "2") {
-                popup(data);
-                return false;
-            } else {
-                popup(data);
-            }
-            return false;
-        }, 'html');
+        //     $('#printpopup').dialog('close');
+        //     if (data == "1") {
+        //         popup(data);
+        //         location.reload(true);
+        //     } else if (data == "2") {
+        //         popup(data);
+        //         return false;
+        //     } else {
+        //         popup(data);
+        //     }
+        //     return false;
+        // }, 'html');
 
         console.log()
         if (window.location.href.includes("history")) {
