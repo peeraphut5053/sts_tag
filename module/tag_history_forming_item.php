@@ -5,7 +5,7 @@ while (list($key, $data) = each($_GET) OR list($key, $data) = each($_POST)) {
 }
 
 $temp->setReplace("{crumb}", "พิมพ์แท็กบาร์โค้ด");
-$temp->setReplace("{pagename}", ' <img src="./image/next.png" border="0" align="absmiddle">ประวัติการพิมพ์แท็กท่อ');
+$temp->setReplace("{pagename}", ' <img src="./image/next.png" border="0" align="absmiddle">ประวัติการพิมพ์แท็กท่อ co-product');
 $temp->setReplace("{content}", $temp->getTemplate("./template/tag_history_forming_item.html"));
 
 $cSql = new SqlSrv();

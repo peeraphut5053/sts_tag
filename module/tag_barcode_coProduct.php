@@ -22,7 +22,7 @@ if (isset($mode)) {
         $temp->setReplace("{content}", $temp->getTemplate("./template/tag_c.html"));
     }
 } else {
-    $temp->setReplace("{pagename}", ' <img src="./image/next.png" border="0" align="absmiddle">ประวัติการพิมพ์แท็กท่อ <img src="./image/next.png" border="0" align="absmiddle">พิมพ์ {static_grade}');
+    $temp->setReplace("{pagename}", ' <img src="./image/next.png" border="0" align="absmiddle">ประวัติการพิมพ์แท็กท่อ co-product <img src="./image/next.png" border="0" align="absmiddle">พิมพ์ {static_grade}');
     $temp->setReplace("{content}", $temp->getTemplate("./template/tag_barcode_coProduct.html"));
 }
 $cSql = new SqlSrv();
