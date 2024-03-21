@@ -126,6 +126,7 @@
     function inpEditLine(id, qty1, wg) {
         $("#d_qty_" + id).html('<input name="qty1" type="text" id="qty1" style="width:100%" class="default" value="' + qty1 + '">');
         $("#d_w_" + id).html('<input name="uf_act_Weight" type="text" id="uf_act_Weight" style="width:100%" class="default" value="' + wg + '">');
+        $("#d_sts_no_" + id).html('<input name="edt_sts_no" type="text" id="edt_sts_no" style="width:100%" class="default" value="' + sts_no + '">');
         $("#edit_b_" + id).hide();
         $("#edit_c_" + id).show();
     }
@@ -133,6 +134,7 @@
     function scEditLine(id, qty1, wg) {
         var qty = $("#qty1").val();
         var wg = $("#uf_act_Weight").val();
+        var sts_no2 = $("div[id='d_sts_no_" + id + "'] #edt_sts_no").val();
         $.post("./module/tagBarcode_edit.php", {"tag_id": id, "qty1": qty, "uf_act_Weight": wg}, function (data) {
             location.reload(true);
             //alert(data);

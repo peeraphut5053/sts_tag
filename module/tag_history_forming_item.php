@@ -195,11 +195,15 @@ for ($i = $rs[0][0]; $i >= 1; $i--) {
         $disable = " disabled";
         $cfont = "gray";
     }
+    $Heat_no_obj = new FunctionCenter();
+    $Heat_no = $Heat_no_obj->GetHeatNo($rs[$i]['sts_no'], $rs[$i]['sts_no2'], $rs[$i]['sts_no3'], $rs[$i]['qty_sts_no'], $rs[$i]['qty_sts_no2'], $rs[$i]['qty_sts_no3']);
+    $temp->setReplace("{Heat_no}", "" . $Heat_no . "");
+
     $list .= '<tr bgcolor="' . $bg_color . '" class="' . $cfont . '">
         <td  align="center"><input name="line" type="checkbox" id="line" value="' . $rs[$i]["id"] . '"' . $disable . '></td>
         <td>' . $rs[$i]["id"] . '</td>
         <td>' . $rs[$i]["lot"] . '</td>
-        <td>' . $rs[$i]["sts_no"] . '</td>
+        <td><div id="d_sts_no_' . $rs[$i]["id"] . '">' . $Heat_no . '</div></td>
         <td align="right"><div id="d_qty_' . $rs[$i]["id"] . '">' . total_format($rs[$i]["qty1"]) . '</div></td>
         <td align="right"><div id="d_w_' . $rs[$i]["id"] . '">' . total_format($rs[$i]["uf_act_Weight"], 2) . '</div></td>
         <td align="center">' . $rs[$i]["uf_pack"] . '</td>
