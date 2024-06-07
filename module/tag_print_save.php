@@ -207,21 +207,24 @@ for ($i = 1; $i <= $tag_a2; $i++) {
         $lot = (explode("-", $lot)[0] . "-" . sprintf("%'.04d", $pack));
     }
 
-
-
     $uf_sts_job2 = str_replace("'", " ", $uf_sts_job);
+
+    $tag_status = $_POST["tag_status"];
+    if ($tag_status == "") {
+        $tag_status = "Good";
+    }
 
     $sql = "insert into Mv_Bc_tag"
             . " (id, sts_no , sts_no2, sts_no3, qty_sts_no, qty_sts_no2, qty_sts_no3, job, suffix, oper_num , item, lot ,"
             . " qty1, qty2, uf_act_Weight, uf_grade, uf_pack, mfg_date,"
             . " print_date, ship_stat, active, uf_sts_job, pipeno_1,"
             . " pipeno_2, pipeno_3, pipeno_4, pipeqty_1, pipeqty_2,"
-            . " pipeqty_3, pipeqty_4, um1, um2, tag_status ) "
+            . " pipeqty_3, pipeqty_4, um1, um2, tag_status, detail, old_lot ) "
             . " values ('" . $id . "','" . $sts_no . "','" . $_POST["sts_no2"] . "','" . $_POST["sts_no3"] . "','" . $qty_sts_no . "','" . $qty_sts_no2 . "','" . $qty_sts_no3 . "',"
             . " '" . $jobm[0] . "', '" . $jobm[1] . "', '" . $jobm[2] . "',"
             . " '" . $item . "', '" . $lot . "', '" . $perpack . "', '" . $qty2 . "', '" . $act_weight . "', '" . $grade . "',"
             . " '" . $pack . "', '" . $print_day . "', '" . $print_day . "', '0', '1', '" . $uf_sts_job2 . "'" . $pipe . ","
-            . " '" . $um1 . "', '" . $um2 . "', 'Good')";
+            . " '" . $um1 . "', '" . $um2 . "', '" . $tag_status ."', '" . $_POST['detail'] . "', '" . $_POST['old_lot'] . "')";
 
 
     //echo(sprintf("%'.04d", $pack));
@@ -233,7 +236,8 @@ for ($i = 1; $i <= $tag_a2; $i++) {
             . " sts_no3 ='" . $_POST["sts_no3"] . "', "
             . " qty_sts_no = '" . $_POST["qty_sts_no"] . "',"
             . " qty_sts_no2 = '" . $_POST["qty_sts_no2"] . "',"
-            . " qty_sts_no3 = '" . $_POST["qty_sts_no3"] . "' "
+            . " qty_sts_no3 = '" . $_POST["qty_sts_no3"] . "',"
+            . " old_lot = '" . $_POST["old_lot"] . "' "
             . "  where id = '" . $id . "' ";
     $rsUpdate = $cSql->IsUpDel($conn, $sqlUpdate);
 }
@@ -263,16 +267,21 @@ for ($t = 0; $t < $tag_a3; $t++) {
         $lot = (explode("-", $lot)[0] . "-" . sprintf("%'.04d", $pack));
     }
 
+    $tag_status = $_POST["tag_status"];
+    if ($tag_status == "") {
+        $tag_status = "Good";
+    }
+
     $sql = "insert into Mv_Bc_tag (id, sts_no, sts_no2, sts_no3, qty_sts_no, qty_sts_no2, qty_sts_no3,"
             . " job, suffix, oper_num, item, lot , qty1, qty2, uf_act_Weight, uf_grade,"
             . " uf_pack, mfg_date, print_date, ship_stat, active, uf_sts_job, pipeno_1,"
             . " pipeno_2, pipeno_3, pipeno_4, pipeqty_1, pipeqty_2, pipeqty_3, pipeqty_4,"
-            . " um1, um2, tag_status  ) values ('" . $id . "','" . $sts_no . "','" . $_POST["sts_no2"] . "','" . $_POST["sts_no3"] . "','" . $qty_sts_no . "','" . $qty_sts_no2 . "','" . $qty_sts_no3 . "',"
+            . " um1, um2, tag_status, detail, old_lot  ) values ('" . $id . "','" . $sts_no . "','" . $_POST["sts_no2"] . "','" . $_POST["sts_no3"] . "','" . $qty_sts_no . "','" . $qty_sts_no2 . "','" . $qty_sts_no3 . "',"
             . " '" . $jobm[0] . "', '" . $jobm[1] . "', '" . $jobm[2] . "',"
             . " '" . $item . "', '" . $lot . "', '" . $perpack1 . "', '" . $qty2 . "',"
             . " '" . $act_weight . "', '" . $grade . "', '" . $pack . "', '" . $print_day . "',"
             . " '" . $print_day . "', '0', '1', '" . $uf_sts_job . "'" . $pipe . ", '" . $um1 . "',"
-            . " '" . $um2 . "', 'Good')";
+            . " '" . $um2 . "', '" . $tag_status . "', '" . $_POST['detail'] . "', '" . $_POST['old_lot'] . ")";
 
     //echo $sql . " ========================#2";
     $rs1 = $cSql->IsUpDel($conn, $sql);
@@ -282,7 +291,8 @@ for ($t = 0; $t < $tag_a3; $t++) {
             . " sts_no3 ='" . $_POST["sts_no3"] . "', "
             . " qty_sts_no = '" . $_POST["qty_sts_no"] . "',"
             . " qty_sts_no2 = '" . $_POST["qty_sts_no2"] . "',"
-            . " qty_sts_no3 = '" . $_POST["qty_sts_no3"] . "' "
+            . " qty_sts_no3 = '" . $_POST["qty_sts_no3"] . "',"
+            . " old_lot = '" . $_POST["old_lot"] . "' "
             . "  where id = '" . $id . "' ";
     $rsUpdate = $cSql->IsUpDel($conn, $sqlUpdate);
 }

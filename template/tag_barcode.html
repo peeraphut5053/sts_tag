@@ -63,7 +63,7 @@
         window.location.href = '?tag_history_forming&jobno=' + uri_enc;
     }
 
-    function ChkActWeight() {
+    {/*function ChkActWeight() {
         var act_Weight = $('#uf_act_Weight').val();
         var pp = $('#perpack').val();
                 var t_w = {tw};
@@ -88,7 +88,7 @@
                 $('#uf_act_Weight').focus();
             }
         }
-    }
+    }*/}
 
     function WeightCal(e) {
         var keycode;
@@ -126,6 +126,38 @@
         var uf_act_Weight = parseFloat(uf_p_weight) * parseFloat(qty);
         $('#uf_act_Weight').val(uf_act_Weight);
     }
+
+    function ValidateJob(e) {
+		//alert('xx');
+        if ($('#id_tag').val() == '') {
+            return false;
+        }
+		var keycode;
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			var id_tag = $('#id_tag').val();
+			$.post("./module/mv_bc_tag.php", {"id_tag": id_tag}, function(data) {				
+				if (data) {
+                    console.log(data);
+                    $("#notfound").hide();
+					const res = JSON.parse(data);
+                    $("#tag_status").val(res.tag_status);
+                    $("#old_lot").val(res.lot);
+                    $("#detail").val(res.detail);
+
+				} 
+            }, 'html').fail(function() {
+                $("#notfound").show();
+                $("#id_tag").select();
+                $("#tag_status").val("");
+                $("#old_lot").val("")
+                $("#detail").val("")
+
+            });
+			return false;
+		}	
+	}
 
 
 
@@ -253,6 +285,31 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4"><span id="warning-word"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <table width="100%" border="0" cellpadding="0" cellspacing="5" class="font14">
+                                <tr>
+                                    <td width="8%" scope="col" align="right"><strong>ID Tag</strong>: </span></td>
+                                    <td width="24%" ><input name="id_tag" type="text" id="id_tag" size="18" class="default" value="" onKeyup="ValidateJob();" style="background: #f2fff9;"/>
+                                    <span class="red" id="notfound" style="display:none;">ไม่พบข้อมูลที่ต้องการค้นหา</span
+                                    </td>
+                                    <td align="right"><strong>Old Lot</strong>: </td>
+                                    <td><input class="default_view" name="old_lot" type="text" id="old_lot" size="18" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td align="right"><strong>Tag Status</strong>: </td>
+                                    <td><input class="default_view" name="tag_status" type="text" id="tag_status" size="18" readonly /></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td align="right"><strong>Detail</strong>: </td>
+                                    <td><input class="default_view" name="detail" type="text" id="detail" size="60" readonly /></td>
                                 </tr>
                             </table>
                         </div>
