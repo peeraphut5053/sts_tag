@@ -35,8 +35,12 @@ if (isset($_POST["tag_ids"])) {
 		$temp->setReplace("{Uf_Grade}", "".$rs[1]["uf_grade"]."");
 		
 		$sql2 = "select Uf_qty_slit from job_mst where job = '".$rs[1]["job"]."' AND suffix = '".$rs[1]["suffix"]."';";
-		$rs2 = $cSql->SqlQuery($conn, $sql2);		 
-		$numtab = $rs[1]["uf_pack"]."/".$rs2[1]["Uf_qty_slit"];
+		$rs2 = $cSql->SqlQuery($conn, $sql2);
+		$uf_pack = isset($rs[1]['uf_pack']) ? $rs[1]['uf_pack'] : '';
+        $uf_qty_slit = isset($rs2[1]['Uf_qty_slit']) ? $rs2[1]['Uf_qty_slit'] : '';
+
+        $numtab = $uf_pack . "/" . $uf_qty_slit;		 
+		// $numtab = $rs[1]["uf_pack"]."/".$rs2[1]["Uf_qty_slit"];
 		$temp->setReplace("{numtab}", "".$numtab."");		
 		$temp->setReplace("{sts_no}", "".$rs[1]["sts_no"]."");		
 	}
