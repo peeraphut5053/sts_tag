@@ -231,7 +231,7 @@ if (isset($_POST["tag_ids"])) {
 
         if ($grade == "A") {
             $lot_tmp = (explode("-", $lot_tmp)[0] . "-" . sprintf("%'.04d", $pack));
-        } elseif ($grade == "C") {
+        } elseif ($grade == "B") {
             $lot_tmp = (explode("-", $lot_tmp)[0] . "-B" . sprintf("%'.03d", $pack));
         } elseif ($grade == "R") {
             $lot_tmp = (explode("-", $lot_tmp)[0] . "-R" . sprintf("%'.03d", $pack));
