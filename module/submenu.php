@@ -5,7 +5,7 @@ while (list($key, $data) = each($_GET)) {
 
 //echo "<pre>";
 //print_r($_GET);
-$bgcl = array(1=>"#17666a", "#00A400", "#db542d", "#2173ed", "#dd2856", "#b0b000", "#b38313", "#603CBA", "#018FA3", "#00006a", "#8f0901", "#425917", "#a28653", "#9b009b", "#cb07bc", "#47478f", "#868686", "#9200c2");
+$bgcl = array(1=>"#17666a", "#00A400", "#db542d", "#2173ed", "#ff0066", "#e6b800", "#b38313", "#603CBA", "#018FA3", "#00006a", "#8f0901", "#425917", "#a28653", "#9b009b", "#cb07bc", "#47478f", "#868686", "#9200c2");
 $menu = "";
 if ($m_id == "m1") {
 	$menu .= blockmenu("บันทึกเวลาเริ่มผลิต", $bgcl[1], "scan_jobOrder_start&linkcmd=clockin_job");
@@ -33,6 +33,7 @@ if ($m_id == "m1") {
 	$menu .= blockmenu("Move Qty ", $bgcl[17], "sts_move_qty_new&linkcmd=sts_move_qty_new");
 	$menu .= blockmenu("Reset Tag ID Shipped", $bgcl[17], "reset_tag_id_shiped");
 	$menu .= blockmenu("Delete GRN Line", $bgcl[8], "delete_grn_line");
+	$menu .= blockmenu("Reset Tag Status", $bgcl[3], "reset_tag_status");
 } elseif ($m_id == "m3") {
 	$menu .= blockmenu("บันทึกผลผลิตสลิต", $bgcl[10], "scan_jobOrder_start&linkcmd=unposted_job_slit");
 	$menu .= blockmenu("บันทึกผลผลิตท่อ", $bgcl[11], "scan_jobOrder_start&linkcmd=unposted_job_forming");

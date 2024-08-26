@@ -5,9 +5,37 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script type="text/javascript">
+    $(document).ready(function () {
+        pageHtml = "reset_tag_status";
+        if (pageHtml == "reset_tag_status"){
+            $.confirm({
+                title: 'กรุณาใส่ Password',
+                theme: 'modern',
+                content: '<input placeholder="" type="password" id="Pass" class="form-control" name="Pass" value="" autofocus>',
+                buttons: {
+                    confirm: function checked() {
+                        var Pass = $("#Pass").val();
+                        // console.log('P ',Pass);
+                        if (Pass == 1234){
+                            $(".hide").removeClass("hide");
+                            window.close();
+                        }else{
+                            $('#Pass').attr('placeholder','Password ไม่ถูกต้อง');
+                            $("#Pass").val('');
+                            return false;
+                        }
+                    }, 
+                    cencel: function close() {
+                       window.location.href = "/sts_tag";
+                    }
+                }
+            });
+        }
+    });
+
     function ValidateJob(e) {
         //alert('xx');
         var keycode;
@@ -15,10 +43,6 @@
         else if (e) keycode = e.which; //  Firefox 		
         if (keycode == 13) {
             var tag_id = $('#tag_id').val();
-
-
-
-
             $.ajax({
                 url: `./module/reset_tag_id_shiped_get_tag.php?tag_id=${tag_id}`,
                 dataType: 'json',
@@ -26,16 +50,14 @@
                 contentType: 'application/json',
                 processData: false,
                 success: function (data, textStatus, jQxhr) {
-
                     if (data) {
-
                         console.log(data)
                         $("#data_tag_id").html(data.id)
                         $("#data_job").html(data.job)
                         $("#data_item").html(data.item)
                         $("#data_lot").html(data.lot)
                         $("#data_qty1").html(data.qty1)
-                        $("#data_ship_stat").val(data.ship_stat)
+                        $("#data_active").val(data.active)
                         $("#notfound").hide();
 
                     } else {
@@ -54,25 +76,24 @@
 
     function LinkUnpost() {
         var tag_id = $('#tag_id').val();
-        var data_ship_stat = $('#data_ship_stat').val();
+        var data_active = $('#data_active').val();
         let updateVal = ""
-        if (data_ship_stat == '1') {
+        if (data_active == '1') {
             updateVal = "0"
         } else {
             updateVal = "1"
         }
         $.ajax({
-            url: `./module/reset_tag_id_shiped_update_tag.php?tag_id=${tag_id}&updateVal=${updateVal}`,
+            url: `./module/reset_tag_status_api.php?tag_id=${tag_id}&updateVal=${updateVal}&load=update`,
             dataType: 'json',
-            type: 'get',
+            type: 'post',
             contentType: 'application/json',
             processData: false,
             success: function (data, textStatus, jQxhr) {
                 if (data) {
-
-                    console.log(data)
+                    console.log(data,'')
                     $("#data_tag_id").html(data.id)
-                    $("#data_ship_stat").val(data.ship_stat)
+                    $("#data_active").val(data.active)
                     $("#notfound").hide();
 
                 } else {
@@ -94,11 +115,10 @@
 </script>
 <br>
 <br>
-
-
-<div class="row">
+<div id="reset_tag_status"></div>
+<div class="row hide">
     <div class="col-xs-12">
-        <table width="100%" border="0" cellspacing="0" cellpadding="10" class="font18 green">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" class="font18 green" autocomplete="off">
             <tr>
                 <td align="center"><strong>สแกน Tag id</strong></td>
             </tr>
@@ -107,7 +127,8 @@
                         style="display:none;">ไม่พบข้อมูลที่ต้องการค้นหา</span>&nbsp;</td>
             </tr>
             <tr>
-                <td align="center"><input name="tag_id" type="text" id="tag_id" value="" class="tag_id"
+                <td align="center"><input name="tag_id" type="text" id="tag_id" value="" class="tag_id" autocomplete="off"
+                    readonly onclick="this.removeAttribute('readonly');"
                         onKeyup="ValidateJob();" autofocus>
                         <button class="ui-button ui-widget ui-corner-all " id="timeWork" onClick="clearTextInput();"
                         type="button"> รีเซท </button></td>
@@ -126,7 +147,7 @@
                         <th>item</td>
                         <th>Lot</td>
                         <th>จำนวน</td>
-                        <th>Ship Status</td>
+                        <th>Active</td>
                         <th>เปลี่ยนสถานะ tag</td>
                     </tr>
                     <tr>
@@ -146,7 +167,7 @@
                             <span id="data_qty1"></span>
                         </td>
                         <td>
-                            <input readonly type="text" id="data_ship_stat">
+                            <input readonly type="text" id="data_active">
                         </td>
                         <td align="center">
                             <button class="ui-button ui-widget ui-corner-all " id="timeWork" onClick="LinkUnpost();"
@@ -155,12 +176,11 @@
                     </tr>
 
                 </table>
-                <span style="color:red">** Status 1 = Tag ถูก ship ไปแล้ว **</span>
+                <span style="color:red">** Active 0 = ลบ Tag **</span>
             </tr>
 
         </table>
     </div>
     <div class="col-xs-6">
-
     </div>
 </div>
