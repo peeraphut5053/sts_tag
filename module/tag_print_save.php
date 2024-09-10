@@ -199,7 +199,7 @@ for ($i = 1; $i <= $tag_a2; $i++) {
 
     if ($grade == "A") {
         $lot = (explode("-", $lot)[0] . "-" . sprintf("%'.04d", $pack));
-    } elseif ($grade == "C") {
+    } elseif ($grade == "B") {
         $lot = (explode("-", $lot)[0] . "-B" . sprintf("%'.03d", $pack));
     } elseif ($grade == "R") {
         $lot = (explode("-", $lot)[0] . "-R" . sprintf("%'.03d", $pack));
@@ -259,7 +259,7 @@ for ($t = 0; $t < $tag_a3; $t++) {
 
     if ($grade == "A") {
         $lot = (explode("-", $lot)[0] . "-" . sprintf("%'.04d", $pack));
-    } elseif ($grade == "C") {
+    } elseif ($grade == "B") {
         $lot = (explode("-", $lot)[0] . "-B" . sprintf("%'.03d", $pack));
     } elseif ($grade == "R") {
         $lot = (explode("-", $lot)[0] . "-R" . sprintf("%'.03d", $pack));
