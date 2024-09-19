@@ -137,7 +137,7 @@
 		else if (e) keycode = e.which; //  Firefox 		
 		if (keycode == 13) {
 			var id_tag = $('#id_tag').val();
-			$.post("./module/mv_bc_tag.php", {"id_tag": id_tag}, function(data) {				
+			$.post("./module/mv_bc_tag.php", {"id_tag": id_tag, "load": "old_lot"}, function(data) {				
 				if (data) {
                     console.log(data);
                     $("#notfound").hide();

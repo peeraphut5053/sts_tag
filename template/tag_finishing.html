@@ -3,6 +3,11 @@
     td{
         padding: 2px;
     }
+    .box_card {
+        border: 1px solid crimson;
+        
+      
+    }
 </style>
 <script>
     $(function () {
@@ -171,8 +176,8 @@
         chk_t = (t_w / 100) * (pp * uw);
         utw = (pp * uw) + chk_t;
         uuw = (pp * uw) - chk_t;
-        console.log(act_Weight)
-        console.log(pp)
+        console.log(`${tw} / 100 * ${pp} * ${uw}`)
+        console.log(``)
         console.log(t_w)
 
         if (act_Weight != '') {
@@ -329,6 +334,10 @@
                         <div class="col-sm-4">
                             <table>
                                 <tr>
+                                    <td align="right"><strong>Tag Id:</strong>: </td>
+                                    <td><input value="" name="tag_id" type="text" id="tag_id" class="default " onKeyup="ScanTagId();" /></td>
+                                </tr>
+                                <tr>
                                     <td align="right"><strong>H/N(1)</strong>: </td>
                                     <td><input value="" name="sts_no" type="text" id="sts_no" maxlength="5" size="15" class="default " /></td>
                                     <td align="right"><strong>Qty1</strong>: </td>
@@ -388,4 +397,40 @@
     $("#perpack").keyup(function () {
         calSTDWeight();
     });
+
+    function ScanTagId(e) {
+		//alert('xx');
+        if ($('#tag_id').val() == '') {
+            return false;
+        }
+		var keycode;
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			var tag_id = $('#tag_id').val();
+			$.post("./module/mv_bc_tag.php", {"tag_id": tag_id, "load": "scan"}, function(data) {				
+				if (data) {
+                    console.log(data);
+					const res = JSON.parse(data);
+                    $("#sts_no").val(res.sts_no);
+                    $("#sts_no2").val(res.sts_no2);
+                    $("#sts_no3").val(res.sts_no3);
+                    $("#qty_sts_no").val(res.qty_sts_no);
+                    $("#qty_sts_no2").val(res.qty_sts_no2);
+                    $("#qty_sts_no3").val(res.qty_sts_no3);
+
+				} 
+            }, 'html').fail(function() {
+                $("#tag_id").select();
+                $("#tag_id").focus();
+                $("#sts_no").val("");
+                $("#sts_no2").val("");
+                $("#sts_no3").val("");
+                $("#qty_sts_no").val("");
+                $("#qty_sts_no2").val("");
+                $("#qty_sts_no3").val("");
+            });
+			return false;
+		}	
+	}
 </script>
