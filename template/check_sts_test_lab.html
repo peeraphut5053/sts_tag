@@ -1,0 +1,166 @@
+<head></head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<script type="text/javascript">
+    function ValidateJob(e) {
+        //alert('xx');
+        var keycode;
+        if (window.event) keycode = window.event.keyCode; //  IE
+        else if (e) keycode = e.which; //  Firefox 		
+        if (keycode == 13) {
+            var tag_id = $('#tag_id').val();
+            var sts_no = $('#sts_no').val();
+
+            $.ajax({
+                url: `./module/mv_bc_tag.php?tag_id=${tag_id}&load=test&sts_no=${sts_no}`,
+                dataType: 'json',
+                type: 'get',
+                contentType: 'application/json',
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+                    if (data) {
+                        console.log(data,'ff')
+                        $("#data_tag_id").html(data.id)
+                        $("#data_item").html(data.item)
+                        $("#data_sts").html(data.sts_no)
+                        $("#data_c").html(data.sts_c)
+                        $("#data_Si").html(data.sts_si)
+                        $("#data_Mn").html(data.sts_mn)
+                        $("#data_P").html(data.sts_p)
+                        $("#data_S").html(data.sts_s)
+                        $("#data_TS").html(data.sts_ts)
+                        $("#data_YP").html(data.sts_ys)
+                        $("#data_El").html(data.sts_el)
+                        $("#notfound").hide();
+
+                    } else {
+                        alert("ไม่พบข้อมูลที่ต้องการค้นหา");
+                        $("#notfound").show();
+                        $("#tag_id").select();
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    $("#notfound").show();
+                    console.log(errorThrown);
+                }
+            });
+
+            return false;
+        }
+    }
+    
+    function clearTextInput(){
+        $("#tag_id").val("")
+        $("#sts_no").val("")
+        $("#tag_id").focus()
+    }
+
+</script>
+<br>
+<br>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" class="font18 green">
+            <tr>
+                <td style="padding: 10px;" align="center"><strong>สแกน Tag Id</strong></td>
+            </tr>
+            <tr>
+                <td align="center">
+                         <div class="container">
+                            <div class="row justify-content-md-center">
+                                <div class="col-sm-4"> 
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Tag Id</div>
+                                        <input type="text" class="form-control txt-filter" id="tag_id" onkeypress="return ValidateJob();">
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-4"> 
+                                    <div class="input-group">
+                                        <div class="input-group-addon">STS No</div>
+                                        <input type="text" class="form-control txt-filter" id="sts_no" onkeypress="return ValidateJob();">
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-2">
+                                    <button class="ui-button ui-widget ui-corner-all " id="timeWork" onClick="clearTextInput();"
+                                    type="button"> รีเซท </button></td>
+                                 </div>
+                             </div>
+                         </div>
+                <td align="center">
+                    <tr>
+                        <td align="center" class="red">&nbsp;<span id="notfound"
+                                style="display:none;">ไม่พบข้อมูลที่ต้องการค้นหา</span>&nbsp;</td>
+                    </tr>
+                </td>
+            </tr>
+            <tr>
+                <td>.</td>
+            </tr>
+            <tr>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Tag Id</td>
+                        <th>Item</td>
+                        <th>sts_no</td>
+                        <th>C</td>
+                        <th>Si</td>
+                        <th>Mn</td>
+                        <th>P</td>
+                        <th>S</td>
+                        <th>T.S.</td>
+                        <th>Y.P.</td>
+                        <th>El</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span id="data_tag_id"></span>
+                        </td>
+                        <td>
+                            <span id="data_item"></span>
+                        </td>
+                        <td>
+                            <span id="data_sts"></span>
+                        </td>
+                        <td>
+                            <span id="data_c"></span>
+                        </td>
+                        <td>
+                            <span id="data_Si"></span>
+                        </td>
+                        <td>
+                            <span id="data_Mn"></span>
+                        </td>
+                        <td>
+                            <span id="data_P"></span>
+                        </td>
+                        <td align="center">
+                            <span id="data_S"></span>
+                        </td>
+                        <td>
+                            <span id="data_TS"></span>
+                        </td>
+                        <td>
+                            <span id="data_YP"></span>
+                        </td>
+                        <td>
+                            <span id="data_El"></span>
+                        </td>
+                    </tr>
+
+                </table>
+            </tr>
+
+        </table>
+    </div>
+    <div class="col-xs-6">
+
+    </div>
+</div>

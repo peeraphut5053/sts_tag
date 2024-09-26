@@ -34,6 +34,7 @@ if ($m_id == "m1") {
 	$menu .= blockmenu("Reset Tag ID Shipped", $bgcl[17], "reset_tag_id_shiped");
 	$menu .= blockmenu("Delete GRN Line", $bgcl[8], "delete_grn_line");
 	$menu .= blockmenu("Reset Tag Status", $bgcl[3], "reset_tag_status");
+	$menu .= blockmenu("Check Test Lab", $bgcl[3], "check_sts_test_lab");
 } elseif ($m_id == "m3") {
 	$menu .= blockmenu("บันทึกผลผลิตสลิต", $bgcl[10], "scan_jobOrder_start&linkcmd=unposted_job_slit");
 	$menu .= blockmenu("บันทึกผลผลิตท่อ", $bgcl[11], "scan_jobOrder_start&linkcmd=unposted_job_forming");
