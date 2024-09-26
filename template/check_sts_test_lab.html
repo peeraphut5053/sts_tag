@@ -8,8 +8,14 @@
 </head>
 
 <script type="text/javascript">
-    function ValidateJob(e) {
+    function ValidateJob(e, type) {
         //alert('xx');
+        if (type == 'tag') {
+           $('#sts_no').val('');
+        } else {
+           $('#tag_id').val('');
+        }
+        
         var keycode;
         if (window.event) keycode = window.event.keyCode; //  IE
         else if (e) keycode = e.which; //  Firefox 		
@@ -79,13 +85,13 @@
                                 <div class="col-sm-4"> 
                                     <div class="input-group">
                                         <div class="input-group-addon">Tag Id</div>
-                                        <input type="text" class="form-control txt-filter" id="tag_id" onkeypress="return ValidateJob();">
+                                        <input type="text" class="form-control txt-filter" id="tag_id" onkeypress="return ValidateJob(event, 'tag');">
                                     </div>
                                  </div>
                                  <div class="col-sm-4"> 
                                     <div class="input-group">
                                         <div class="input-group-addon">STS No</div>
-                                        <input type="text" class="form-control txt-filter" id="sts_no" onkeypress="return ValidateJob();">
+                                        <input type="text" class="form-control txt-filter" id="sts_no" onkeypress="return ValidateJob(event,'sts');">
                                     </div>
                                  </div>
                                  <div class="col-sm-2">
