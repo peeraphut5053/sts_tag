@@ -10,11 +10,7 @@
 <script type="text/javascript">
     function ValidateJob(e, type) {
         //alert('xx');
-        if (type == 'tag') {
-           $('#sts_no').val('');
-        } else {
-           $('#tag_id').val('');
-        }
+   
         
         var keycode;
         if (window.event) keycode = window.event.keyCode; //  IE
@@ -43,6 +39,54 @@
                         $("#data_TS").html(data.sts_ts)
                         $("#data_YP").html(data.sts_ys)
                         $("#data_El").html(data.sts_el)
+                        $("#notfound").hide();
+
+                    } else {
+                        alert("ไม่พบข้อมูลที่ต้องการค้นหา");
+                        $("#notfound").show();
+                        $("#tag_id").select();
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    $("#notfound").show();
+                    console.log(errorThrown);
+                }
+            });
+
+            return false;
+        }
+    }
+
+    function ValidateJob2(e, type) {
+        //alert('xx');
+        
+        var keycode;
+        if (window.event) keycode = window.event.keyCode; //  IE
+        else if (e) keycode = e.which; //  Firefox 		
+        if (keycode == 13) {
+            var tag_id = $('#tag_id').val();
+            var sts_no = $('#sts_no').val();
+
+            $.ajax({
+                url: `./module/mv_bc_tag.php?tag_id=${tag_id}&load=test2&sts_no=${sts_no}`,
+                dataType: 'json',
+                type: 'get',
+                contentType: 'application/json',
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+                    if (data) {
+                        console.log(data,'ff')
+                        $("#data_tag_id2").html('-')
+                        $("#data_item2").html('-')
+                        $("#data_sts2").html(data.sts_no)
+                        $("#data_c2").html(data.sup_c)
+                        $("#data_Si2").html(data.sup_si)
+                        $("#data_Mn2").html(data.sup_mn)
+                        $("#data_P2").html(data.sup_p)
+                        $("#data_S2").html(data.sup_s)
+                        $("#data_TS2").html(data.sup_ts)
+                        $("#data_YP2").html(data.sup_ys)
+                        $("#data_El2").html(data.sup_el)
                         $("#notfound").hide();
 
                     } else {
@@ -91,7 +135,7 @@
                                  <div class="col-sm-4"> 
                                     <div class="input-group">
                                         <div class="input-group-addon">STS No</div>
-                                        <input type="text" class="form-control txt-filter" id="sts_no" onkeypress="return ValidateJob(event,'sts');">
+                                        <input type="text" class="form-control txt-filter" id="sts_no" onkeypress="return ValidateJob2(event,'sts');">
                                     </div>
                                  </div>
                                  <div class="col-sm-2">
@@ -108,30 +152,25 @@
                 </td>
             </tr>
             <tr>
-                <td>.</td>
+                <td class="text-center" style="color: red;">Item : <span id="data_item"></span></td>
             </tr>
             <tr>
                 <table class="table table-bordered">
+                    <h1 class="text-center">Test Lab</h1>
                     <tr>
-                        <th>Tag Id</td>
-                        <th>Item</td>
-                        <th>sts_no</td>
-                        <th>C</td>
-                        <th>Si</td>
-                        <th>Mn</td>
-                        <th>P</td>
-                        <th>S</td>
-                        <th>T.S.</td>
-                        <th>Y.P.</td>
-                        <th>El</td>
+                       
+                        <th width="10%">sts_no</td>
+                        <th width="10%">C</td>
+                        <th width="10%">Si</td>
+                        <th width="10%">Mn</td>
+                        <th width="10%">P</td>
+                        <th width="10%">S</td>
+                        <th width="10%">T.S.</td>
+                        <th width="10%">Y.P.</td>
+                        <th width="10%">El</td>
+                          
                     </tr>
                     <tr>
-                        <td>
-                            <span id="data_tag_id"></span>
-                        </td>
-                        <td>
-                            <span id="data_item"></span>
-                        </td>
                         <td>
                             <span id="data_sts"></span>
                         </td>
@@ -159,9 +198,56 @@
                         <td>
                             <span id="data_El"></span>
                         </td>
+                      
                     </tr>
 
                 </table>
+            </tr>
+
+        </table>
+        
+        <table class="table table-bordered">
+            <h1 class="text-center">Supplier</h1>
+            <tr>
+                <th width="10%">sts_no</td>
+                    <th width="10%">C</td>
+                    <th width="10%">Si</td>
+                    <th width="10%">Mn</td>
+                    <th width="10%">P</td>
+                    <th width="10%">S</td>
+                    <th width="10%">T.S.</td>
+                    <th width="10%">Y.P.</td>
+                    <th width="10%">El</td>
+            </tr>
+            <tr>
+                <td>
+                    <span id="data_sts2"></span>
+                </td>
+                <td>
+                    <span id="data_c2"></span>
+                </td>
+                <td>
+                    <span id="data_Si2"></span>
+                </td>
+                <td>
+                    <span id="data_Mn2"></span>
+                </td>
+                <td>
+                    <span id="data_P2"></span>
+                </td>
+                <td align="center">
+                    <span id="data_S2"></span>
+                </td>
+                <td>
+                    <span id="data_TS2"></span>
+                </td>
+                <td>
+                    <span id="data_YP2"></span>
+                </td>
+                <td>
+                    <span id="data_El2"></span>
+                </td>
+                
             </tr>
 
         </table>
