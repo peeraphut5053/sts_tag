@@ -71,6 +71,70 @@
         }
     }
 
+    function inpActiveLine(id) {
+      $.confirm({
+      title: 'กรุณาใส่ Password',
+      theme: 'modern',
+      boxWidth: '30%',
+      useBootstrap: false,
+      content: '<input placeholder="" type="password" id="Pass" class="form-control" style="padding: 10px" size="30" name="Pass" autofocus>',
+      buttons: {
+        confirm: function checked() {
+          var Pass = $("#Pass").val();
+    
+          if (Pass == 5404) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 5404}, function (data) {
+             window.location.reload();
+          })
+          } else if (Pass == 8105) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8105}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == 8113) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8113}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == 8139) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8139}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == 8192) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8192}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == 8202) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8202}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == 8222) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8222}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == 8236) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8236}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == 8237) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8237}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == 8238) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8238}, function (data) {
+             window.location.reload();
+            })
+          } else {
+            $('#Pass').attr('placeholder', 'Password ไม่ถูกต้อง');
+            $("#Pass").val('');
+            return false;
+          }
+        },
+        cencel: function close() {
+          window.close()
+        }
+      }
+    });
+    }
+
     function PrintTag() {
         var jobno = $('#job_no').val();
         var uri_enc = encodeURIComponent(jobno);
@@ -322,6 +386,7 @@ function saveOperation() {
                         <td align="center" width="13%"><strong>วันที่</strong></td>
                         <!-- <td align="center" width="9%"><strong>โดย</strong></td> -->
                         <td width="2%"> </td>
+                        <td width="10%">ตรวจสอบ</td>
                     </tr>
                     {list}		
                 </table></div>

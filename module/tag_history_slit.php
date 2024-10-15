@@ -167,6 +167,7 @@ for ($i = $rs[0][0]; $i >= 1; $i--) {
         }
     }
     $list .= '</td>';
+    $list .= '<td align="center">' . ($rs[$i]["inspector"] ? "ตวรจแล้ว" : "ยังไม่ตวรจ") . ($rs[$i]["inspector"] ? '' : ' <button type="button" onclick="inpActiveLine(\'' . $rs[$i]["id"] . '\');">Check</button>') . '</td>';
     $list .= '</tr>';
 }
 $total_qty1 = $qty1_a;
