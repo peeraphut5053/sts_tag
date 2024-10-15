@@ -73,7 +73,7 @@ $pds = array();
 $pds = explode("/", $pdate);
 $print_day = $pds[1]."/".$pds[0]."/".$pds[2]." ".date("H:i");
 
-$sql = "insert into Mv_Bc_tag (id, job, suffix, oper_num, item, lot, qty1, uf_act_Weight, uf_pack, mfg_date, print_date, ship_stat, active, uf_sts_job, uf_grade, Uf_manu, uf_spec, um1, um2, sts_no, tag_status) values ('".$id."', '".$jobm[0]."', '".$jobm[1]."', '".$jobm[2]."', '".$item."', '".$slot[0].$lot."', '".$uf_act_Weight."', '".$uf_act_Weight."', '".$pack_no."', '".$print_day."', '".$print_day."', '0', '1', '".$uf_sts_job."', 'A', '".$slot[1]."', '".$slot[2]."', '".$um1."', '".$um2."', '".$sts_no."', 'Good');";
+$sql = "insert into Mv_Bc_tag (id, job, suffix, oper_num, item, lot, qty1, uf_act_Weight, qty_sts_no, uf_pack, mfg_date, print_date, ship_stat, active, uf_sts_job, uf_grade, Uf_manu, uf_spec, um1, um2, sts_no, tag_status) values ('".$id."', '".$jobm[0]."', '".$jobm[1]."', '".$jobm[2]."', '".$item."', '".$slot[0].$lot."', '".$uf_act_Weight."', '".$uf_act_Weight."', '".$uf_act_Weight."', '".$pack_no."', '".$print_day."', '".$print_day."', '0', '1', '".$uf_sts_job."', 'A', '".$slot[1]."', '".$slot[2]."', '".$um1."', '".$um2."', '".$sts_no."', 'Good');";
 //echo $sql." =======================";
 $rs1 = $cSql->IsUpDel($conn, $sql);
 
