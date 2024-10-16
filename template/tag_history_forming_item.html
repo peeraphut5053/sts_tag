@@ -142,6 +142,7 @@
       buttons: {
         confirm: function checked() {
           var Pass = $("#Pass").val();
+          
     
           if (Pass == 5404) {
             $.post("./module/tag_check.php", {"tag_id": id, "inspector": 5404}, function (data) {
