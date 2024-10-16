@@ -14,7 +14,7 @@ include "./initial.php";
 //print_r($_POST);
 //exit();
 $cSql = new SqlSrv();
-$computerName = gethostname();
+$computerName = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 $sql = "update Mv_Bc_tag set inspector = '" . $inspector . "', inspec_date = getdate(), comp_name = '" . $computerName . "' where id = '".$tag_id."';";
 $rs = $cSql->IsUpDel($conn, $sql);
 echo $rs;
