@@ -335,23 +335,23 @@
                             <table>
                                 <tr>
                                     <td align="right"><strong>Tag Id:</strong>: </td>
-                                    <td><input value="" name="tag_id" type="text" id="tag_id" class="default " onKeyup="ScanTagId();" /></td>
+                                    <td><input value="" name="tag_id" type="text" id="tag_id" class="default " onKeyup="ScanTagId();" />  <span class="red" id="notfound" style="display:none;">material ไม่ตรงกับ job</span></td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>H/N(1)</strong>: </td>
-                                    <td><input value="" name="sts_no" type="text" id="sts_no" maxlength="5" size="15" class="default " /></td>
+                                    <td><input value="" name="sts_no" type="text" id="sts_no" maxlength="5" size="15" class="default_view" readonly /></td>
                                     <td align="right"><strong>Qty1</strong>: </td>
                                     <td><input value="{Uf_pack}" onkeyup="calQtyStsNo();" name="qty_sts_no" type="text" id="qty_sts_no" maxlength="30" size="15" class="default qty_sts_no" /></td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>H/N(2)</strong>: </td>
-                                    <td><input value="" name="sts_no2" type="text" id="sts_no2" maxlength="5" size="15" class="default" /></td>
+                                    <td><input value="" name="sts_no2" type="text" id="sts_no2" maxlength="5" size="15" class="default_view" readonly /></td>
                                     <td align="right"><strong>Qty2</strong>: </td>
                                     <td><input value="0" onkeyup="calQtyStsNo2();" name="qty_sts_no2" type="text" id="qty_sts_no2" maxlength="30" size="15" class="default qty_sts_no" /></td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>H/N(3)</strong>: </td>
-                                    <td><input value="" name="sts_no3" type="text" id="sts_no3" maxlength="5" size="15" class="default" /></td>
+                                    <td><input value="" name="sts_no3" type="text" id="sts_no3" maxlength="5" size="15" class="default_view" readonly /></td>
                                     <td align="right"><strong>Qty3</strong>: </td>
                                     <td><input value="0" onkeyup="calQtyStsNo3();" name="qty_sts_no3" type="text" id="qty_sts_no3" maxlength="30" size="15" class="default qty_sts_no" /></td>
                                 </tr>
@@ -363,6 +363,12 @@
                                     <td>รวม</td>
                                     <td>
                                         <input value="{Uf_pack}" readonly="readonly" type="text" id="qty_sts_sum" maxlength="30" size="15" class="default" />
+                                        <td><input style="display: none;" class="default_view" name="old_lot" type="text" id="old_lot" size="15" readonly /></td>
+                                        <td><input style="display: none;" class="default_view" name="tag_status" type="text" id="tag_status" size="15" readonly /></td>
+                                        <td><input style="display: none;" class="default_view" name="detail" type="text" id="detail" size="15" readonly /></td>
+                                        <td><input style="display: none;" class="default_view" name="issue" type="text" id="issue" size="10" readonly /></td>
+                                        <td><input style="display: none;" class="default_view" name="minor" type="text" id="minor" size="10" readonly /></td>
+                                        <td><input style="display: none;" class="default_view" name="main" type="text" id="main" size="10" readonly /></td>
                                     </td>
                                 </tr>
                                 <tr>
@@ -408,9 +414,11 @@
 		else if (e) keycode = e.which; //  Firefox 		
 		if (keycode == 13) {
 			var tag_id = $('#tag_id').val();
-			$.post("./module/mv_bc_tag.php", {"tag_id": tag_id, "load": "scan"}, function(data) {				
+            var job = $('#job_no').val(); // FM24110002+0+10 split('+')[0];
+            var jobno = job.split('+')[0];
+			$.post("./module/mv_bc_tag.php", {"id_tag": tag_id, "load": "old_lot", "jobno": jobno}, function(data) {				
 				if (data) {
-                    console.log(data);
+                    $("#notfound").hide();
 					const res = JSON.parse(data);
                     $("#sts_no").val(res.sts_no);
                     $("#sts_no2").val(res.sts_no2);
@@ -418,9 +426,15 @@
                     $("#qty_sts_no").val(res.qty_sts_no);
                     $("#qty_sts_no2").val(res.qty_sts_no2);
                     $("#qty_sts_no3").val(res.qty_sts_no3);
-
+                    $("#tag_status").val(res.tag_status);
+                    $("#old_lot").val(res.lot);
+                    $("#detail").val(res.detail);
+                    $("#issue").val(res.issue);
+                    $("#minor").val(res.Minor_cause);
+                    $("#main").val(res.Main_cause);
 				} 
             }, 'html').fail(function() {
+                $("#notfound").show();
                 $("#tag_id").select();
                 $("#tag_id").focus();
                 $("#sts_no").val("");
@@ -429,6 +443,9 @@
                 $("#qty_sts_no").val("");
                 $("#qty_sts_no2").val("");
                 $("#qty_sts_no3").val("");
+                $("#issue").val("")
+                $("#minor").val("")
+                $("#main").val("")
             });
 			return false;
 		}	

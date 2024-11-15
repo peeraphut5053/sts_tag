@@ -13,13 +13,33 @@ include "./initial.php";
 if ($load == "old_lot") {
 	$sql = "select * from mv_bc_tag where id = '" . $id_tag . "';";
 
+	$sql2 = "select job.job, job.item
+from jobmatl_mst job
+  inner join mv_bc_tag tag on tag.item = job.item
+where job.job ='" . $jobno . "'
+   and tag.id ='" . $id_tag . "'";
+
 //echo $sql;
 $cSql = new SqlSrv();
 $rs = $cSql->SqlQuery($conn, $sql);
+$rs2 = $cSql->SqlQuery($conn, $sql2);
+
+array_splice($rs2, count($rs2) - 1, 1);
+
+$check = $rs2 ? true : false;
+
+if ($check) {
+	
+} else {
+	echo json_encode(false);
+	http_response_code(404);
+	return;
+}
+
 if ($rs[1]) {
 	echo json_encode($rs[1]);
   } else {
-	echo json_encode('false');
+	echo json_encode(false);
 	http_response_code(404);
   }
 }
