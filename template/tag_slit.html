@@ -94,6 +94,47 @@
 		}, 'html');
 		return false;
 	}*/
+
+	function ValidateJob(e) {
+		//alert('xx');
+        if ($('#id_tag').val() == '') {
+            return false;
+        }
+		var keycode;
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			var id_tag = $('#id_tag').val();
+            var job = $('#job_no').val(); // FM24110002+0+10 split('+')[0];
+            var jobno = job.split('+')[0];
+    
+			$.post("./module/mv_bc_tag.php", {"id_tag": id_tag, "load": "old_lot", "jobno": jobno}, function(data) {				
+				if (data) {
+                    $("#notfound").hide();
+					const res = JSON.parse(data);
+                    $("#tag_status").val(res.tag_status);
+                    $("#old_lot").val(res.lot);
+                    $("#detail").val(res.detail);
+                    $("#sts_no").val(res.sts_no);
+                    $("#issue").val(res.issue);
+                    $("#minor").val(res.Minor_cause);
+                    $("#main").val(res.Main_cause);
+
+				} 
+            }, 'html').fail(function() {
+                $("#notfound").show();
+                $("#id_tag").select();
+                $("#tag_status").val("");
+                $("#old_lot").val("")
+                $("#detail").val("")
+                $("#issue").val("")
+                $("#minor").val("")
+                $("#main").val("")
+
+            });
+			return false;
+		}	
+	}
 	
 
 //-->
@@ -149,12 +190,29 @@
           
 		<table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
 		<tr>
-			<td width="36%" align="right">Lot:</td>
-			<td width="15%"><input name="lot" type="text" class="default" id="lot" size="18" value="{lot}" style="background: #f2fff9; readonly"/></td>
-			<td width="10%" align="right">น้ำหนัก: </td>
+			<td width="8%" align="right" style="color: red;">Tag Id * :</td>
+			<td width="20%"><input name="id_tag" type="text" class="default" id="id_tag" size="15"  style="background: #f2fff9" onKeyup="ValidateJob();" /><span class="red" id="notfound" style="display:none;">material ไม่ตรงกับ job</span></td>
+			<td align="right">Lot:</td>
+			<td width="10%"><input name="lot" type="text" class="default" id="lot" size="15" value="{lot}" style="background: #f2fff9" readonly/></td>
+			<td align="right">น้ำหนัก:</td>
               <td><input name="uf_act_Weight" type="text" id="uf_act_Weight" size="15" class="default" autofocus/> KG. {hidden_w}
 			  <input name="slit_lotm" type="hidden" id="slit_lotm" value=""/></td>
 		</tr>
+		</table>
+		<table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
+			<tr>
+			  <td width="36%" align="right">Old Lot:</td>
+		      <td width="20%"><input class="default_view" name="old_lot" type="text" id="old_lot" size="15" readonly /></td>
+			  <td width="10%" align="right">Tag Status:</td>
+			  <td><input class="default_view" name="tag_status" type="text" id="tag_status" size="15" readonly /></td>
+			  <td><input style="display: none;" class="default_view" name="issue" type="text" id="issue" size="10" readonly /></td>
+			  <td><input style="display: none;" class="default_view" name="minor" type="text" id="minor" size="10" readonly /></td>
+			  <td><input style="display: none;" class="default_view" name="main" type="text" id="main" size="10" readonly /></td>
+			</tr>
+			<tr>
+				<td width="20%" align="right">Detail:</td>
+				<td><input class="default_view" name="detail" type="text" id="detail" size="40" readonly /></td>
+			</tr>
 		</table>
 
         <!-- <table width="100%" border="0" cellpadding="2" cellspacing="0" class="font14">

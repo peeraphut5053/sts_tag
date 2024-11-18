@@ -363,9 +363,6 @@
                                     <td>รวม</td>
                                     <td>
                                         <input value="{Uf_pack}" readonly="readonly" type="text" id="qty_sts_sum" maxlength="30" size="15" class="default" />
-                                        <td><input style="display: none;" class="default_view" name="old_lot" type="text" id="old_lot" size="15" readonly /></td>
-                                        <td><input style="display: none;" class="default_view" name="tag_status" type="text" id="tag_status" size="15" readonly /></td>
-                                        <td><input style="display: none;" class="default_view" name="detail" type="text" id="detail" size="15" readonly /></td>
                                         <td><input style="display: none;" class="default_view" name="issue" type="text" id="issue" size="10" readonly /></td>
                                         <td><input style="display: none;" class="default_view" name="minor" type="text" id="minor" size="10" readonly /></td>
                                         <td><input style="display: none;" class="default_view" name="main" type="text" id="main" size="10" readonly /></td>
@@ -376,6 +373,18 @@
                                 </tr>
                             </table>
                         </div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+                            <tr>
+                                <td width="31.5%" align="right">Old Lot:</td>
+                            <td width="22%"><input class="default_view" name="old_lot" type="text" id="old_lot" size="15" readonly /></td>
+                            <td width="17%" align="right">Tag Status:</td>
+                            <td><input class="default_view" name="tag_status" type="text" id="tag_status" size="15" readonly /></td>
+                            </tr>
+                            <tr>
+                                <td width="20%" align="right">Detail:</td>
+                                <td><input class="default_view" name="detail" type="text" id="detail" size="40" readonly /></td>
+                            </tr>
+                        </table>
                     </div>
                     <br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
