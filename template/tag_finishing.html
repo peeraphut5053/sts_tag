@@ -434,15 +434,13 @@
 					const res = JSON.parse(data);
                     if (!sts) {
                         $("#sts_no").val(res.sts_no);
-                    } 
-
-                    if (!sts2) {
+                    } else if (!sts2) {
                         $("#sts_no2").val(res.sts_no);
-                    }
-
-                    if (!sts3) {
+                    } else if (!sts3) {
                         $("#sts_no3").val(res.sts_no);
                     }
+
+                   
                     $("#tag_status").val(res.tag_status);
                     $("#old_lot").val(res.lot);
                     $("#detail").val(res.detail);
