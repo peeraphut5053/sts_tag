@@ -16,7 +16,9 @@ if (isset($_POST["tag_ids"])) {
 	for ($t=0; $t<$s_tag; $t++) {
 		$temp->setReplace("{printlist}", $temp->getTemplate("../template/tag_slit_block.html"));	
 		$id = $_POST["tag_ids"][$t];
-		$sql = "select *, CONVERT(VARCHAR(16), print_date, 120)  AS print_date from Mv_Bc_tag where id = '".$id."';";
+		$sql = "select *, CONVERT(VARCHAR(16), print_date, 120)  AS print_date , itemgrade = item_mst.uf_grade
+from Mv_Bc_tag inner join item_mst on mv_bc_tag.item = item_mst.item
+where id = '".$id."';";
 		$rs = $cSql->SqlQuery($conn, $sql);
 		$item = $rs[1]["item"];
 		$sql1 = "select * from item_mst where item = '".$item."';";
@@ -32,7 +34,7 @@ if (isset($_POST["tag_ids"])) {
 		$temp->setReplace("{uf_spec}", "".$rs[1]["uf_spec"]."");
 		$temp->setReplace("{lot}", "".$rs[1]["lot"]."");
 		$temp->setReplace("{item}", "".$rs[1]["item"]."");
-		$temp->setReplace("{Uf_Grade}", "".$rs[1]["uf_grade"]."");
+		$temp->setReplace("{Uf_Grade}", "".$rs[1]["itemgrade"]."");
 		
 		$sql2 = "select Uf_qty_slit from job_mst where job = '".$rs[1]["job"]."' AND suffix = '".$rs[1]["suffix"]."';";
 		$rs2 = $cSql->SqlQuery($conn, $sql2);
