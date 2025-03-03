@@ -74,7 +74,7 @@ if (isset($_POST["tag_ids"])) {
         $temp->setReplace("{img_qrcode}", "" . $img_qrcode . "");
         
         $qr_tis = "<table width='100%' border='0' cellspacing='0' cellpadding='0'> "
-                . "<tr> <td align='center'>==<span style='font-family:Code39; color: #000000; font-size: 9pt; white-space: nowrap;'>*".$id."*</span>==</td> </tr> "
+                . "<tr> <td align='center'><span style=' color: #000000; font-size: 12pt; white-space: nowrap;'>".$id."</span></td> </tr> "
                 . "<tr> <td><table width='100%' border='0' cellspacing='0' cellpadding='0' style='font-family:Tahoma; font-size:9px;' align='right'> <tr><td>SPEC./มาตราฐาน:".$spec." ".$rs2[1]["Uf_Grade"]."</td> </tr>"
                 . "<tr><td>SIZE/ขนาด:". $rs2[1]["Uf_NPS"]." x". $rs2[1]["Uf_Schedule"]." x". $rs2[1]["Uf_length"]."</td> </tr> "
                 . "<tr><td>ACT WT./น้ำหนักจริง(Kgs.): ".total_format($rs[1]["uf_act_Weight"], 2)."  (".$rs[1]["uf_grade"].")</td> </tr> "
@@ -272,7 +272,7 @@ if (isset($_POST["tag_ids"])) {
         
                 
         $qr_tis = "<table width='100%' border='0' cellspacing='0' cellpadding='0'> "
-                . "<tr> <td align='center'>==<span style='font-family:Code39; color: #000000; font-size: 9pt; white-space: nowrap;'>*".$id."*</span>==</td> </tr> "
+                . "<tr> <td align='center'><span style=' color: #000000; font-size: 12pt; white-space: nowrap;'>".$id."</span></td> </tr> "
                 . "<tr> <td><table width='100%' border='0' cellspacing='0' cellpadding='0' style='font-family:Tahoma; font-size:9px;' align='right'> <tr><td>SPEC./มาตราฐาน:".$spec." ".$rs2[1]["Uf_Grade"]."</td> </tr>"
                 . "<tr><td>SIZE/ขนาด:". $rs2[1]["Uf_NPS"]." x". $rs2[1]["Uf_Schedule"]." x". $rs2[1]["Uf_length"]."</td> </tr> "
                 . "<tr><td>ACT WT./น้ำหนักจริง(Kgs.): ".total_format($actwt, 2)."  (".$grade.")</td> </tr> "
