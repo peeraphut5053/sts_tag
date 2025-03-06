@@ -57,8 +57,8 @@ if (isset($_POST["tag_ids"])) {
         $desc = "";
         $Uf_TheoryWeightPerItem  = "";
         if($TagBarcode->Uf_class == "TIS.107"){
-            $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS_107.jpg' width='100' height='100'>";
+            $img_qrcode = "<img src='./image/qr107.png' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS107-2566.jpg' width='100' height='100'>";
         }elseif($TagBarcode->Uf_class == "TIS.276"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
             $img_tis = "<img src='./image/TIS_276.jpg' width='100' height='100'>";
@@ -183,8 +183,8 @@ if (isset($_POST["tag_ids"])) {
         $desc = "";
         $Uf_TheoryWeightPerItem  = "";
         if($TagBarcodePreview->Uf_class == "TIS.107"){
-            $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS_107.jpg' width='100' height='100'>";
+            $img_qrcode = "<img src='./image/qr107.png' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS107-2566.jpg' width='100' height='100'>";
         }elseif($TagBarcodePreview->Uf_class == "TIS.276"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
             $img_tis = "<img src='./image/TIS_276.jpg' width='100' height='100'>";

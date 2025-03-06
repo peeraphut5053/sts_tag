@@ -60,7 +60,7 @@ if (isset($_POST["tag_ids"])) {
         
         $img_qrcode = "";
         $img_tis = "";
-        $img_sts = "<img style='margin-left:-1px;'  src='./image/logo_sts.png' width='100' height='100' border='0' alt=''>";
+        $img_sts = "<img style='margin-left:-1px;'  src='./image/LOGO_STS2.jpg' width='100' height='100' border='0' alt=''>";
  
         if (isset($rs2[1]["Uf_sizeontag"]))
             $size = $rs2[1]["Uf_sizeontag"];
@@ -79,8 +79,8 @@ if (isset($_POST["tag_ids"])) {
         
         
         if($rs2[1]["Uf_spec"] == "TIS.107" ||$rs2[1]["Uf_spec"] == "TIS.107 STK290" ||$rs2[1]["Uf_spec"] == "TIS.107 STK400"  ){
-            $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
+            $img_qrcode = "<img src='./image/qr107.png' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS107-2566.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
         }elseif($rs2[1]["Uf_spec"] == "TIS.276"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
@@ -274,11 +274,11 @@ if (isset($_POST["tag_ids"])) {
                 . "<tr><td>SIZE/ขนาด:". $rs2[1]["Uf_NPS"]." x". $rs2[1]["Uf_Schedule"]." x". $rs2[1]["Uf_length"]."</td> </tr> "
                 . "<tr><td>ACT WT./น้ำหนักจริง(Kgs.): ".total_format($actwt, 2)."  (".$grade.")</td> </tr> "
                 . "<tr><td>LOT No./รุ่น: {lot}</td> </tr> <tr><td style='font-size: 13px'>H/N.: <span style='font-size:22px;'>".$Heat_no."</span></td> </tr> </table></td> </tr> </table>";
-        $img_sts = "<img style='margin-left:-1px;'  src='./image/logo_sts.png' width='100' height='100' border='0' alt=''>";
+        $img_sts = "<img style='margin-left:-1px;'  src='./image/LOGO_STS2.jpg' width='100' height='100' border='0' alt=''>";
 
         if($rs2[1]["Uf_spec"] == "TIS.107" ||$rs2[1]["Uf_spec"] == "TIS.107 STK290" ||$rs2[1]["Uf_spec"] == "TIS.107 STK400"  ){
-            $img_qrcode = "<img src='./image/2392603330.jpg' width='100' height='100'>";
-            $img_tis = "<img src='./image/TIS1.jpg' width='100' height='100'>";
+            $img_qrcode = "<img src='./image/qr107.png' width='100' height='100'>";
+            $img_tis = "<img src='./image/TIS107-2566.jpg' width='100' height='100'>";
             $qr_tis = "<table><tr><td>".$img_qrcode."</td><td>".$img_tis."</td><td>".$img_sts."</td></tr></table>";
         }elseif($rs2[1]["Uf_spec"] == "TIS.276"){
             $img_qrcode = "<img src='./image/350563986.png' width='100' height='100'>";
