@@ -22,7 +22,7 @@ if (isset($_POST["coil_ids"])) {
 		$id = $_POST["coil_ids"][$t];
 		$sql = "select *, CONVERT(VARCHAR(16), mfg_date, 120)  AS mfg_date from Mv_Bc_tag where id = '".$id."';";
 		$rs = $cSql->SqlQuery($conn, $sql);
-
+		$temp->setReplace("{reprint}", "".true."");
 		$temp->setReplace("{barcode}", "".$id."");		
 		$temp->setReplace("{Uf_Grade}", "".$rs[1]["uf_spec"]."");
 		$temp->setReplace("{qty_rec}", "".total_format($rs[1]["qty1"])."");	

@@ -1,38 +1,54 @@
 <script type="text/javascript">
+
     function PrintElem() {
-        var mywindow = window.open('', 'PRINT', '');
+    let spanElement = document.querySelector("#gentagid");
+    let barcodeValue = spanElement.textContent.replace(/\*/g, ""); // เอา * ออก
+    let reprint = document.querySelector("#reprint").value;
+    // ใช้ return เพื่อรอให้การเรียก AJAX แรกเสร็จก่อน
+    return $.post("./module/mv_bc_tag.php", { "tag_id": barcodeValue, "load": "check" }, function (data) {
+        if (data == 'true' && reprint !== '1') {
+            alert('Tag id ซํ้า');
+            $('#printpopup').dialog("close");
+            return false; // ไม่ทำอะไรต่อ
+        } else {
+            // ดำเนินการต่อเมื่อไม่ซ้ำเท่านั้น
+            var mywindow = window.open('', 'PRINT', '');
         mywindow.document.write('<html><head><title>' + document.title + '</title>');
         mywindow.document.write('</head><body >');
         mywindow.document.write(document.getElementById("printTag").innerHTML);
         mywindow.document.write('</body></html>');
         mywindow.document.close(); // necessary for IE >= 10
         mywindow.focus(); // necessary for IE >= 10*/
-        mywindow.print();
-        mywindow.close();
         $.post("./module/tag_print_save.php", $('#formB').serialize(), function (data) {
 
-            $('#printpopup').dialog('close');
-            if (data == "1") {
-                popup(data);
-                location.reload(true);
-            } else if (data == "2") {
-                popup(data);
+                $('#printpopup').dialog('close');
+                if (data == "1") {
+                    popup(data);
+                    location.reload(true);
+                } else if (data == "2") {
+                    popup(data);
+                    return false;
+                } else {
+                    popup(data);
+                }
                 return false;
-            } else {
-                popup(data);
-            }
-            return false;
-        }, 'html');
+            }, 'html');
+        mywindow.print();
+        mywindow.close();
+      
 
-        console.log()
+
         if (window.location.href.includes("history")) {
             location.reload();
         } else {
             window.history.back();
             location.reload();
         }
-
-    }
+        }
+    }, 'html').fail(function () {
+        alert("พิมพ์ Tag Barcode ไม่สําเร็จ");
+    });
+}
 </script>
 
 <table width="100%" border="0" cellpadding="5" cellspacing="0">

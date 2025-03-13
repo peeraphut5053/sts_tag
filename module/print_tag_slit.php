@@ -25,6 +25,7 @@ where id = '".$id."';";
 		$rs1 = $cSql->SqlQuery($conn, $sql1);
 		if (isset($rs1[1]["Uf_width"])) $ufwidth = " x ".$rs1[1]["Uf_width"];
 		else $ufwidth = "";
+		$temp->setReplace("{reprint}", "".true."");
 		$temp->setReplace("{barcode}", "".$id."");
 		$temp->setReplace("{uf_Width}", $rs1[1]["Uf_thickness"].$ufwidth);
 		$temp->setReplace("{qty_rec}", "".total_format($rs[1]["qty1"])."");

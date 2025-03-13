@@ -93,7 +93,7 @@ if (isset($_POST["tag_ids"])) {
         }
  
         $temp->setReplace("{qr_tis}", "".$qr_tis."");
-
+        $temp->setReplace("{reprint}", "".true."");
         $temp->setReplace("{barcode}", "" . $id . "");
         //$temp->setReplace("{commodity}", "".$rs1[1]["item"]."");
         $temp->setReplace("{commodity}", "" . isset($rs1[1]["item_desc"]) ? $rs1[1]["item_desc"] : "" . "");

@@ -1,31 +1,45 @@
 <script type="text/javascript">
-<!--
+
 	function PrintElem() {
-		var mywindow = window.open('', 'PRINT', '');
-        mywindow.document.write('<html><head><title>' + document.title  + '</title>');		
+    let spanElement = document.querySelector("#gentagid");
+    let barcodeValue = spanElement.textContent.replace(/\*/g, ""); // เอา * ออก
+    let reprint = document.querySelector("#reprint").value;
+    // ใช้ return เพื่อรอให้การเรียก AJAX แรกเสร็จก่อน
+    return $.post("./module/mv_bc_tag.php", { "tag_id": barcodeValue, "load": "check" }, function (data) {
+        if (data == 'true' && reprint !== '1') {
+            alert('Tag id ซํ้า');
+            $('#printpopup').dialog("close");
+            return false; // ไม่ทำอะไรต่อ
+        } else {
+            // ดำเนินการต่อเมื่อไม่ซ้ำเท่านั้น
+            var mywindow = window.open('', 'PRINT', '');
+        mywindow.document.write('<html><head><title>' + document.title + '</title>');
         mywindow.document.write('</head><body >');
         mywindow.document.write(document.getElementById("printTag").innerHTML);
         mywindow.document.write('</body></html>');
-
         mywindow.document.close(); // necessary for IE >= 10
         mywindow.focus(); // necessary for IE >= 10*/
+        $.post("./module/tag_coil_save.php", { "grndata": { grndata }, "ids": { ids } }, function (data) {
 
+                $('#printpopup').dialog('close');
+                if (data == "1") {
+                    popup(data);
+                    location.reload(true);
+                } else if (data == "2") {
+                    popup(data);
+                    return false;
+                } else {
+                    popup(data);
+                }
+                return false;
+            }, 'html');
         mywindow.print();
-        mywindow.close();		
-		
-		$.post("./module/tag_coil_save.php", {"grndata": {grndata}, "ids": {ids}}, function(data) {				
-			//popup(data);
-			$('#printpopup').dialog('close');
-			if (data == "1") {
-				location.reload(true);
-			} else if(data == "2") {
-				return false;
-			} else {
-				popup(data);
-			}
-			return false;
-		}, 'html');  
-	}	
+        mywindow.close();
+        }
+    }, 'html').fail(function () {
+        alert("พิมพ์ Tag Barcode ไม่สําเร็จ");
+    });
+  }
 //-->
 </script>
 <form name="formC" method="post" action="" id="formC">

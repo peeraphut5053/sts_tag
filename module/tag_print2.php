@@ -70,7 +70,7 @@ if (isset($_POST["tag_ids"])) {
         }
         
         
-        
+        $temp->setReplace("{reprint}", "".true."");
         $temp->setReplace("{barcode}", "" . $id . "");
         $temp->setReplace("{Uf_refno}", "" . $TagBarcode->Uf_refno . "");
         $temp->setReplace("{img_qrcode}", "" . $img_qrcode . "");
