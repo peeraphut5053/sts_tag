@@ -43,7 +43,7 @@ if (isset($_POST["tag_ids"])) {
 
 
     $lot = $TagBarcode->GetGenLot($jobm0, $TagBarcode->GetLateBundle_ReJob($jobm0));
-    $temp->setReplace("{reprint}", "".false."");
+    $temp->setReplace("{reprint}", "".true."");
     $temp->setReplace("{barcode}", "" . $id . "");
     $temp->setReplace("{Uf_refno}", "" . $TagBarcode->Uf_refno . "");
     $temp->setReplace("{spec}", "" . $TagBarcode->spec . "");
