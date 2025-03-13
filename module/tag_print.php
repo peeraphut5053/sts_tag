@@ -28,7 +28,7 @@ if (isset($_POST["tag_ids"])) {
         $sql = "select *, CONVERT(VARCHAR(16), print_date, 120)  AS print_date from Mv_Bc_tag where id = '" . $id . "';";
         $rs = $cSql->SqlQuery($conn, $sql);
 
-        $sql1 = "select TOP 1 * from MV_Job where item = '" . $rs[1]["item"] . "';";
+        $sql1 = "select TOP 1 * from MV_Job where item = '" . $rs[1]["item"] . "' and job = '" . $rs[1]["job"] . "';";
         $rs1 = $cSql->SqlQuery($conn, $sql1);
 
         $sql2 = "select * ,case when item_mst.uf_market in ('AUS', 'USA') then 'เหล็กนำเข้าตามมาตรา 21 ตรี'
