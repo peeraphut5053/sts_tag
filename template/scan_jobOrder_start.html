@@ -24,6 +24,7 @@
 	function LinkUnpost() {
 		var jobno = $('#joborder').val();
 		var jobno1 = encodeURIComponent(jobno);
+		jobno1 = jobno1.toUpperCase();
 		window.location.href = '?{linkcmd}&jobno='+ jobno1+"&act=start";
 	}
 	
