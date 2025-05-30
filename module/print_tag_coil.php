@@ -99,8 +99,9 @@ if (isset($_POST["coil_ids"])) {
 		$temp->setReplace("{item}", "".$rs[1]["item"]."");
 		$temp->setReplace("{po_num}", "".$rs[1]["po_num"]."");
 	}	
-	$temp->setReplace("{grndata}", json_encode($_POST["tag_ids"]));
-	$temp->setReplace("{ids}", json_encode($ids));
+	
+	$temp->setReplace("{grndata}", "" . implode("!!", $_POST["tag_ids"]) . "");
+    $temp->setReplace("{ids}", "" . implode("!!", $ids) . "");
 }
 $temp->setReplace("{printlist}", "");
 echo $temp->getReplace();

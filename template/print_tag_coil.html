@@ -5,6 +5,9 @@
     let barcodeValue = spanElement.textContent.replace(/\*/g, ""); // เอา * ออก
     let reprint = document.querySelector("#reprint").value;
     // ใช้ return เพื่อรอให้การเรียก AJAX แรกเสร็จก่อน
+    let grndata = document.querySelector("#grndata").textContent;
+    let ids = document.querySelector("#ids").textContent;
+    
     return $.post("./module/mv_bc_tag.php", { "tag_id": barcodeValue, "load": "check" }, function (data) {
         if (data == 'true' && reprint !== '1') {
             alert('Tag id ซํ้า');
@@ -19,8 +22,9 @@
         mywindow.document.write('</body></html>');
         mywindow.document.close(); // necessary for IE >= 10
         mywindow.focus(); // necessary for IE >= 10*/
-        $.post("./module/tag_coil_save.php", { "grndata": { grndata }, "ids": { ids } }, function (data) {
-
+        $.post("./module/tag_coil_save.php", { "grndata": grndata , "ids": ids }, function (data) {
+             console.log(grndata, ids, data);
+             
                 $('#printpopup').dialog('close');
                 if (data == "1") {
                     popup(data);
@@ -38,7 +42,7 @@
         }
     }, 'html').fail(function () {
         alert("พิมพ์ Tag Barcode ไม่สําเร็จ");
-    });
+    })
   }
 //-->
 </script>
