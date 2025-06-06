@@ -13,23 +13,22 @@ $cSql = new SqlSrv();
 $jobm = explode("+", $jobno);
 // $jobno uppercase
 
-$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark       , convert(varchar ,
-ISNULL( (CASE 
-WHEN jr.run_basis_lbr  = 'P' and jrs.run_lbr_hrs <> 0
-THEN  jrs.pcs_per_lbr_hr
-ELSE jrs.run_lbr_hrs
-   END) / 60 , 0) 
-* isnull(case when substring(MV_Job.item,22,1) = 'F' then
- (cast(MV_Job.Uf_length_FT as decimal(8,2)) * 0.3048)
- else
- cast(MV_Job.Uf_length_FT as decimal(8,2))
- end , 0)
-) 
-as operationSpeed
+$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark       
+ , operationSpeed = case when mv_job.wc like '%FM01' then fs.FM1
+                      when mv_job.wc like '%FM02' then fs.FM2
+       when mv_job.wc like '%FM04' then fs.FM4
+       when mv_job.wc like '%FM05' then fs.FM5
+       when mv_job.wc like '%FM06' then fs.FM6
+       when mv_job.wc like '%FM07' then fs.FM7
+       when mv_job.wc like '%FM08' then fs.FM8
+       when mv_job.wc like '%FM09' then fs.FM9
+       when mv_job.wc like '%FM10' then fs.FM10
+       when mv_job.wc like '%FM11' then fs.FM11
+       when mv_job.wc like '%C%' then fs.FMC
+      else 0 end
  from MV_Job 
  LEFT JOIN job_mst ON MV_Job.job = job_mst.job 
- LEFT JOIN jobroute_mst jr on job_mst.job = jr.job and jr.wc like '%FM%'
- LEFT JOIN jrt_sch_mst jrs on jrs.job = jr.job and jrs.oper_num = jr.oper_num
+ left join STS_forming_speed fs on mv_job.item like '%'+fs.item+'%'
  where ltrim(MV_Job.job) = '" . $jobm[0] . "' and MV_Job.suffix = '" . $jobm[1] . "' and MV_Job.oper_num = '" . $jobm[2] . "';";
 
 $rs = $cSql->SqlQuery($conn, $sql);
