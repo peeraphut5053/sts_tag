@@ -64,6 +64,7 @@ if (isset($rs[1]["qty_issued"]))
     $qty_issued = total_format($rs[1]["qty_issued"]);
 $qty_issued = 0;
 $temp->setReplace("{qty_issued}", "" . $qty_issued . "");
+$temp->setReplace("{uf_pack}", "" . $rs[1]["Uf_pack"] . "");
 $temp->setReplace("{matl_um}", "" . $rs[1]["matl_um"] . "");
 //echo substr($rs[1]["item"],0,3);
 $item_c = substr($rs[1]["item"], 0, 3);
