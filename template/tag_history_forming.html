@@ -149,6 +149,10 @@
             $.post("./module/tag_check.php", {"tag_id": id, "inspector": 10218}, function (data) {
              window.location.reload();
             })
+          } else if (Pass == 10227) {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 10227}, function (data) {
+             window.location.reload();
+            })
           } else {
             $('#Pass').attr('placeholder', 'Password ไม่ถูกต้อง');
             $("#Pass").val('');
