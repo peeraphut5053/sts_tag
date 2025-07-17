@@ -68,6 +68,7 @@ if (isset($_POST["coil_ids"])) {
 
 	$s_tag = count($_POST["tag_ids"]);
 	$id_a = array();
+	$tag = [];
 	for ($t=0; $t<$s_tag; $t++) {
 		$temp->setReplace("{printlist}", $temp->getTemplate("../template/tag_coil_block.html"));	
 		
@@ -98,10 +99,11 @@ if (isset($_POST["coil_ids"])) {
 		$temp->setReplace("{lot}", "".$rs[1]["lot"]."");
 		$temp->setReplace("{item}", "".$rs[1]["item"]."");
 		$temp->setReplace("{po_num}", "".$rs[1]["po_num"]."");
+		array_push( $tag, $_POST["tag_ids"][$t]);
 	}	
-	
-	$temp->setReplace("{grndata}", "" . implode("!!", $_POST["tag_ids"]) . "");
+	$temp->setReplace("{grndata}", "" . implode("??", $tag) . "");
     $temp->setReplace("{ids}", "" . implode("!!", $ids) . "");
+	
 }
 $temp->setReplace("{printlist}", "");
 echo $temp->getReplace();

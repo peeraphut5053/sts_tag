@@ -5,8 +5,11 @@
     let barcodeValue = spanElement.textContent.replace(/\*/g, ""); // เอา * ออก
     let reprint = document.querySelector("#reprint").value;
     // ใช้ return เพื่อรอให้การเรียก AJAX แรกเสร็จก่อน
-    let grndata = document.querySelector("#grndata").textContent;
+    let grndata = document.querySelector("#grndata").textContent.split("??");
     let ids = document.querySelector("#ids").textContent;
+
+
+    
     
     return $.post("./module/mv_bc_tag.php", { "tag_id": barcodeValue, "load": "check" }, function (data) {
         if (data == 'true' && reprint !== '1') {
