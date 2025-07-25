@@ -148,10 +148,18 @@
             var job = $('#job_no').val(); // FM24110002+0+10 split('+')[0];
             var jobno = job.split('+')[0];
     
-			$.post("./module/mv_bc_tag.php", {"id_tag": id_tag, "load": "old_lot", "jobno": jobno}, function(data) {				
+			$.post("./module/mv_bc_tag.php", {"id_tag": id_tag, "load": "old_lot", "jobno": jobno}, function(data) {
+                const res = JSON.parse(data);
+                
+                if (res.tag_status == 'Reject') {
+                    window.alert('Tag ID: ' + res.id + ' มีสถานะเป็น ' + res.tag_status + ' กรุณาติดต่อ QC ');
+                    $("#id_tag").focus();
+                    $("#id_tag").val('');
+                    return false;
+                }
+        
 				if (data) {
                     $("#notfound").hide();
-					const res = JSON.parse(data);
                     $("#tag_status").val(res.tag_status);
                     $("#old_lot").val(res.lot);
                     $("#detail").val(res.detail);

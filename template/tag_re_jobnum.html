@@ -195,7 +195,14 @@
                         "tag_ids": tag_ids
                     },
                     success: function (data) {
-                        console.log(data);
+
+                        if (data == 2) {
+                            alert("Tag ID: " + tag_ids + " มีสถานะเป็น " + data + " กรุณาติดต่อ QC ");
+                            $("#tagid").focus();
+                            $("#tagid").val('');
+                            return false;
+                        }
+
                         if (data == 0 && sts_no == "") {
                             alert("กรุณากรอกเลข Heat No");
                             $("#sts_no").focus();

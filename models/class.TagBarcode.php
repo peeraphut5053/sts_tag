@@ -202,8 +202,14 @@ class TagBarcode extends sqlConn {
 
     function check_sts_no($tag_ids) {
         $cSql = new SqlSrv();
-        $sql = "select TOP 1 sts_no from Mv_Bc_tag where id = '" . $tag_ids . "' order by id desc;";
+        $sql = "select TOP 1 * from Mv_Bc_tag where id = '" . $tag_ids . "' order by id desc;";
         $rs = $cSql->SqlQuery($this->conn, $sql);
+      
+        if ($rs[1]["tag_status"] == "Reject") {
+            $tag_ids = "2";
+            return $tag_ids;
+        } 
+
         if (isset($rs[1]["sts_no"])) {
             $tag_ids = "1";
         } else {

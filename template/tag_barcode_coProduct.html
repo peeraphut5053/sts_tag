@@ -140,62 +140,6 @@
         $('#uf_act_Weight').val(uf_act_Weight);
     }
 
-    function ValidateJob(e) {
-		//alert('xx');
-        if ($('#id_tag').val() == '') {
-            return false;
-        }
-
-        var sts = $('#sts_no').val();
-        var sts2 = $('#sts_no2').val();
-        var sts3 = $('#sts_no3').val();
-		var keycode;
-		if (window.event) keycode = window.event.keyCode; //  IE
-		else if (e) keycode = e.which; //  Firefox 		
-		if (keycode == 13) {
-			var id_tag = $('#id_tag').val();
-            var job = $('#job_no').val(); // FM24110002+0+10 split('+')[0];
-            var jobno = job.split('+')[0];
-			$.post("./module/mv_bc_tag.php", {"id_tag": id_tag, "load": "old_lot", "jobno": jobno}, function(data) {				
-				if (data) {
-                    $("#notfound").hide();
-					const res = JSON.parse(data);
-                    $("#tag_status").val(res.tag_status);
-                    $("#old_lot").val(res.lot);
-                    $("#detail").val(res.detail);
-
-                    if (!sts) {
-                        $("#sts_no").val(res.sts_no);
-                    } 
-
-                    /*if (!sts2) {
-                        $("#sts_no2").val(40000);
-                    }
-
-                    if (!sts3) {
-                        $("#sts_no3").val(40000);
-                    }*/
-                   
-                    $("#issue").val(res.issue);
-                    $("#minor").val(res.Minor_cause);
-                    $("#main").val(res.Main_cause);
-
-				} 
-            }, 'html').fail(function() {
-                $("#notfound").show();
-                $("#id_tag").select();
-                $("#tag_status").val("");
-                $("#old_lot").val("")
-                $("#detail").val("")
-                $("#issue").val("")
-                $("#minor").val("")
-                $("#main").val("")
-
-            });
-			return false;
-		}	
-	}
-
 
 </script>
 <script src="js/main.js"></script>
@@ -367,4 +311,68 @@
     $("#perpack").keyup(function () {
         calSTDWeight();
     });
+
+    function ValidateJob(e) {
+		//alert('xx');
+        if ($('#id_tag').val() == '') {
+            return false;
+        }
+
+        var sts = $('#sts_no').val();
+        var sts2 = $('#sts_no2').val();
+        var sts3 = $('#sts_no3').val();
+		var keycode;
+		if (window.event) keycode = window.event.keyCode; //  IE
+		else if (e) keycode = e.which; //  Firefox 		
+		if (keycode == 13) {
+			var id_tag = $('#id_tag').val();
+            var job = $('#job_no').val(); // FM24110002+0+10 split('+')[0];
+            var jobno = job.split('+')[0];
+			$.post("./module/mv_bc_tag.php", {"id_tag": id_tag, "load": "old_lot", "jobno": jobno}, function(data) {	
+                const res = JSON.parse(data);
+                
+                if (res.tag_status == 'Reject') {
+                    window.alert('Tag ID: ' + res.id + ' มีสถานะเป็น ' + res.tag_status + ' กรุณาติดต่อ QC ');
+                    $("#id_tag").focus();
+                    $("#id_tag").val('');
+                    return false;
+                }			
+				if (data) {
+                    $("#notfound").hide();
+				
+                    $("#tag_status").val(res.tag_status);
+                    $("#old_lot").val(res.lot);
+                    $("#detail").val(res.detail);
+
+                    if (!sts) {
+                        $("#sts_no").val(res.sts_no);
+                    } 
+
+                    /*if (!sts2) {
+                        $("#sts_no2").val(40000);
+                    }
+
+                    if (!sts3) {
+                        $("#sts_no3").val(40000);
+                    }*/
+                   
+                    $("#issue").val(res.issue);
+                    $("#minor").val(res.Minor_cause);
+                    $("#main").val(res.Main_cause);
+
+				} 
+            }, 'html').fail(function() {
+                $("#notfound").show();
+                $("#id_tag").select();
+                $("#tag_status").val("");
+                $("#old_lot").val("")
+                $("#detail").val("")
+                $("#issue").val("")
+                $("#minor").val("")
+                $("#main").val("")
+
+            });
+			return false;
+		}	
+	}
 </script>
