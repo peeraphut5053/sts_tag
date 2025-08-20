@@ -24,6 +24,12 @@
             return false;
         }
 
+        if ($("#uf_p_weight").val() == '') {
+            alert('กรุณาระบุน้ำหนักชั่งจริง/เส้น');
+            $('#uf_p_weight').focus();
+            return false;
+        }
+
         if ($("#qty_sts_no").val() > 0 && $("#sts_no").val() == "") {
             alert("กรุณากรอกเลข H/N");
         } else if ($("#qty_sts_no2").val() <= 0 && $("#sts_no2").val() != "") {
@@ -234,7 +240,7 @@
                                     <span class="red" id="notfound" style="display:none;">material ไม่ตรงกับ job</span>
                                     </td>
                                     <td align="right"><strong>น้ำหนักชั่งจริง/เส้น</strong>: </td>
-                                    <td><input name="uf_p_weight" type="text" id="uf_p_weight" size="18" onkeyup="WeightCalUf_p_weight()" class="default" value="{unit_weight1}" autofocus onKeyup="WeightCal();"/> KG. </td>
+                                    <td><input name="uf_p_weight" type="text" id="uf_p_weight" size="18" onkeyup="WeightCalUf_p_weight()" class="default" value="" autofocus onKeyup="WeightCal();"/> KG. </td>
                                 </tr>
                             </table>
                         </div>
