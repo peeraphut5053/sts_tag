@@ -16,8 +16,9 @@ if (isset($_POST["tag_ids"])) {
 	for ($t=0; $t<$s_tag; $t++) {
 		$temp->setReplace("{printlist}", $temp->getTemplate("../template/tag_slit_block.html"));	
 		$id = $_POST["tag_ids"][$t];
-		$sql = "select *, CONVERT(VARCHAR(16), print_date, 120)  AS print_date , itemgrade = item_mst.uf_grade
+		$sql = "select *, CONVERT(VARCHAR(16), print_date, 120)  AS print_date , itemgrade = item_mst.uf_grade, po.c_no
 from Mv_Bc_tag inner join item_mst on mv_bc_tag.item = item_mst.item
+left join STS_po_qc po on po.sno = mv_bc_tag.sts_no
 where id = '".$id."';";
 		$rs = $cSql->SqlQuery($conn, $sql);
 		$item = $rs[1]["item"];
@@ -46,6 +47,7 @@ where id = '".$id."';";
 		// $numtab = $rs[1]["uf_pack"]."/".$rs2[1]["Uf_qty_slit"];
 		$temp->setReplace("{numtab}", "".$numtab."");		
 		$temp->setReplace("{sts_no}", "".$rs[1]["sts_no"]."");		
+		$temp->setReplace("{c_no}", "".$rs[1]["c_no"]."");
 	}
 } else {
 	$temp->setReplace("{printlist}", $temp->getTemplate("../template/tag_slit_block.html"));
@@ -107,11 +109,14 @@ where id = '".$id."';";
 	else $temp->setReplace("{uf_spec}", "");
 	
 	$sql2 = "select Uf_qty_slit from job_mst where job = '".$jobm[0]."' AND suffix = '".$jobm[1]."';";
-	$rs2 = $cSql->SqlQuery($conn, $sql2);	
+	$cno = "select c_no from  STS_po_qc where sno = '".$sts_no."'";
+	$rs2 = $cSql->SqlQuery($conn, $sql2);
+	$rs3 = $cSql->SqlQuery($conn, $cno);
 	$uf_pack = (int) substr($lot, 1, -1);
 	$numtab = $uf_pack."/".$rs2[1]["Uf_qty_slit"];
 	$temp->setReplace("{numtab}", "".$numtab."");
 	$temp->setReplace("{sts_no}", "".$sts_no."");
+	$temp->setReplace("{c_no}", "".$rs3[1]["c_no"]."");
 	setcookie("sts_no",$sts_no, time() + (86400 * 30), "/");
 	//echo $_COOKIE["sts_no"]."xxx";
 }
