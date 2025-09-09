@@ -142,7 +142,6 @@
       buttons: {
         confirm: function checked() {
           var Pass = $("#Pass").val();
-          
     
           if (Pass == 5404) {
             $.post("./module/tag_check.php", {"tag_id": id, "inspector": 5404}, function (data) {
@@ -210,6 +209,14 @@
             })
           } else if (Pass == 10227) {
             $.post("./module/tag_check.php", {"tag_id": id, "inspector": 10227}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == '010234') {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": '010234'}, function (data) {
+             window.location.reload();
+            })
+          } else if (Pass == '010235') {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": '010235'}, function (data) {
              window.location.reload();
             })
           } else {
@@ -425,7 +432,7 @@ function saveOperation() {
                 </tr>
             </table>
         </td>
-    </tr>
+    </tr>ms-appid:undefined
     <tr>
         <td align="center" >
             <input name="print_a" type="button" id="print_a" value="พิมพ์ A" class="ui-button ui-widget ui-corner-all" onClick="LinkTagA();">
