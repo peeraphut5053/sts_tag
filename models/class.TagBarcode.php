@@ -204,7 +204,9 @@ class TagBarcode extends sqlConn {
         $cSql = new SqlSrv();
         $sql = "select TOP 1 * from Mv_Bc_tag where id = '" . $tag_ids . "' order by id desc;";
         $rs = $cSql->SqlQuery($this->conn, $sql);
-      
+        $query = "select * from rsvd_inv_mst where lot = '" . $rs[1]["lot"] . "'";
+        $rs2 = $cSql->SqlQuery($this->conn, $query);
+
         if ($rs[1]["tag_status"] == "Reject") {
             $tag_ids = "2";
             return $tag_ids;
@@ -215,6 +217,12 @@ class TagBarcode extends sqlConn {
         } else {
             $tag_ids = "0";
         }
+
+        if (isset($rs2[1]["qty_rsvd"]) > 0) {
+            $tag_ids = "3";
+            return $tag_ids;
+        }
+
         return $tag_ids;
     }
 

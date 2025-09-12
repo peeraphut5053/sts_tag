@@ -203,6 +203,11 @@
                             return false;
                         }
 
+                        if (data == 3) {
+                            alert("Tag ID: " + tag_ids + " ถูกจองไปแล้ว");
+                            return false;
+                        }
+
                         if (data == 0 && sts_no == "") {
                             alert("กรุณากรอกเลข Heat No");
                             $("#sts_no").focus();
