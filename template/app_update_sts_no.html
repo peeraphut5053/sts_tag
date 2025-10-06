@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -20,7 +25,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div class='col-xs-offset-1'>
+        
+        <div class='col-xs-offset-1 hide'>
 
             <div class="row">
                 <div class="col-xs-11 col-xs-offset-1">
@@ -152,7 +158,34 @@ and open the template in the editor.
             </div>
         </div>
         <script>
-
+             
+             $(document).ready(function () {
+            pageHtml = "app_update_sts_no";
+        if (pageHtml == "app_update_sts_no"){
+            $.confirm({
+                title: 'กรุณาใส่ Password',
+                theme: 'modern',
+                content: '<input placeholder="" type="password" id="Pass" class="form-control" name="Pass" value="" autofocus>',
+                buttons: {
+                    confirm: function checked() {
+                        var Pass = $("#Pass").val();
+                        // console.log('P ',Pass);
+                        if (Pass == 'lord1'){
+                            $(".hide").removeClass("hide");
+                            window.close();
+                        }else{
+                            $('#Pass').attr('placeholder','Password ไม่ถูกต้อง');
+                            $("#Pass").val('');
+                            return false;
+                        }
+                    }, 
+                    cencel: function close() {
+                       window.location.href = "/sts_tag";
+                    }
+                }
+            });
+        }
+    });
 
 
 
