@@ -49,13 +49,21 @@
 	}
         
         function LotBarcode() {
+            let link = window.location.search.split('&')[1];
             let url = "";
             if (window.location.host == '172.18.1.194') {
             url = '172.18.1.194'
             } else {
                 url = '61.90.156.165'
             }
-            window.open(`http://${url}/sts_tag/?slit_list`, '_blank');
+
+            if (link == 'tag=slit') {
+               window.open(`http://${url}/sts_tag/?slit_list`, '_blank');
+            } else if (link == 'tag=coil') {
+                window.open(`http://${url}/sts_tag/?coil_list`, '_blank');
+            } else if (link == 'tag=fg') {
+                window.open(`http://${url}/sts_tag/?print_tag_fg`, '_blank');
+            }
 	}
 
 	function SplitQty() {
