@@ -1,12 +1,13 @@
-<link rel = "stylesheet" type = "text/css" href = "css/bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <style>
-    td{
+    td {
         padding: 2px;
     }
+
     .box_card {
         border: 1px solid crimson;
-        
-      
+
+
     }
 </style>
 <script>
@@ -48,7 +49,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load('./module/tag_print2.php?c=usa&' + $('#formB').serialize());
+                .load('./module/tag_print2.php?c=usa&' + $('#formB').serialize());
         }
         return false;
     }
@@ -86,7 +87,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load('./module/tag_print2.php?c=thai&' + $('#formB').serialize());
+                .load('./module/tag_print2.php?c=thai&' + $('#formB').serialize());
         }
         return false;
     }
@@ -97,7 +98,7 @@
         var actWeight = $('#uf_act_Weight').val();
         var sts_no = $("#sts_no").val();
 
-        
+
         if ($("#qty_sts_no").val() > 0 && $("#sts_no").val() == "") {
             alert("กรุณากรอกเลข H/N");
         } else if ($("#qty_sts_no2").val() <= 0 && $("#sts_no2").val() != "") {
@@ -122,7 +123,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load('./module/tag_print2.php?c=aus&cert=sts&' + $('#formB').serialize());
+                .load('./module/tag_print2.php?c=aus&cert=sts&' + $('#formB').serialize());
         }
         return false;
     }
@@ -155,7 +156,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load('./module/tag_print2.php?c=aus&cert=win&' + $('#formB').serialize());
+                .load('./module/tag_print2.php?c=aus&cert=win&' + $('#formB').serialize());
         }
         return false;
     }
@@ -168,8 +169,8 @@
     function ChkActWeight() {
         var act_Weight = $('#uf_act_Weight').val();
         var pp = $('#perpack').val();
-                var t_w = {tw};
-                var uw = {unit_weight};
+        var t_w = { tw };
+        var uw = { unit_weight };
         var uuw;
         var utw;
         var chk_t;
@@ -194,35 +195,47 @@
 <script src="js/main.js"></script>
 
 <form name="formB" method="post" action="" id="formB">
-    <table width="100%" border="0" cellpadding="0" cellspacing="0" background="./image/pipe.jpg" style="background-repeat:no-repeat; background-position:left;">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" background="./image/pipe.jpg"
+        style="background-repeat:no-repeat; background-position:left;">
         <tr>
-            <td height="10"><fieldset class="fieldstyle">
+            <td height="10">
+                <fieldset class="fieldstyle">
                     <table width="100%" border="0" cellspacing="0" class="font14">
                         <tr>
                             <td align="right">Job Order: </td>
-                            <td colspan="3" >
-                                <input style="width:35%" name="job_no" type="text" id="job_no" size="20" class="default_view" readonly value="{job_no}">
-                                <input style="width:45%" name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000"></td>
+                            <td colspan="3">
+                                <input style="width:35%" name="job_no" type="text" id="job_no" size="20"
+                                    class="default_view" readonly value="{job_no}">
+                                <input style="width:45%" name="sp" type="text" id="sp" size="7" class="default_view"
+                                    readonly value="0000">
+                            </td>
                         </tr>
                         <tr hidden="hidden">
                             <td align="right">CO Type: </td>
-                            <td colspan="3" >
-                                <input name="co_type" type="text" id="co_type" size="20" class="default_view" readonly value="{co_type}">
+                            <td colspan="3">
+                                <input name="co_type" type="text" id="co_type" size="20" class="default_view" readonly
+                                    value="{co_type}">
                             </td>
                         </tr>
                         <tr>
                             <td align="right">Item:</td>
-                            <td colspan="3" >
-                                <input style="width:35%" name="item" type="text" id="item" class="default_view" readonly value="{item}">
-                                <input style="width:45%" name="item_desc" type="text" id="item_desc" size="62" class="default_view" readonly value={item_desc}>
+                            <td colspan="3">
+                                <input style="width:35%" name="item" type="text" id="item" class="default_view" readonly
+                                    value="{item}">
+                                <input style="width:45%" name="item_desc" type="text" id="item_desc" size="62"
+                                    class="default_view" readonly value={item_desc}>
                             </td>
                         </tr>
                         <tr>
                             <td align="right">Operation:</td>
-                            <td colspan="3" ><input name="oper_num" type="text" id="oper_num" size="8" class="default_view" readonly value="{oper_num}">
+                            <td colspan="3"><input name="oper_num" type="text" id="oper_num" size="8"
+                                    class="default_view" readonly value="{oper_num}">
                                 &nbsp;&nbsp;WC:
-                                <input name="wc" type="text" id="wc" size="8" class="default_view" readonly value="{wc}">
-                                <input name="description" type="text" id="description" size="30" class="default_view" readonly value="{description}"></td>
+                                <input name="wc" type="text" id="wc" size="8" class="default_view" readonly
+                                    value="{wc}">
+                                <input name="description" type="text" id="description" size="30" class="default_view"
+                                    readonly value="{description}">
+                            </td>
                         </tr>
                         <tr>
                             <td height="10" colspan="2" align="right"></td>
@@ -230,101 +243,129 @@
 
                         <tr>
                             <td align="right">ยอดสั่งผลิต:</td>
-                            <td width="15%" height="26" scope="col"><input name="qty_released" type="text" id="qty_released" value="{qty_released}" size="8" class="default_view" readonly="readonly" />
+                            <td width="15%" height="26" scope="col"><input name="qty_released" type="text"
+                                    id="qty_released" value="{qty_released}" size="8" class="default_view"
+                                    readonly="readonly" />
                                 เส้น</td>
-                            <td width="15%" height="26" scope="col"><input name="weight_released" type="text" id="weight_released" value="{weight_released}" size="8" class="default_view" readonly="readonly" />
+                            <td width="15%" height="26" scope="col"><input name="weight_released" type="text"
+                                    id="weight_released" value="{weight_released}" size="8" class="default_view"
+                                    readonly="readonly" />
                                 KG.</td>
-                            <td width="40%" scope="col"><input name="pack_released" type="text" id="pack_released" value="{pack_released}" size="8" class="default_view" readonly="readonly"/>
+                            <td width="40%" scope="col"><input name="pack_released" type="text" id="pack_released"
+                                    value="{pack_released}" size="8" class="default_view" readonly="readonly" />
                                 มัด </td>
                         </tr>
                         <tr>
                             <td align="right">ยอดรายงานผล Grade {static_grade}:</td>
-                            <td scope="col"><input name="Uf_Grade" type="text" id="Uf_Grade" value="{Uf_Grade}" size="8" class="default_view" readonly="readonly"/>
+                            <td scope="col"><input name="Uf_Grade" type="text" id="Uf_Grade" value="{Uf_Grade}" size="8"
+                                    class="default_view" readonly="readonly" />
                                 เส้น</td>
-                            <td scope="col"><input name="Uf_WGgrade" type="text" id="Uf_WGgrade" value="{Uf_WGgrade}" size="8" class="default_view" readonly="readonly"/>
+                            <td scope="col"><input name="Uf_WGgrade" type="text" id="Uf_WGgrade" value="{Uf_WGgrade}"
+                                    size="8" class="default_view" readonly="readonly" />
                                 KG.</td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td align="right">ยอดพิมพ์ Barcode Grade {static_grade}:<br /></td>
                             <td scope="col"><span class="font16">
-                                    <input name="qty_line2" type="text" id="qty_line2" value="{qty_line}" size="8" class="default_view" readonly="readonly"/>
+                                    <input name="qty_line2" type="text" id="qty_line2" value="{qty_line}" size="8"
+                                        class="default_view" readonly="readonly" />
                                     เส้น</span></td>
-                            <td width="12%" class="font14"><input name="uf_act_Weight1" type="text" id="uf_act_Weight1" value="{uf_act_Weight1}" size="8" class="default_view" readonly="readonly"/>
+                            <td width="12%" class="font14"><input name="uf_act_Weight1" type="text" id="uf_act_Weight1"
+                                    value="{uf_act_Weight1}" size="8" class="default_view" readonly="readonly" />
                                 KG.</td>
                             <td><span class="font14">
-                                    <input name="pack_no" type="text" id="pack_no" value="{pack_no}" size="8" class="default_view" readonly="readonly" />
+                                    <input name="pack_no" type="text" id="pack_no" value="{pack_no}" size="8"
+                                        class="default_view" readonly="readonly" />
                                     มัด </span></td>
                         </tr>
                         <tr>
                             <td align="right">วันที่พิมพ์:</td>
-                            <td colspan="3"><input type="text" id="pdate" name="pdate" class="default" style="width:100px;" value="{pdate}" readonly="readonly"></td>
+                            <td colspan="3"><input type="text" id="pdate" name="pdate" class="default"
+                                    style="width:100px;" value="{pdate}" readonly="readonly"></td>
                         </tr>
                     </table>
 
                     <div class="row">
-                        <div hidden  class="col-sm-4">
+                        <div hidden class="col-sm-4">
                             <table>
                                 <tr>
                                     <td align="right"><strong>มัดที่ผลิตจากเครื่องท่อ</strong>:</td>
-                                    <td><input name="pipeno_1" type="text" class="default" id="pipeno_1" size="15" /></td>
+                                    <td><input name="pipeno_1" type="text" class="default" id="pipeno_1" size="15" />
+                                    </td>
                                     <td align="right"><strong>จำนวน</strong>:</td>
-                                    <td><input name="pipeqty_1" type="text" class="default" id="pipeqty_1" size="15" /> เส้น</td>
+                                    <td><input name="pipeqty_1" type="text" class="default" id="pipeqty_1" size="15" />
+                                        เส้น</td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>มัดที่ผลิตจากเครื่องท่อ</strong>:</td>
-                                    <td><input name="pipeno_2" type="text" class="default" id="pipeno_2" size="15" /></td>
+                                    <td><input name="pipeno_2" type="text" class="default" id="pipeno_2" size="15" />
+                                    </td>
                                     <td align="right"><strong>จำนวน</strong>:</td>
-                                    <td><input name="pipeqty_2" type="text" class="default" id="pipeqty_2" size="15" /> เส้น</td>
+                                    <td><input name="pipeqty_2" type="text" class="default" id="pipeqty_2" size="15" />
+                                        เส้น</td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>มัดที่ผลิตจากเครื่องท่อ</strong>:</td>
-                                    <td><input name="pipeno_3" type="text" class="default" id="pipeno_3" size="15" /></td>
+                                    <td><input name="pipeno_3" type="text" class="default" id="pipeno_3" size="15" />
+                                    </td>
                                     <td align="right"><strong>จำนวน</strong>:</td>
-                                    <td><input name="pipeqty_3" type="text" class="default" id="pipeqty_3" size="15" /> เส้น</td>
+                                    <td><input name="pipeqty_3" type="text" class="default" id="pipeqty_3" size="15" />
+                                        เส้น</td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>มัดที่ผลิตจากเครื่องท่อ</strong>:</td>
-                                    <td><input name="pipeno_4" type="text" class="default" id="pipeno_4" size="15" /></td>
+                                    <td><input name="pipeno_4" type="text" class="default" id="pipeno_4" size="15" />
+                                    </td>
                                     <td align="right"><strong>จำนวน</strong>:</td>
-                                    <td><input name="pipeqty_4" type="text" class="default" id="pipeqty_4" size="15" /> เส้น</td>
+                                    <td><input name="pipeqty_4" type="text" class="default" id="pipeqty_4" size="15" />
+                                        เส้น</td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-sm-2">
-                            
+
                         </div>
                         <div class=" col-sm-4">
                             <table border="0" cellpadding="0" cellspacing="10" class="font14" align="center">
                                 <tr>
                                     <td align="right">
-                                        <strong>Lot</strong>:</td>
+                                        <strong>Lot</strong>:
+                                    </td>
                                     <td>
-                                        <input name="lot" type="text" class="default" id="lot" size="15" value="{lot}" style="background: #f2fff9;"/>
+                                        <input name="lot" type="text" class="default" id="lot" size="15" value="{lot}"
+                                            style="background: #f2fff9;" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>ต้องการพิมพ์</strong>: </td>
-                                    <td><input name="qty1" type="text" id="qty1" size="15" class="default" value="{qty1}" style="background: #f2fff9;"/> เส้น</td>
+                                    <td><input name="qty1" type="text" id="qty1" size="15" class="default"
+                                            value="{qty1}" style="background: #f2fff9;" /> เส้น</td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>เส้น / มัด</strong>: </td>
-                                    <td><input name="perpack" type="text" id="perpack" size="15" class="default" value="{Uf_pack}" style="background: #f2fff9;"/></td>
+                                    <td><input name="perpack" type="text" id="perpack" size="15" class="default"
+                                            value="{Uf_pack}" style="background: #f2fff9;" /></td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>น้ำหนักชั่งจริง / มัด</strong>:
                                     </td>
                                     <td>
-                                        <input onclick="$('#uf_act_Weight').val('')" name="uf_act_Weight" type="text" id="uf_act_Weight" size="15" class="default" value="{stdpack_weight}"  {event_ch}autofocus/>
-                                        KG.</td>
+                                        <input onclick="$('#uf_act_Weight').val('')" name="uf_act_Weight" type="text"
+                                            id="uf_act_Weight" size="15" class="default" value="{stdpack_weight}"
+                                            {event_ch}autofocus />
+                                        KG.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         น้ำหนักมาตรฐาน / มัด
                                     </td>
                                     <td>
-                                        <input readonly="readonly" name="unit_weight_b" type="text" id="unit_weight_b" value="" size="15" class="default" > 
-                                        <input hidden name="unit_weight" type="text" id="unit_weight" value="{unit_weight}" size="15" class="default" > 
+                                        <input readonly="readonly" name="unit_weight_b" type="text" id="unit_weight_b"
+                                            value="" size="15" class="default">
+                                        <input hidden name="unit_weight" type="text" id="unit_weight"
+                                            value="{unit_weight}" size="15" class="default">
                                         KG.
                                     </td>
                                 </tr>
@@ -335,25 +376,33 @@
                             <table>
                                 <tr>
                                     <td align="right"><strong>Tag Id:</strong>: </td>
-                                    <td><input value="" name="tag_id" type="text" id="tag_id" class="default " onKeyup="ScanTagId();" />  <span class="red" id="notfound" style="display:none;">material ไม่ตรงกับ job</span></td>
+                                    <td><input value="" name="tag_id" type="text" id="tag_id" class="default "
+                                            onKeyup="ScanTagId();" /> <span class="red" id="notfound"
+                                            style="display:none;">material ไม่ตรงกับ job</span></td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>H/N(1)</strong>: </td>
-                                    <td><input value="" name="sts_no" type="text" id="sts_no" maxlength="6" size="15" class="default_view" readonly /></td>
+                                    <td><input value="" name="sts_no" type="text" id="sts_no" maxlength="6" size="15"
+                                            class="default_view" readonly /></td>
                                     <td align="right"><strong>Qty1</strong>: </td>
-                                    <td><input value="{Uf_pack}" onkeyup="calQtyStsNo();" name="qty_sts_no" type="text" id="qty_sts_no" maxlength="30" size="15" class="default qty_sts_no" /></td>
+                                    <td><input value="{Uf_pack}" onkeyup="calQtyStsNo();" name="qty_sts_no" type="text"
+                                            id="qty_sts_no" maxlength="30" size="15" class="default qty_sts_no" /></td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>H/N(2)</strong>: </td>
-                                    <td><input value="" name="sts_no2" type="text" id="sts_no2" maxlength="6" size="15" class="default_view" readonly /></td>
+                                    <td><input value="" name="sts_no2" type="text" id="sts_no2" maxlength="6" size="15"
+                                            class="default_view" readonly /></td>
                                     <td align="right"><strong>Qty2</strong>: </td>
-                                    <td><input value="0" onkeyup="calQtyStsNo2();" name="qty_sts_no2" type="text" id="qty_sts_no2" maxlength="30" size="15" class="default qty_sts_no" /></td>
+                                    <td><input value="0" onkeyup="calQtyStsNo2();" name="qty_sts_no2" type="text"
+                                            id="qty_sts_no2" maxlength="30" size="15" class="default qty_sts_no" /></td>
                                 </tr>
                                 <tr>
                                     <td align="right"><strong>H/N(3)</strong>: </td>
-                                    <td><input value="" name="sts_no3" type="text" id="sts_no3" maxlength="6" size="15" class="default_view" readonly /></td>
+                                    <td><input value="" name="sts_no3" type="text" id="sts_no3" maxlength="6" size="15"
+                                            class="default_view" readonly /></td>
                                     <td align="right"><strong>Qty3</strong>: </td>
-                                    <td><input value="0" onkeyup="calQtyStsNo3();" name="qty_sts_no3" type="text" id="qty_sts_no3" maxlength="30" size="15" class="default qty_sts_no" /></td>
+                                    <td><input value="0" onkeyup="calQtyStsNo3();" name="qty_sts_no3" type="text"
+                                            id="qty_sts_no3" maxlength="30" size="15" class="default qty_sts_no" /></td>
                                 </tr>
 
 
@@ -362,46 +411,58 @@
                                     <td></td>
                                     <td>รวม</td>
                                     <td>
-                                        <input value="{Uf_pack}" readonly="readonly" type="text" id="qty_sts_sum" maxlength="30" size="15" class="default" />
-                                        <td><input style="display: none;" class="default_view" name="issue" type="text" id="issue" size="10" readonly /></td>
-                                        <td><input style="display: none;" class="default_view" name="minor" type="text" id="minor" size="10" readonly /></td>
-                                        <td><input style="display: none;" class="default_view" name="main" type="text" id="main" size="10" readonly /></td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4"><span id="warning-word"></span></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
-                            <tr>
-                                <td width="31.5%" align="right">Old Lot:</td>
-                            <td width="22%"><input class="default_view" name="old_lot" type="text" id="old_lot" size="15" readonly /></td>
-                            <td width="17%" align="right">Tag Status:</td>
-                            <td><input class="default_view" name="tag_status" type="text" id="tag_status" size="15" readonly /></td>
-                            </tr>
-                            <tr>
-                                <td width="20%" align="right">Detail:</td>
-                                <td><input class="default_view" name="detail" type="text" id="detail" size="40" readonly /></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <br />
-                    <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
-                        <tr>
-                            <td align="center">
-                                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print" onclick="GotoHistory();" value=" กลับไปหน้าประวัติ ">
-                                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print" onclick="PrintTag();" value="Tag USA">
-                                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print" onclick="PrintTagThai();" value="Tag Thai">
-                                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print" onclick="PrintTag1();" value="Tag AUS STS">
-                                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print" onclick="PrintTag2();" value="Tag AUS WN">
-                                <input name="grade" type="hidden" id="grade" value="{static_grade}">
-                                <input name="uf_sts_job" type="hidden" id="uf_sts_job" value="{uf_sts_job}"><input name="pack" type="hidden" id="pack" value="{pack}">
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset></td>
+                                        <input value="{Uf_pack}" readonly="readonly" type="text" id="qty_sts_sum"
+                                            maxlength="30" size="15" class="default" />
+                                    <td><input style="display: none;" class="default_view" name="issue" type="text"
+                                            id="issue" size="10" readonly /></td>
+                                    <td><input style="display: none;" class="default_view" name="minor" type="text"
+                                            id="minor" size="10" readonly /></td>
+                                    <td><input style="display: none;" class="default_view" name="main" type="text"
+                                            id="main" size="10" readonly /></td>
+            </td>
         </tr>
+        <tr>
+            <td colspan="4"><span id="warning-word"></span></td>
+        </tr>
+    </table>
+    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+        <tr>
+            <td width="31.5%" align="right">Old Lot:</td>
+            <td width="22%"><input class="default_view" name="old_lot" type="text" id="old_lot" size="15" readonly />
+            </td>
+            <td width="17%" align="right">Tag Status:</td>
+            <td><input class="default_view" name="tag_status" type="text" id="tag_status" size="15" readonly /></td>
+        </tr>
+        <tr>
+            <td width="20%" align="right">Detail:</td>
+            <td><input class="default_view" name="detail" type="text" id="detail" size="40" readonly /></td>
+        </tr>
+    </table>
+    </div>
+    <br />
+    <table width="100%" border="0" cellspacing="0" cellpadding="5" class="font14">
+        <tr>
+            <td align="center">
+                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print"
+                    onclick="GotoHistory();" value=" กลับไปหน้าประวัติ ">
+                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print"
+                    onclick="PrintTag();" value="Tag USA">
+                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print"
+                    onclick="PrintTagThai();" value="Tag Thai">
+                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print"
+                    onclick="PrintTag1();" value="Tag AUS STS">
+                <input name="print" type="button" class="ui-button ui-widget ui-corner-all" id="print"
+                    onclick="PrintTag2();" value="Tag AUS WN">
+                <input name="grade" type="hidden" id="grade" value="{static_grade}">
+                <input name="uf_sts_job" type="hidden" id="uf_sts_job" value="{uf_sts_job}"><input name="pack"
+                    type="hidden" id="pack" value="{pack}">
+            </td>
+        </tr>
+    </table>
+    </fieldset>
+    </td>
+    </tr>
     </table>
 </form>
 <div id="printpopup"></div>
@@ -414,50 +475,72 @@
     });
 
     function ScanTagId(e) {
-		//alert('xx');
+        //alert('xx');
         if ($('#tag_id').val() == '') {
             return false;
         }
         var sts = $('#sts_no').val();
         var sts2 = $('#sts_no2').val();
         var sts3 = $('#sts_no3').val();
-		var keycode;
-		if (window.event) keycode = window.event.keyCode; //  IE
-		else if (e) keycode = e.which; //  Firefox 		
-		if (keycode == 13) {
-			var tag_id = $('#tag_id').val();
+        var keycode;
+        if (window.event) keycode = window.event.keyCode; //  IE
+        else if (e) keycode = e.which; //  Firefox 		
+        if (keycode == 13) {
+            var tag_id = $('#tag_id').val();
             var job = $('#job_no').val(); // FM24110002+0+10 split('+')[0];
             var jobno = job.split('+')[0];
-			$.post("./module/mv_bc_tag.php", {"id_tag": tag_id, "load": "old_lot", "jobno": jobno}, function(data) {	
+            $.post("./module/mv_bc_tag.php", { "id_tag": tag_id, "load": "old_lot", "jobno": jobno }, function (data) {
                 const res = JSON.parse(data);
-                
+
                 if (res.tag_status == 'Reject') {
                     window.alert('Tag ID: ' + res.id + ' มีสถานะเป็น ' + res.tag_status + ' กรุณาติดต่อ QC ');
                     $("#id_tag").focus();
                     $("#id_tag").val('');
                     return false;
-                }	
+                }
 
-				if (data) {
+                if (data) {
                     $("#notfound").hide();
-					
-                    if (!sts) {
-                        $("#sts_no").val(res.sts_no);
-                    } else if (!sts2) {
-                        $("#sts_no2").val(res.sts_no);
-                    } else if (!sts3) {
-                        $("#sts_no3").val(res.sts_no);
-                    }
 
-                   
-                    $("#tag_status").val(res.tag_status);
-                    $("#old_lot").val(res.lot);
-                    $("#detail").val(res.detail);
-                    $("#issue").val(res.issue);
-                    $("#minor").val(res.Minor_cause);
-                    $("#main").val(res.Main_cause);
-				} 
-            }, 'html').fail(function() {
+                    const currentValues = [
+                        $("#sts_no").val(),
+                        $("#sts_no2").val(),
+                        $("#sts_no3").val()
+                    ];
+
+                    // เช็คว่าค่าใหม่ซ้ำกับที่มีอยู่แล้วหรือไม่
+                    const isDuplicate = currentValues.includes(res.sts_no);
+
+                    if (!isDuplicate) {
+                        if (!sts) {
+                            $("#sts_no").val(res.sts_no);
+                            $("#tag_status").val(res.tag_status);
+                            $("#old_lot").val(res.lot);
+                            $("#detail").val(res.detail);
+                            $("#issue").val(res.issue);
+                            $("#minor").val(res.Minor_cause);
+                            $("#main").val(res.Main_cause);
+                        } else if (!sts2) {
+                            $("#sts_no2").val(res.sts_no);
+                        } else if (!sts3) {
+                            $("#sts_no3").val(res.sts_no);
+                        }
+                    } else {
+                        window.alert('H/N: ' + res.sts_no + ' ซ้ำกับที่มีอยู่แล้ว กรุณาตรวจสอบ');
+                        return false;
+                    }
+                } else {
+                    $("#notfound").show();
+                    $("#tag_id").select();
+                    $("#tag_id").focus();
+                    $("#sts_no").val("");
+                    $("#sts_no2").val("");
+                    $("#sts_no3").val("");
+                    $("#issue").val("")
+                    $("#minor").val("")
+                    $("#main").val("")
+                }
+            }, 'html').fail(function () {
                 $("#notfound").show();
                 $("#tag_id").select();
                 $("#tag_id").focus();
@@ -468,7 +551,7 @@
                 $("#minor").val("")
                 $("#main").val("")
             });
-			return false;
-		}	
-	}
+            return false;
+        }
+    }
 </script>
