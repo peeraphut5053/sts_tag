@@ -32,7 +32,7 @@ $pdate = date("d/m/Y");
 $jobm = explode("+", $jobno);
 
 
-$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark, ji.item as jobitem, item.[description] as jobitem_desc, item.uf_pack as co_uf_pack, item.unit_weight as co_unit_weight
+$sql = "select MV_Job.*,job_mst.ord_num,job_mst.Uf_refno, job_mst.Uf_remark, ji.item as jobitem, item.[description] as jobitem_desc, item.uf_pack as co_uf_pack, item.unit_weight as co_unit_weight, item.u_m as item_u_m
 from MV_Job 
 LEFT JOIN job_mst ON MV_Job.job = job_mst.job 
 left join jobitem_mst ji on ji.job = job_mst.job
@@ -45,7 +45,7 @@ and ji.item = '$item'";
 //         . " where ltrim(MV_Job.job) = '" . $jobm[0] . "' and MV_Job.suffix = '" . $jobm[1] . "' and oper_num = '" . $jobm[2] . "' order by joblot;";
 //print_r($sql);
 $rs = $cSql->SqlQuery($conn, $sql);
-
+$item_u_m = $rs[1]["item_u_m"];
 function CoType($jobno) {
     $jobSubStr = substr($jobno, 0, 2);
     if (
@@ -177,7 +177,7 @@ $temp->setReplace("{uf_act_Weight1}", "" . total_format($uf_act_Weight, 2) . "")
 $temp->setReplace("{pack_no}", "" . total_format($printTagLaw) . "");
 $temp->setReplace("{static_grade}", "" . $grade . "");
 $temp->setReplace("{pdate}", "" . $pdate . "");
-
+$temp->setReplace("{item_u_m}", $item_u_m);
 if ($grade == "A") {
     $temp->setReplace("{event_ch}", 'onBlur="ChkActWeight();" ');
 } else {
