@@ -28,7 +28,7 @@ if ($m_id == "m1") {
 	$menu .= blockmenu("เปลี่ยนเลข HEAT No.", $bgcl[14], "app_update_sts_no");
 	// $menu .= blockmenu("พิมพ์ Tag B", $bgcl[15], "scan_jobOrder_start&linkcmd=tag_history_tag_b");
 	// $menu .= blockmenu("พิมพ์ Tag C", $bgcl[15], "scan_jobOrder_start&linkcmd=tag_history_tag_c");
-	$menu .= blockmenu("พิมพ์ Barcode MiscReceipt", $bgcl[16], "AppGenBarcodeMiscReceipt");
+	$menu .= blockmenu("พิมพ์ Barcode MiscReceipt", $bgcl[16], "print_lot_barcode");
 	// $menu .= blockmenu("Move Qty (เวอร์ชั่นเดิม)", $bgcl[17], "sts_move_qty&linkcmd=movestock");
 	$menu .= blockmenu("Move Qty ", $bgcl[17], "sts_move_qty_new&linkcmd=sts_move_qty_new");
 	$menu .= blockmenu("Reset Tag ID Shipped", $bgcl[17], "reset_tag_id_shiped");

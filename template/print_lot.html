@@ -1,0 +1,59 @@
+<script type="text/javascript">
+
+    function PrintElem() {
+    let lotData = document.querySelector("#lotdata").textContent.split("??");
+   
+    // format lotData[4] yyyy-mm-dd
+    let lotData4 = lotData[4].split("/");
+    lotData[4] = lotData4[2] + "-" + lotData4[1] + "-" + lotData4[0];
+    
+    let ids = document.querySelector("#lotdata").textContent.split("??")[0];
+
+    return $.post("./module/mv_bc_tag.php", { "tag_id": ids, "load": "check" }, function (data) {
+        if (data == 'true') {
+            alert('Tag id ซํ้า');
+            $('#printLotBarcode').dialog("close");
+            return false; // ไม่ทำอะไรต่อ
+        } else {
+            // ดำเนินการต่อเมื่อไม่ซ้ำเท่านั้น
+            var mywindow = window.open('', 'PRINT', '');
+        mywindow.document.write('<html><head><title>' + document.title + '</title>');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(document.getElementById("printTag").innerHTML);
+        mywindow.document.write('</body></html>');
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+        $.post("./module/tag_lot_save.php", { "grndata": lotData }, function (data) {
+    
+                $('#printLotBarcode').dialog('close');
+                if (data == "1") {
+                    popup(lotData[0]);
+                } else if (data == "2") {
+                    popup(data);
+                    return false;
+                } else {
+                    popup(data);
+                }
+                return false;
+            }, 'html');
+        mywindow.print();
+        mywindow.close();
+        }
+    }, 'html').fail(function () {
+        alert("พิมพ์ Tag Barcode ไม่สําเร็จ");
+    })
+  
+}
+</script>
+
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+    <tr>
+        <td style="text-align: center !important" align="center">
+            <input name="print_a" type="button" id="print_a" value=" พิมพ์ Tag Barcode " class="ui-button ui-widget ui-corner-all" onClick="PrintElem();">
+        </td>
+    </tr>
+</table>
+<hr>
+<div id="printTag">
+    {printlist}
+</div>

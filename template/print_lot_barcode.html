@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    function checkLotExist() {
+        var lot = $('#tag_id_lot').val().trim();
+        var sts_no = $('#sts_no_lot').val();
+
+        if (lot == "") {
+            alert("กรุณากรอก Lot");
+            return;
+        }
+
+        if (sts_no == "") {
+            alert("กรุณากรอก STS No");
+            return;
+        }
+
+        $.ajax({
+                url: `./module/mv_bc_tag.php?load=check_lot&lot=${lot}`,
+                dataType: 'json',
+                type: 'get',
+                contentType: 'application/json',
+                processData: false,
+                success: function (data) {
+                   if (data) {
+                        showBarcodeDialog(lot, sts_no);
+                   } else {
+                        alert("ไม่พบ Lot นี้ในระบบ");
+                   }
+                },
+                errqor: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+         });
+    }
+
+    function showBarcodeDialog(lot, sts_no) {
+         $('#printLotBarcode').dialog({
+                modal: true,
+                autoOpen: true,
+                show: 'fade',
+                width: 400,
+                height: 600,
+                title: "ตัวอย่างก่อนพิมพ์"
+            })
+          .load("./module/print_lot_barcode2.php", {"lot": lot, "sts_no": sts_no});
+           $('#tag_id_lot').val('');
+           $('#sts_no_lot').val('');
+    }
+
+</script>
+<br>
+<br>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10" class="font18 green">
+            <tr>
+                <td style="padding: 10px;" align="center">
+                    <h1>พิมพ์ Lot Barcode</h1>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <div class="container">
+                        <div style="display: flex; justify-content: center;" class="row justify-content-md-center">
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Lot</div>
+                                    <input type="text" class="form-control txt-filter" id="tag_id_lot" >
+                                </div>
+                            </div>
+                             <div class="col-sm-4">
+                                <div class="input-group">
+                                    <div class="input-group-addon">STS No</div>
+                                    <input type="number" class="form-control txt-filter" id="sts_no_lot" >
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="ui-button ui-widget ui-corner-all " id="timeWork"
+                                    onClick="checkLotExist();" type="button"> Print </button>
+                </td>
+    </div>
+</div>
+</div>
+<td align="center">
+    <tr>
+        <td align="center" class="red">&nbsp;<span id="notfound"
+                style="display:none;">ไม่พบข้อมูลที่ต้องการค้นหา</span>&nbsp;</td>
+    </tr>
+</td>
+</tr>
+</table>
+</div>
+<div id="printLotBarcode"></div>
+</div>

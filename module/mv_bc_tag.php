@@ -103,6 +103,18 @@ if ($load == "check") {
 	}
   }
 
+if ($load == "check_lot") {
+	  $sql = "SELECT TOP 1 lot FROM lot_mst WHERE lot = '$lot'";
+	  $cSql = new SqlSrv();
+	  $rs = $cSql->SqlQuery($conn, $sql);
+	  array_splice($rs, count($rs) - 1, 1);
+	  if ($rs) {
+		echo json_encode(true);
+	} else {
+		echo json_encode(false);
+	}
+  }
+
 
 
 ?>
