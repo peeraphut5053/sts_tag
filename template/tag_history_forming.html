@@ -160,6 +160,10 @@
             $.post("./module/tag_check.php", {"tag_id": id, "inspector": '010235'}, function (data) {
              window.location.reload();
             })
+           } else if (Pass == '8245') {
+            $.post("./module/tag_check.php", {"tag_id": id, "inspector": '8245'}, function (data) {
+             window.location.reload();
+            })
           } else {
             $('#Pass').attr('placeholder', 'Password ไม่ถูกต้อง');
             $("#Pass").val('');
