@@ -5,7 +5,7 @@ while (list($key, $data) = each($_GET) OR list($key, $data) = each($_POST)) {
 include "./initial.php";
 
 
-$sql = "update mv_bc_tag set ship_stat = '".$updateVal."' where id = '".$tag_id."' ";
+$sql = "update mv_bc_tag set ship_stat = '".$updateVal."', do_num = '".$do_num."'  where id = '".$tag_id."' ";
 $cSql = new SqlSrv();
 $rs = $cSql->SqlQuery($conn, $sql);
 

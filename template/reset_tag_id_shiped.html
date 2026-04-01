@@ -8,6 +8,19 @@
 </head>
 
 <script type="text/javascript">
+
+    // creat function for validate do_num if do_num is not empty then set readonly to data_do_num input 
+
+    function validateDoNum() {
+        var do_num = $('#data_do_num').val();
+        if (do_num != "") {
+            $('#data_do_num').attr('readonly', true);
+        } else {
+            $('#data_do_num').attr('readonly', false);
+        }
+    }
+
+
     function ValidateJob(e) {
         //alert('xx');
         var keycode;
@@ -28,7 +41,6 @@
                 success: function (data, textStatus, jQxhr) {
 
                     if (data) {
-
                         console.log(data)
                         $("#data_tag_id").html(data.id)
                         $("#data_job").html(data.job)
@@ -36,8 +48,9 @@
                         $("#data_lot").html(data.lot)
                         $("#data_qty1").html(data.qty1)
                         $("#data_ship_stat").val(data.ship_stat)
+                        $("#data_do_num").val(data.do_num)
+                        validateDoNum();
                         $("#notfound").hide();
-
                     } else {
                         $("#notfound").show();
                         $("#tag_id").select();
@@ -55,6 +68,7 @@
     function LinkUnpost() {
         var tag_id = $('#tag_id').val();
         var data_ship_stat = $('#data_ship_stat').val();
+        var data_do_num = $('#data_do_num').val();
         let updateVal = ""
         if (data_ship_stat == '1') {
             updateVal = "0"
@@ -62,7 +76,7 @@
             updateVal = "1"
         }
         $.ajax({
-            url: `./module/reset_tag_id_shiped_update_tag.php?tag_id=${tag_id}&updateVal=${updateVal}`,
+            url: `./module/reset_tag_id_shiped_update_tag.php?tag_id=${tag_id}&updateVal=${updateVal}&do_num=${data_do_num}`,
             dataType: 'json',
             type: 'get',
             contentType: 'application/json',
@@ -127,6 +141,7 @@
                         <th>Lot</td>
                         <th>จำนวน</td>
                         <th>Ship Status</td>
+                        <th>do_num</td>
                         <th>เปลี่ยนสถานะ tag</td>
                     </tr>
                     <tr>
@@ -148,6 +163,9 @@
                         <td>
                             <input readonly type="text" id="data_ship_stat">
                         </td>
+                        <td>
+                            <input type="text" id="data_do_num">
+                        </td>
                         <td align="center">
                             <button class="ui-button ui-widget ui-corner-all " id="timeWork" onClick="LinkUnpost();"
                                 type="button"> เปลี่ยนสถานะ </button>
@@ -156,6 +174,8 @@
 
                 </table>
                 <span style="color:red">** Status 1 = Tag ถูก ship ไปแล้ว **</span>
+                <br>
+                <span style="color:red">** ใส่เลข do_num แล้วกด เปลี่ยนสถานะ tag จะเป็นการอัปเดต do_num ใหม่ **</span>
             </tr>
 
         </table>
