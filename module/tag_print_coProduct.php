@@ -67,6 +67,26 @@ if (isset($_POST["tag_ids"])) {
         $size = "";
         $Heat_no_obj = new FunctionCenter();
         $Heat_no = $Heat_no_obj->GetHeatNo($rs[1]['sts_no'], $rs[1]['sts_no2'], $rs[1]['sts_no3'], $rs[1]['qty_sts_no'], $rs[1]['qty_sts_no2'], $rs[1]['qty_sts_no3']);
+
+        $sql_uf_market = "select uf_market from item_mst where item = '" . $rs[1]['item'] . "';";
+
+        $rs_uf_market = $cSql->SqlQuery($conn, $sql_uf_market);
+
+        $description = "";
+
+        $sql_id_tag = "select id from mv_bc_tag where lot = '" . $rs[1]['old_lot'] . "';";
+
+        $rs_id_tag = $cSql->SqlQuery($conn, $sql_id_tag);
+
+        if (isset($rs_uf_market[1]["uf_market"]) && in_array($rs_uf_market[1]["uf_market"], ['AUS', 'USA'])) {
+            $sql_note = "select Description = isnull((SELECT TOP 1 CONVERT(NVARCHAR(1000),Description) FROM ReportNotesView R WHERE R.RefRowPointer = grn_hdr_mst.RowPointer and note like '%นำเข้าตาม%'),'')
+from Mv_Bc_tag left join grn_hdr_mst on Mv_Bc_tag.grn_num = grn_hdr_mst.grn_num
+where id = '" . $rs_id_tag[1]["id"] . "';";
+
+            $rs_note = $cSql->SqlQuery($conn, $sql_note);
+            $description = isset($rs_note[1]["Description"]) ? $rs_note[1]["Description"] : "";
+        }
+
         $temp->setReplace("{Heat_no}", "" . $Heat_no . "");
         $temp->setReplace("{img_qrcode}", "" . $img_qrcode . "");
         
@@ -75,7 +95,8 @@ if (isset($_POST["tag_ids"])) {
                 . "<tr> <td><table width='100%' border='0' cellspacing='0' cellpadding='0' style='font-family:Tahoma; font-size:9px;' align='right'> <tr><td>SPEC./มาตราฐาน:".$spec." ".$rs2[1]["Uf_Grade"]."</td> </tr>"
                 . "<tr><td>SIZE/ขนาด:". $rs2[1]["Uf_NPS"]." x". $rs2[1]["Uf_Schedule"]." x". $rs2[1]["Uf_length"]."</td> </tr> "
                 . "<tr><td>ACT WT./น้ำหนักจริง(Kgs.): ".total_format($rs[1]["uf_act_Weight"], 2)."  (".$rs[1]["uf_grade"].")</td> </tr> "
-                . "<tr><td>LOT No./รุ่น: {lot}</td> </tr> <tr><td style='font-size: 13px'>H/N.: <span style='font-size:22px;'>".$Heat_no."</span></td> </tr> </table></td> </tr> </table>";
+                . "<tr><td>LOT No./รุ่น: {lot}</td> </tr> <tr><td style='font-size: 13px'>H/N.: <span style='font-size:22px;'>".$Heat_no."</span></td> </tr> </table></td> </tr> "
+                . "<tr><td style='font-size: 11px;'>".$description."</td></tr> </table>";
         
         
         if($rs2[1]["Uf_spec"] == "TIS.107" ||$rs2[1]["Uf_spec"] == "TIS.107 STK290" ||$rs2[1]["Uf_spec"] == "TIS.107 STK400" || substr(explode("-", $rs2[1]['item'])[1], 0, 2) == 'T1'){

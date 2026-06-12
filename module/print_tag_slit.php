@@ -26,6 +26,26 @@ where id = '".$id."';";
 		$rs1 = $cSql->SqlQuery($conn, $sql1);
 		if (isset($rs1[1]["Uf_width"])) $ufwidth = " x ".$rs1[1]["Uf_width"];
 		else $ufwidth = "";
+		 
+	    $sql_uf_market = "select uf_market from item_mst where item = '" . $rs[1]['item'] . "';";
+
+        $rs_uf_market = $cSql->SqlQuery($conn, $sql_uf_market);
+
+        $description = "";
+
+        $sql_id_tag = "select id from mv_bc_tag where lot = '" . $rs[1]['old_lot'] . "';";
+
+        $rs_id_tag = $cSql->SqlQuery($conn, $sql_id_tag);
+
+        if (isset($rs_uf_market[1]["uf_market"]) && in_array($rs_uf_market[1]["uf_market"], ['AUS', 'USA'])) {
+            $sql_note = "select Description = isnull((SELECT TOP 1 CONVERT(NVARCHAR(1000),Description) FROM ReportNotesView R WHERE R.RefRowPointer = grn_hdr_mst.RowPointer and note like '%นำเข้าตาม%'),'')
+from Mv_Bc_tag left join grn_hdr_mst on Mv_Bc_tag.grn_num = grn_hdr_mst.grn_num
+where id = '" . $rs_id_tag[1]["id"] . "';";
+
+            $rs_note = $cSql->SqlQuery($conn, $sql_note);
+            $description = isset($rs_note[1]["Description"]) ? $rs_note[1]["Description"] : "";
+		}
+
 		$temp->setReplace("{reprint}", "".true."");
 		$temp->setReplace("{barcode}", "".$id."");
 		$temp->setReplace("{uf_Width}", $rs1[1]["Uf_thickness"].$ufwidth);
@@ -46,6 +66,7 @@ where id = '".$id."';";
 		$temp->setReplace("{numtab}", "".$numtab."");		
 		$temp->setReplace("{sts_no}", "".$rs[1]["sts_no"]."");		
 		$temp->setReplace("{c_no}", "".$rs[1]["c_no"]."");
+		$temp->setReplace("{Description}", "".$description."");
 	}
 } else {
 	$temp->setReplace("{printlist}", $temp->getTemplate("../template/tag_slit_block.html"));
@@ -93,6 +114,21 @@ where id = '".$id."';";
 	} else {
 		$slot[0] = $slit_lotm;
 	}
+
+	 $sql_uf_market = "select uf_market from item_mst where item = '" . $item . "';";
+
+        $rs_uf_market = $cSql->SqlQuery($conn, $sql_uf_market);
+
+        $description = "";
+
+        if (isset($rs_uf_market[1]["uf_market"]) && in_array($rs_uf_market[1]["uf_market"], ['AUS', 'USA'])) {
+            $sql_note = "select Description = isnull((SELECT TOP 1 CONVERT(NVARCHAR(1000),Description) FROM ReportNotesView R WHERE R.RefRowPointer = grn_hdr_mst.RowPointer and note like '%นำเข้าตาม%'),'')
+from Mv_Bc_tag left join grn_hdr_mst on Mv_Bc_tag.grn_num = grn_hdr_mst.grn_num
+where id = '" . $id_tag . "';";
+
+            $rs_note = $cSql->SqlQuery($conn, $sql_note);
+            $description = isset($rs_note[1]["Description"]) ? $rs_note[1]["Description"] : "";
+        }
 	
 	$temp->setReplace("{Uf_Grade}", "".$rs1[1]["Uf_Grade"]."");
 	$temp->setReplace("{lot}", "".$slot[0].$lot."");
@@ -115,6 +151,7 @@ where id = '".$id."';";
 	$temp->setReplace("{numtab}", "".$numtab."");
 	$temp->setReplace("{sts_no}", "".$sts_no."");
 	$temp->setReplace("{c_no}", "".$rs3[1]["c_no"]."");
+	$temp->setReplace("{Description}", "".$description."");
 	setcookie("sts_no",$sts_no, time() + (86400 * 30), "/");
 	//echo $_COOKIE["sts_no"]."xxx";
 }
