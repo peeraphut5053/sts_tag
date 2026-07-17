@@ -78,14 +78,13 @@ if (isset($_POST["tag_ids"])) {
 
         $rs_id_tag = $cSql->SqlQuery($conn, $sql_id_tag);
 
-        $sql_note = "select Description = isnull((SELECT TOP 1 CONVERT(NVARCHAR(1000),Description) FROM ReportNotesView R WHERE R.RefRowPointer = grn_hdr_mst.RowPointer and note like '%นำเข้าตาม%'),'')
+        if (isset($rs_uf_market[1]["uf_market"]) && in_array($rs_uf_market[1]["uf_market"], ['AUS', 'USA'])) {
+           /* $sql_note = "select Description = isnull((SELECT TOP 1 CONVERT(NVARCHAR(1000),Description) FROM ReportNotesView R WHERE R.RefRowPointer = grn_hdr_mst.RowPointer and note like '%นำเข้าตาม%'),'')
 from Mv_Bc_tag left join grn_hdr_mst on Mv_Bc_tag.grn_num = grn_hdr_mst.grn_num
 where id = '" . $rs_id_tag[1]["sl_tag_id"] . "';";
 
-            $rs_note = $cSql->SqlQuery($conn, $sql_note);
-
-        if (isset($rs_note[1]["Description"]) && $rs_note[1]["Description"] != "") {
-            $description = $rs_note[1]["Description"];
+            $rs_note = $cSql->SqlQuery($conn, $sql_note); */
+            $description = "นำเข้าตามมาตรา 21 ตรี";
         }
 
         $temp->setReplace("{Heat_no}", "" . $Heat_no . "");
@@ -298,14 +297,8 @@ where id = '" . $rs_id_tag[1]["sl_tag_id"] . "';";
 
         $rs_id_tag = $cSql->SqlQuery($conn, $sql_id_tag);
 
-        $sql_note = "select Description = isnull((SELECT TOP 1 CONVERT(NVARCHAR(1000),Description) FROM ReportNotesView R WHERE R.RefRowPointer = grn_hdr_mst.RowPointer and note like '%นำเข้าตาม%'),'')
-from Mv_Bc_tag left join grn_hdr_mst on Mv_Bc_tag.grn_num = grn_hdr_mst.grn_num
-where id = '" . $rs_id_tag[1]["sl_tag_id"] . "';";
-
-            $rs_note = $cSql->SqlQuery($conn, $sql_note);
-
-        if (isset($rs_note[1]["Description"]) && $rs_note[1]["Description"] != "") {
-            $description = $rs_note[1]["Description"];
+        if (isset($rs_uf_market[1]["uf_market"]) && in_array($rs_uf_market[1]["uf_market"], ['AUS', 'USA'])) {
+            $description = "นำเข้าตามมาตรา 21 ตรี";
         }
         
         
