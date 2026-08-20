@@ -246,7 +246,8 @@
                                             value="{num}" style="background: #f2fff9;" /></td>
                                     <td align="right"><strong>ต้องการพิมพ์</strong>: </td>
                                     <td><input name="qty1" type="text" id="qty1" size="18" class="default"
-                                            value="{qty1}" style="background: #f2fff9;" />  <span id="item_u_m">{item_u_m}</span></td>
+                                            value="{qty1}" style="background: #f2fff9;" /> <span
+                                            id="item_u_m">{item_u_m}</span></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -387,7 +388,7 @@
             $.post("./module/mv_bc_tag.php", { "id_tag": id_tag, "load": "old_lot", "jobno": jobno }, function (data) {
                 const res = JSON.parse(data);
 
-                if (res.tag_status == 'Reject') {
+                if (res.tag_status == 'Reject' && res.sale_appr !== '1') {
                     window.alert('Tag ID: ' + res.id + ' มีสถานะเป็น ' + res.tag_status + ' กรุณาติดต่อ QC ');
                     $("#id_tag").focus();
                     $("#id_tag").val('');

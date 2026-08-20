@@ -492,7 +492,7 @@
             $.post("./module/mv_bc_tag.php", { "id_tag": tag_id, "load": "old_lot", "jobno": jobno }, function (data) {
                 const res = JSON.parse(data);
 
-                if (res.tag_status == 'Reject') {
+                if (res.tag_status == 'Reject' && res.sale_appr !== '1') {
                     window.alert('Tag ID: ' + res.id + ' มีสถานะเป็น ' + res.tag_status + ' กรุณาติดต่อ QC ');
                     $("#id_tag").focus();
                     $("#id_tag").val('');
