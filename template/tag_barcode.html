@@ -169,6 +169,7 @@
                     $("#issue").val(res.issue);
                     $("#minor").val(res.Minor_cause);
                     $("#main").val(res.Main_cause);
+                    $("#sale_appr").val(res.sale_appr == 1 ? 1 : 0);
 
                 }
             }, 'html').fail(function () {
@@ -386,6 +387,8 @@
                                             id="minor" size="10" readonly /></td>
                                     <td><input style="display: none;" class="default_view" name="main" type="text"
                                             id="main" size="10" readonly /></td>
+                                    <td><input style="display: none;" class="default_view" name="sale_appr" value="0"
+                                            type="number" id="sale_appr" size="10" readonly /></td>
                                 </tr>
                             </table>
                         </div>

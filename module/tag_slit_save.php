@@ -78,7 +78,7 @@ if ($tag_status == "") {
 	$tag_status = "Good";
 }
 
-$sql = "insert into Mv_Bc_tag (id, job, suffix, oper_num, item, lot, qty1, uf_act_Weight, qty_sts_no, uf_pack, mfg_date, print_date, ship_stat, active, uf_sts_job, uf_grade, Uf_manu, uf_spec, um1, um2, sts_no, tag_status, old_lot, detail, issue, Minor_cause, Main_cause) values ('".$id."', '".$jobm[0]."', '".$jobm[1]."', '".$jobm[2]."', '".$item."', '".$slot[0].$lot."', '".$uf_act_Weight."', '".$uf_act_Weight."', '".$uf_act_Weight."', '".$pack_no."', '".$print_day."', '".$print_day."', '0', '1', '".$uf_sts_job."', 'A', '".$slot[1]."', '".$slot[2]."', '".$um1."', '".$um2."', '".$sts_no."', '".$tag_status."', '".$old_lot."', '".$_POST['detail']."', '".$_POST['issue']."', '".$_POST['minor']."', '".$_POST['main']."');";
+$sql = "insert into Mv_Bc_tag (id, job, suffix, oper_num, item, lot, qty1, uf_act_Weight, qty_sts_no, uf_pack, mfg_date, print_date, ship_stat, active, uf_sts_job, uf_grade, Uf_manu, uf_spec, um1, um2, sts_no, tag_status, old_lot, detail, issue, Minor_cause, Main_cause,	 sale_appr) values ('".$id."', '".$jobm[0]."', '".$jobm[1]."', '".$jobm[2]."', '".$item."', '".$slot[0].$lot."', '".$uf_act_Weight."', '".$uf_act_Weight."', '".$uf_act_Weight."', '".$pack_no."', '".$print_day."', '".$print_day."', '0', '1', '".$uf_sts_job."', 'A', '".$slot[1]."', '".$slot[2]."', '".$um1."', '".$um2."', '".$sts_no."', '".$tag_status."', '".$old_lot."', '".$_POST['detail']."', '".$_POST['issue']."', '".$_POST['minor']."', '".$_POST['main']."', '".$_POST["sale_appr"]."');";
 //echo $sql." =======================";
 $rs1 = $cSql->IsUpDel($conn, $sql);
 
