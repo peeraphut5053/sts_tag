@@ -84,7 +84,7 @@ from Mv_Bc_tag left join grn_hdr_mst on Mv_Bc_tag.grn_num = grn_hdr_mst.grn_num
 where id = '" . $rs_id_tag[1]["sl_tag_id"] . "';";
 
             $rs_note = $cSql->SqlQuery($conn, $sql_note); */
-            $description = "นำเข้าตามมาตรา 21 ตรี";
+            $description = "";
         }
 
         $temp->setReplace("{Heat_no}", "" . $Heat_no . "");
@@ -298,7 +298,7 @@ where id = '" . $rs_id_tag[1]["sl_tag_id"] . "';";
         $rs_id_tag = $cSql->SqlQuery($conn, $sql_id_tag);
 
         if (isset($rs_uf_market[1]["uf_market"]) && in_array($rs_uf_market[1]["uf_market"], ['AUS', 'USA'])) {
-            $description = "นำเข้าตามมาตรา 21 ตรี";
+            $description = "";
         }
         
         

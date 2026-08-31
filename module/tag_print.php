@@ -84,7 +84,7 @@ if (isset($_POST["tag_ids"])) {
         $rs_id_tag = $cSql->SqlQuery($conn, $sql_id_tag);
 
         if (isset($rs_uf_market[1]["uf_market"]) && in_array($rs_uf_market[1]["uf_market"], ['AUS', 'USA'])) {
-            $description = "นำเข้าตามมาตรา 21 ตรี";
+            $description = "";
         }
         
         $qr_tis = "<table width='100%' border='0' cellspacing='0' cellpadding='0'> "
@@ -298,7 +298,7 @@ if (isset($_POST["tag_ids"])) {
         $rs_id_tag = $cSql->SqlQuery($conn, $sql_id_tag);
 
         if (isset($rs_uf_market[1]["uf_market"]) && in_array($rs_uf_market[1]["uf_market"], ['AUS', 'USA'])) {
-            $description = "นำเข้าตามมาตรา 21 ตรี";
+            $description = "";
         }
   
         $qr_tis = "<table width='100%' border='0' cellspacing='0' cellpadding='0'> "

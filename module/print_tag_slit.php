@@ -42,7 +42,7 @@ from Mv_Bc_tag left join grn_hdr_mst on Mv_Bc_tag.grn_num = grn_hdr_mst.grn_num
 where id = '" . $rs_id_tag[1]["sl_tag_id"] . "';";
         $rs_note = $cSql->SqlQuery($conn, $sql_note);
         if (isset($rs_note[1]["Description"]) && $rs_note[1]["Description"] != "") {
-            $description = $rs_note[1]["Description"];
+            $description = "";
 		}
 
 		$temp->setReplace("{reprint}", "".true."");
@@ -131,7 +131,7 @@ where id = '" . $rs_id_tag[1]["sl_tag_id"] . "';";
         $rs_note = $cSql->SqlQuery($conn, $sql_note);
 
         if (isset($rs_note[1]["Description"]) && $rs_note[1]["Description"] != "") {
-            $description = $rs_note[1]["Description"];
+            $description = "";
         }
 	
 	$temp->setReplace("{Uf_Grade}", "".$rs1[1]["Uf_Grade"]."");
