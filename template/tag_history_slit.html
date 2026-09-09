@@ -1,54 +1,54 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script type="text/javascript">
-<!--
-    /*$(document).ready(function() {
-     $('#tblist tr').click(function(event) {
-     if (event.target.type !== 'checkbox') {			
-     $(':checkbox', this).trigger('click');
-     }
-     });
-     });	*/
+  <!--
+      /*$(document).ready(function() {
+       $('#tblist tr').click(function(event) {
+       if (event.target.type !== 'checkbox') {			
+       $(':checkbox', this).trigger('click');
+       }
+       });
+       });	*/
 
-    function LinkTagA() {
-        var jobno = $('#job_no').val();
-        var uri_enc = encodeURIComponent(jobno);
-        window.location.href = '?tag_barcode&jobno=' + uri_enc + '&grade=A';
-    }
-    function LinkTagB() {
-        var jobno = $('#job_no').val();
-        var uri_enc = encodeURIComponent(jobno);
-        window.location.href = '?tag_barcode&jobno=' + uri_enc + '&grade=B';
-    }
-    function LinkTagC() {
-        var jobno = $('#job_no').val();
-        var uri_enc = encodeURIComponent(jobno);
-        window.location.href = '?tag_barcode&jobno=' + uri_enc + '&grade=C';
-    }
-    function LinkTagS() {
-        var jobno = $('#job_no').val();
-        var uri_enc = encodeURIComponent(jobno);
-        window.location.href = '?tag_slit&jobno=' + uri_enc + '&grade=S';
-    }
-    function LinkTagR() {
-        var jobno = $('#job_no').val();
-        var uri_enc = encodeURIComponent(jobno);
-        window.location.href = '?tag_barcode&jobno=' + uri_enc + '&grade=R';
-    }
+  function LinkTagA() {
+    var jobno = $('#job_no').val();
+    var uri_enc = encodeURIComponent(jobno);
+    window.location.href = '?tag_barcode&jobno=' + uri_enc + '&grade=A';
+  }
+  function LinkTagB() {
+    var jobno = $('#job_no').val();
+    var uri_enc = encodeURIComponent(jobno);
+    window.location.href = '?tag_barcode&jobno=' + uri_enc + '&grade=B';
+  }
+  function LinkTagC() {
+    var jobno = $('#job_no').val();
+    var uri_enc = encodeURIComponent(jobno);
+    window.location.href = '?tag_barcode&jobno=' + uri_enc + '&grade=C';
+  }
+  function LinkTagS() {
+    var jobno = $('#job_no').val();
+    var uri_enc = encodeURIComponent(jobno);
+    window.location.href = '?tag_slit&jobno=' + uri_enc + '&grade=S';
+  }
+  function LinkTagR() {
+    var jobno = $('#job_no').val();
+    var uri_enc = encodeURIComponent(jobno);
+    window.location.href = '?tag_barcode&jobno=' + uri_enc + '&grade=R';
+  }
 
-    function DeleteTag(tag_id) {
-        var r = confirm("ยืนยันการลบข้อมูล ?");
-        if (r == true) {
-            $.post("./module/tagBarcode_delete.php", {"tag_id": tag_id}, function (data) {
-                location.reload(true);
-                //alert(data);
-                return false;
-            }, 'html');
-        }
+  function DeleteTag(tag_id) {
+    var r = confirm("ยืนยันการลบข้อมูล ?");
+    if (r == true) {
+      $.post("./module/tagBarcode_delete.php", { "tag_id": tag_id }, function (data) {
+        location.reload(true);
+        //alert(data);
+        return false;
+      }, 'html');
     }
+  }
 
-    function inpActiveLine(id) {
-      $.confirm({
+  function inpActiveLine(id) {
+    $.confirm({
       title: 'กรุณาใส่ Password',
       theme: 'modern',
       boxWidth: '30%',
@@ -57,86 +57,94 @@
       buttons: {
         confirm: function checked() {
           var Pass = $("#Pass").val();
-    
+
           if (Pass == 5404) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 5404}, function (data) {
-             window.location.reload();
-          })
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 5404 }, function (data) {
+              window.location.reload();
+            })
           } else if (Pass == 8105) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8105}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8105 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8113) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8113}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8113 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8139) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8139}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8139 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8192) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8192}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8192 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8202) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8202}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8202 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8222) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8222}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8222 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8236) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8236}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8236 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8237) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8237}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8237 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8238) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8238}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8238 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 2048) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 2048}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 2048 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8117) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8117}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8117 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8155) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8155}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8155 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 8157) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8157}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8157 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 9743) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 9743}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 9743 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 10218) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 10218}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 10218 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == 10227) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 10227}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": 10227 }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == '010234') {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": '010234'}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": '010234' }, function (data) {
+              window.location.reload();
             })
           } else if (Pass == '010235') {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": '010235'}, function (data) {
-             window.location.reload();
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": '010235' }, function (data) {
+              window.location.reload();
             })
-         } else if (Pass == '8245') {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": '8245'}, function (data) {
-             window.location.reload();
+          } else if (Pass == '8245') {
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": '8245' }, function (data) {
+              window.location.reload();
+            })
+          } else if (Pass == '010267') {
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": '010267' }, function (data) {
+              window.location.reload();
+            })
+          } else if (Pass == '8247') {
+            $.post("./module/tag_check.php", { "tag_id": id, "inspector": '8247' }, function (data) {
+              window.location.reload();
             })
           } else {
             $('#Pass').attr('placeholder', 'Password ไม่ถูกต้อง');
@@ -149,133 +157,146 @@
         }
       }
     });
+  }
+
+  function PrintTag() {
+    var jobno = $('#job_no').val();
+    var uri_enc = encodeURIComponent(jobno);
+    var tag_ids = [];
+    //var chk = 0;
+    $("input:checkbox[name=line]:checked").each(function () {
+      tag_ids.push($(this).val());
+      //chk = 1;
+    });
+    //alert(tag_ids);
+    if (tag_ids != "") {
+      $('#printpopup').dialog({
+        modal: true,
+        autoOpen: true,
+        show: 'fade',
+        width: 710,
+        height: 360,
+        title: "ตัวอย่างก่อนพิมพ์"
+      })
+        .load("./module/print_tag_slit.php", { "job_no": uri_enc, "tag_ids": tag_ids });
+    } else {
+      alert('กรุณาเลือกข้อมูลก่อน');
     }
 
-    function PrintTag() {
-        var jobno = $('#job_no').val();
-        var uri_enc = encodeURIComponent(jobno);
-        var tag_ids = [];
-        //var chk = 0;
-        $("input:checkbox[name=line]:checked").each(function () {
-            tag_ids.push($(this).val());
-            //chk = 1;
-        });
-        //alert(tag_ids);
-        if (tag_ids != "") {
-            $('#printpopup').dialog({
-                modal: true,
-                autoOpen: true,
-                show: 'fade',
-                width: 710,
-                height: 360,
-                title: "ตัวอย่างก่อนพิมพ์"
-            })
-                    .load("./module/print_tag_slit.php", {"job_no": uri_enc, "tag_ids": tag_ids});
-        } else {
-            alert('กรุณาเลือกข้อมูลก่อน');
-        }
+    return false;
+  }
 
-        return false;
+  function PrintTagSlit() {
+    var tag_ids = [];
+    //var chk = 0;
+    $("input:checkbox[name=line]:checked").each(function () {
+      tag_ids.push($(this).val());
+      //chk = 1;
+    });
+    //alert(tag_ids);
+    if (tag_ids != "") {
+      $('#printpopup2').dialog({
+        modal: true,
+        autoOpen: true,
+        show: 'fade',
+        width: 800,
+        height: 300,
+        title: "ตัวอย่างก่อนพิมพ์"
+      })
+        .load("./module/print_tag_slit.php", { "tag_ids": tag_ids });
+    } else {
+      alert('กรุณาเลือกข้อมูลก่อน');
     }
 
-    function PrintTagSlit() {
-        var tag_ids = [];
-        //var chk = 0;
-        $("input:checkbox[name=line]:checked").each(function () {
-            tag_ids.push($(this).val());
-            //chk = 1;
-        });
-        //alert(tag_ids);
-        if (tag_ids != "") {
-            $('#printpopup2').dialog({
-                modal: true,
-                autoOpen: true,
-                show: 'fade',
-                width: 800,
-                height: 300,
-                title: "ตัวอย่างก่อนพิมพ์"
-            })
-                    .load("./module/print_tag_slit.php", {"tag_ids": tag_ids});
-        } else {
-            alert('กรุณาเลือกข้อมูลก่อน');
-        }
+    return false;
+  }
 
-        return false;
-    }
+  function inpEditLine(id, qty1, wg) {
+    $("#d_qty_" + id).html('<input name="qty1" type="text" id="qty1" style="width:100%" class="default" value="' + qty1 + '">');
+    $("#d_w_" + id).html('<input name="uf_act_Weight" type="text" id="uf_act_Weight" style="width:100%" class="default" value="' + wg + '">');
+    $("#edit_b_" + id).hide();
+    $("#edit_c_" + id).show();
+  }
 
-    function inpEditLine(id, qty1, wg) {
-        $("#d_qty_" + id).html('<input name="qty1" type="text" id="qty1" style="width:100%" class="default" value="' + qty1 + '">');
-        $("#d_w_" + id).html('<input name="uf_act_Weight" type="text" id="uf_act_Weight" style="width:100%" class="default" value="' + wg + '">');
-        $("#edit_b_" + id).hide();
-        $("#edit_c_" + id).show();
-    }
-
-    function scEditLine(id, qty1, wg) {
-        var qty = $("#qty1").val();
-        var wg = $("#uf_act_Weight").val();
-        $.post("./module/tagBarcode_edit.php", {"tag_id": id, "qty1": qty, "uf_act_Weight": wg}, function (data) {
-            location.reload(true);
-            //alert(data);
-            //$("#d_qty_"+id).html(qty);
-            //$("#d_w_"+id).html(wg);
-            return false;
-        }, 'html');
-        //$("#edit_b_"+id).show();	
-        //$("#edit_c_"+id).hide();	
-    }
-//-->
+  function scEditLine(id, qty1, wg) {
+    var qty = $("#qty1").val();
+    var wg = $("#uf_act_Weight").val();
+    $.post("./module/tagBarcode_edit.php", { "tag_id": id, "qty1": qty, "uf_act_Weight": wg }, function (data) {
+      location.reload(true);
+      //alert(data);
+      //$("#d_qty_"+id).html(qty);
+      //$("#d_w_"+id).html(wg);
+      return false;
+    }, 'html');
+    //$("#edit_b_"+id).show();	
+    //$("#edit_c_"+id).hide();	
+  }
+  //-->
 </script>
 <table width="100%" border="0" cellspacing="0" cellpadding="5">
-    <tr>
-        <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
-                <tr>
-                    <td width="17%" align="right">Job Order: </td>
-                    <td><input name="job_no" type="text" id="job_no" size="20" class="default_view" readonly value="{job_no}">
-                        <input name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000"></td>
-                </tr>
-                <tr>
-                    <td align="right">Item:</td>
-                    <td><input name="item" type="text" id="item" size="32" class="default_view" readonly value="{item}"></td>
-                </tr>
-                <tr>
-                    <td align="right"> </td>
-                    <td><input name="item_desc" type="text" id="item_desc" size="50" class="default_view" readonly value={item_desc}></td>
-                </tr>
-                <tr>
-                    <td align="right">Operation:</td>
-                    <td><input name="oper_num" type="text" id="oper_num" size="5" class="default_view" readonly value="{oper_num}">
-                        &nbsp;&nbsp;WC:
-                        <input name="wc" type="text" id="wc" size="7" class="default_view" readonly value="{wc}">
-                        <input name="description" type="text" id="description" size="22" class="default_view" readonly value="{description}"></td>
-                </tr>
-                <tr>
-                    <td align="right">Qty Issued:</td>
-                    <td><input name="qty_issued" type="text" id="qty_issued" size="7" class="default_view" readonly value="{qty_issued}"> {matl_um}.</td>
-                </tr>      
-            </table>
-            <table width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
-                <tr>
-                    <td width="17%" align="right">ยอดสั่งผลิต</td>
-                    <td><input name="qty_released" type="text" id="qty_released" value="{qty_released}" size="7" class="default_view" readonly>
-                        เส้น</td>
-                    <td><input name="weight_released" type="text" id="weight_released" value="{weight_released}" size="9" class="default_view" readonly>
-                        KG.</td>
-                    <td><input name="pack_released" type="text" id="pack_released" value="{pack_released}" size="7" class="default_view" readonly>
-                        มัด</td>
-                </tr>
-                <tr>
-                    <td colspan="4" height="10"><hr></td>
-                </tr>
-                <tr>
-                    <td align="right"><strong>Grade A</strong> </td>
-                    <td><input name="qty1_a" type="text" id="qty1_a" value="{qty1_a}" size="7" class="default_view" readonly>
-                        เส้น</td>
-                    <td><input name="qty2_a" type="text" id="qty2_a" value="{qty2_a}" size="9" class="default_view" readonly>
-                        KG.</td>
-                    <td><input name="uf_pack_a" type="text" id="uf_pack_a" value="{uf_pack_a}" size="7" class="default_view" readonly>
-                        มัด</td>
-                </tr>
-                <!-- <tr>
+  <tr>
+    <td valign="top">
+      <table width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
+        <tr>
+          <td width="17%" align="right">Job Order: </td>
+          <td><input name="job_no" type="text" id="job_no" size="20" class="default_view" readonly value="{job_no}">
+            <input name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000">
+          </td>
+        </tr>
+        <tr>
+          <td align="right">Item:</td>
+          <td><input name="item" type="text" id="item" size="32" class="default_view" readonly value="{item}"></td>
+        </tr>
+        <tr>
+          <td align="right"> </td>
+          <td><input name="item_desc" type="text" id="item_desc" size="50" class="default_view" readonly
+              value={item_desc}></td>
+        </tr>
+        <tr>
+          <td align="right">Operation:</td>
+          <td><input name="oper_num" type="text" id="oper_num" size="5" class="default_view" readonly
+              value="{oper_num}">
+            &nbsp;&nbsp;WC:
+            <input name="wc" type="text" id="wc" size="7" class="default_view" readonly value="{wc}">
+            <input name="description" type="text" id="description" size="22" class="default_view" readonly
+              value="{description}">
+          </td>
+        </tr>
+        <tr>
+          <td align="right">Qty Issued:</td>
+          <td><input name="qty_issued" type="text" id="qty_issued" size="7" class="default_view" readonly
+              value="{qty_issued}"> {matl_um}.</td>
+        </tr>
+      </table>
+      <table width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
+        <tr>
+          <td width="17%" align="right">ยอดสั่งผลิต</td>
+          <td><input name="qty_released" type="text" id="qty_released" value="{qty_released}" size="7"
+              class="default_view" readonly>
+            เส้น</td>
+          <td><input name="weight_released" type="text" id="weight_released" value="{weight_released}" size="9"
+              class="default_view" readonly>
+            KG.</td>
+          <td><input name="pack_released" type="text" id="pack_released" value="{pack_released}" size="7"
+              class="default_view" readonly>
+            มัด</td>
+        </tr>
+        <tr>
+          <td colspan="4" height="10">
+            <hr>
+          </td>
+        </tr>
+        <tr>
+          <td align="right"><strong>Grade A</strong> </td>
+          <td><input name="qty1_a" type="text" id="qty1_a" value="{qty1_a}" size="7" class="default_view" readonly>
+            เส้น</td>
+          <td><input name="qty2_a" type="text" id="qty2_a" value="{qty2_a}" size="9" class="default_view" readonly>
+            KG.</td>
+          <td><input name="uf_pack_a" type="text" id="uf_pack_a" value="{uf_pack_a}" size="7" class="default_view"
+              readonly>
+            มัด</td>
+        </tr>
+        <!-- <tr>
                   <td align="right"><strong>Grade B</strong> </td>
                   <td><input name="qty1_b" type="text" id="qty1_b" value="{qty1_b}" size="7" class="default_view" readonly>
                     เส้น</td>
@@ -311,45 +332,53 @@
                   <td><input name="total_pack" type="text" id="total_pack" value="{total_pack}" size="7" class="default_view" readonly>
                     มัด</td>
                 </tr>-->
-                <tr>
-                    <td align="right"><strong>qty mat</strong></td>
-                    <td>
-                        <input name="qty_mat" type="text" id="qty_mat" value="{qty_mat}" size="7" class="default_view" readonly>
-                    </td>
-                    <td>
+        <tr>
+          <td align="right"><strong>qty mat</strong></td>
+          <td>
+            <input name="qty_mat" type="text" id="qty_mat" value="{qty_mat}" size="7" class="default_view" readonly>
+          </td>
+          <td>
 
-                    </td>
-                </tr>
-            </table></td>
-        <td width="62%" rowspan="3" valign="top"><div style='overflow:auto; height:450px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist">
-                    <tr bgcolor="#c4e1ff">
-                        <td align="center" width="2%"><strong>#</strong></td>
-                        <td align="center"><strong>Tag no.</strong></td>
-                        <td align="center"><strong>Lot</strong></td>
-                        <td align="center"><strong>STS No.</strong></td>
-                        <td align="center" width="9%"><strong>เส้น/กิโล</strong></td>
-                        <td align="center" width="11%"><strong>น้ำหนักจริง</strong></td>
-                        <td align="center" width="9%"><strong>มัด/แถบ</strong></td>
-                        <td align="center" width="7%"><strong>Grade</strong></td>
-                        <td align="center" width="7%"><strong>สถานะ</strong></td>
-                        <td align="center" width="12%"><strong>วันที่</strong></td>
-                        <!-- <td align="center" width="9%"><strong>โดย</strong></td> -->
-                        <td width="2%"> </td>
-                        <td width="10%">ตรวจสอบ</td>
-                    </tr>
-                    {list}		
-                </table></div>
-            <table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
-                <tr>
-                    <td align="center">
-                        <input name="print_tag" type="button" id="print_tag" value=" พิมพ์ซ้ำ " class="ui-button ui-widget ui-corner-all" onClick="{funcprint}();">
-                        <!-- <input name="del_tag" type="button" id="del_tag" value=" ลบ Tag " class="ui-button ui-widget ui-corner-all" onClick="DeleteTag();"> --></td>
-                </tr>
-            </table></td>
-    </tr>
-    <tr>
-        <td align="center" ><input name="print_s" type="button" id="print_s" value="พิมพ์แท็กสลิต" class="ui-button ui-widget ui-corner-all" onClick="LinkTagS();"></td>
-    </tr>  
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="62%" rowspan="3" valign="top">
+      <div style='overflow:auto; height:450px;'>
+        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist">
+          <tr bgcolor="#c4e1ff">
+            <td align="center" width="2%"><strong>#</strong></td>
+            <td align="center"><strong>Tag no.</strong></td>
+            <td align="center"><strong>Lot</strong></td>
+            <td align="center"><strong>STS No.</strong></td>
+            <td align="center" width="9%"><strong>เส้น/กิโล</strong></td>
+            <td align="center" width="11%"><strong>น้ำหนักจริง</strong></td>
+            <td align="center" width="9%"><strong>มัด/แถบ</strong></td>
+            <td align="center" width="7%"><strong>Grade</strong></td>
+            <td align="center" width="7%"><strong>สถานะ</strong></td>
+            <td align="center" width="12%"><strong>วันที่</strong></td>
+            <!-- <td align="center" width="9%"><strong>โดย</strong></td> -->
+            <td width="2%"> </td>
+            <td width="10%">ตรวจสอบ</td>
+          </tr>
+          {list}
+        </table>
+      </div>
+      <table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
+        <tr>
+          <td align="center">
+            <input name="print_tag" type="button" id="print_tag" value=" พิมพ์ซ้ำ "
+              class="ui-button ui-widget ui-corner-all" onClick="{funcprint}();">
+            <!-- <input name="del_tag" type="button" id="del_tag" value=" ลบ Tag " class="ui-button ui-widget ui-corner-all" onClick="DeleteTag();"> -->
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><input name="print_s" type="button" id="print_s" value="พิมพ์แท็กสลิต"
+        class="ui-button ui-widget ui-corner-all" onClick="LinkTagS();"></td>
+  </tr>
 </table>
 <div id="printpopup"></div>
 <div id="printpopup2"></div>

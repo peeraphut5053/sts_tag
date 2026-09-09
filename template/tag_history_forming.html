@@ -1,24 +1,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script type="text/javascript">
-<!--
-    /*$(document).ready(function() {
-     $('#tblist tr').click(function(event) {
-     if (event.target.type !== 'checkbox') {			
-     $(':checkbox', this).trigger('click');
-     }
-     });
-     });	*/
-    
+    <!--
+        /*$(document).ready(function() {
+         $('#tblist tr').click(function(event) {
+         if (event.target.type !== 'checkbox') {			
+         $(':checkbox', this).trigger('click');
+         }
+         });
+         });	*/
 
-    $(document).ready(function(){
+
+    $(document).ready(function () {
         var checkCoP = $('#checkCoP').val();
         var check = encodeURIComponent(checkCoP);
         console.log(check)
 
-          if (checkCoP == ""){
+        if (checkCoP == "") {
             $('#print_a').show();
-        }else {
+        } else {
             $('#print_a').hide();
         }
 
@@ -27,11 +27,11 @@
 
         localStorage.removeItem('refresh')
 
-        setTimeout(function() {
-        if (refresh===null){
-            window.location.reload();
-            window.localStorage.setItem('refresh', "1");
-        }
+        setTimeout(function () {
+            if (refresh === null) {
+                window.location.reload();
+                window.localStorage.setItem('refresh', "1");
+            }
         }, 100); // 100 milliseconds = 0.1 seconds
 
     });
@@ -65,7 +65,7 @@
     function DeleteTag(tag_id) {
         var r = confirm("ยืนยันการลบข้อมูล ?");
         if (r == true) {
-            $.post("./module/tagBarcode_delete.php", {"tag_id": tag_id}, function (data) {
+            $.post("./module/tagBarcode_delete.php", { "tag_id": tag_id }, function (data) {
                 location.reload(true);
                 //alert(data);
                 return false;
@@ -74,107 +74,115 @@
     }
 
     function inpActiveLine(id) {
-      $.confirm({
-      title: 'กรุณาใส่ Password',
-      theme: 'modern',
-      boxWidth: '30%',
-      useBootstrap: false,
-      content: '<input placeholder="" type="password" id="Pass" class="form-control" style="padding: 10px" size="30" name="Pass" autofocus>',
-      buttons: {
-        confirm: function checked() {
-          var Pass = $("#Pass").val();
-    
-          if (Pass == 5404) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 5404}, function (data) {
-             window.location.reload();
-          })
-          } else if (Pass == 8105) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8105}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8113) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8113}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8139) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8139}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8192) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8192}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8202) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8202}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8222) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8222}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8236) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8236}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8237) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8237}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8238) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8238}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 2048) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 2048}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8117) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8117}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8155) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8155}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 8157) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 8157}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 9743) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 9743}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 10218) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 10218}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == 10227) {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": 10227}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == '010234') {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": '010234'}, function (data) {
-             window.location.reload();
-            })
-          } else if (Pass == '010235') {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": '010235'}, function (data) {
-             window.location.reload();
-            })
-           } else if (Pass == '8245') {
-            $.post("./module/tag_check.php", {"tag_id": id, "inspector": '8245'}, function (data) {
-             window.location.reload();
-            })
-          } else {
-            $('#Pass').attr('placeholder', 'Password ไม่ถูกต้อง');
-            $("#Pass").val('');
-            return false;
-          }
-        },
-        cancel: function close() {
-          window.close()
-        }
-      }
-    });
+        $.confirm({
+            title: 'กรุณาใส่ Password',
+            theme: 'modern',
+            boxWidth: '30%',
+            useBootstrap: false,
+            content: '<input placeholder="" type="password" id="Pass" class="form-control" style="padding: 10px" size="30" name="Pass" autofocus>',
+            buttons: {
+                confirm: function checked() {
+                    var Pass = $("#Pass").val();
+
+                    if (Pass == 5404) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 5404 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8105) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8105 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8113) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8113 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8139) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8139 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8192) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8192 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8202) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8202 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8222) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8222 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8236) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8236 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8237) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8237 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8238) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8238 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 2048) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 2048 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8117) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8117 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8155) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8155 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 8157) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 8157 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 9743) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 9743 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 10218) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 10218 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == 10227) {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": 10227 }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == '010234') {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": '010234' }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == '010235') {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": '010235' }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == '8245') {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": '8245' }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == '010267') {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": '010267' }, function (data) {
+                            window.location.reload();
+                        })
+                    } else if (Pass == '8247') {
+                        $.post("./module/tag_check.php", { "tag_id": id, "inspector": '8247' }, function (data) {
+                            window.location.reload();
+                        })
+                    } else {
+                        $('#Pass').attr('placeholder', 'Password ไม่ถูกต้อง');
+                        $("#Pass").val('');
+                        return false;
+                    }
+                },
+                cancel: function close() {
+                    window.close()
+                }
+            }
+        });
     }
 
     function PrintTag() {
@@ -196,7 +204,7 @@
                 height: 600,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load("./module/tag_print.php", {"job_no": uri_enc, "tag_ids": tag_ids});
+                .load("./module/tag_print.php", { "job_no": uri_enc, "tag_ids": tag_ids });
         } else {
             alert('กรุณาเลือกข้อมูลก่อน');
         }
@@ -221,7 +229,7 @@
                 height: 300,
                 title: "ตัวอย่างก่อนพิมพ์"
             })
-                    .load("./module/print_tag_slit.php", {"tag_ids": tag_ids});
+                .load("./module/print_tag_slit.php", { "tag_ids": tag_ids });
         } else {
             alert('กรุณาเลือกข้อมูลก่อน');
         }
@@ -241,7 +249,7 @@
         var qty = $("#qty1").val();
         var wg = $("#uf_act_Weight").val();
         var sts_no2 = $("div[id='d_sts_no_" + id + "'] #edt_sts_no").val();
-        $.post("./module/tagBarcode_edit.php", {"tag_id": id, "qty1": qty, "uf_act_Weight": wg}, function (data) {
+        $.post("./module/tagBarcode_edit.php", { "tag_id": id, "qty1": qty, "uf_act_Weight": wg }, function (data) {
             location.reload(true);
             //alert(data);
             //$("#d_qty_"+id).html(qty);
@@ -251,72 +259,82 @@
         //$("#edit_b_"+id).show();	
         //$("#edit_c_"+id).hide();	
     }
-//-->
+    //-->
 
-function saveOperation() {
-    let w_c = $('#wc').val();
-    let operationWeight = $('#operationWeight').val();
-    let operationTime = $('#operationTime').val();
-    let job = $('#job_no').val().split("+");
-    let operationJob = job[0]
-    let operationItem = $('#item').val() 
+    function saveOperation() {
+        let w_c = $('#wc').val();
+        let operationWeight = $('#operationWeight').val();
+        let operationTime = $('#operationTime').val();
+        let job = $('#job_no').val().split("+");
+        let operationJob = job[0]
+        let operationItem = $('#item').val()
 
 
         // console.log(operationJob)
         // console.log(w_c)
         // console.log(operationWeight)
-   
+
         $.ajax({
-                url: "./module/tag_FM_SaveOperation.php",
-                type: 'get',
-                // processData: false,
-                data: {
+            url: "./module/tag_FM_SaveOperation.php",
+            type: 'get',
+            // processData: false,
+            data: {
                 "load": "save",
                 "w_c": w_c,
                 "operationJob": operationJob,
                 "operationItem": operationItem,
                 "operationWeight": operationWeight,
                 "operationTime": operationTime
-                },
-                success: function () {
-                    // alert("true");
-                }
-            });
-        }
+            },
+            success: function () {
+                // alert("true");
+            }
+        });
+    }
 
 </script>
 <table width="100%" border="0" cellspacing="0" cellpadding="5">
     <tr>
-        <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
+        <td valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
                 <tr>
                     <td align="right">Job Order: </td>
-                    <td><input name="job_no" type="text" id="job_no" size="20" class="default_view" readonly value="{job_no}">
-                        <input name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000"></td>
-                        <input hidden name="checkCoP" type="text" id="checkCoP" size="20" class="default_view" readonly value="{checkCoP}">
+                    <td><input name="job_no" type="text" id="job_no" size="20" class="default_view" readonly
+                            value="{job_no}">
+                        <input name="sp" type="text" id="sp" size="7" class="default_view" readonly value="0000">
+                    </td>
+                    <input hidden name="checkCoP" type="text" id="checkCoP" size="20" class="default_view" readonly
+                        value="{checkCoP}">
                 </tr>
                 <tr>
                     <td align="right">Customer Order: </td>
-                    <td><input name="co_no" type="text" id="co_no" size="20" class="default_view" readonly value="{co_no}">
+                    <td><input name="co_no" type="text" id="co_no" size="20" class="default_view" readonly
+                            value="{co_no}">
                 </tr>
                 <tr>
                     <td align="right">Uf Ref. No.</td>
-                    <td><input name="uf_ref_no" type="text" id="uf_ref_no" size="20" class="default_view" readonly value="{Uf_refno}">
+                    <td><input name="uf_ref_no" type="text" id="uf_ref_no" size="20" class="default_view" readonly
+                            value="{Uf_refno}">
                         น้ำหนักท่อชั่งจริง:
-                        <input name="operationWeight" type="text" id="operationWeight" size="7" class="default_view" value="{operationWeight}" onchange="saveOperation();">
+                        <input name="operationWeight" type="text" id="operationWeight" size="7" class="default_view"
+                            value="{operationWeight}" onchange="saveOperation();">
                 </tr>
                 <tr>
                     <td align="right">Customer name</td>
-                    <td><input name="custname" type="text" id="custname" size="20" class="default_view" readonly value="{custname}">
+                    <td><input name="custname" type="text" id="custname" size="20" class="default_view" readonly
+                            value="{custname}">
                         ความเร็วในการเดินเครื่อง:
-                        <input name="operationSpeed" type="text" id="operationSpeed" size="7" class="default_view" readonly value="{operationSpeed}">
+                        <input name="operationSpeed" type="text" id="operationSpeed" size="7" class="default_view"
+                            readonly value="{operationSpeed}">
                     </td>
-          
+
                 </tr>
                 <tr>
                     <td align="right">City</td>
                     <td><input name="city" type="text" id="city" size="20" class="default_view" readonly value="{city}">
                         เดินเครื่องจริง:
-                        <input name="operationTime" type="text" id="operationTime" size="7" class="default_view"  value="{operationTime}" onchange="saveOperation();">   
+                        <input name="operationTime" type="text" id="operationTime" size="7" class="default_view"
+                            value="{operationTime}" onchange="saveOperation();">
                 </tr>
                 <tr>
                     <td align="right">Item:</td>
@@ -325,98 +343,134 @@ function saveOperation() {
                 </tr>
                 <tr>
                     <td align="right"> </td>
-                    <td><input name="item_desc" type="text" id="item_desc" size="53" class="default_view" readonly value={item_desc}></td>
+                    <td><input name="item_desc" type="text" id="item_desc" size="53" class="default_view" readonly
+                            value={item_desc}></td>
                 </tr>
                 <tr>
                     <td align="right">Operation:</td>
-                    <td><input name="oper_num" type="text" id="oper_num" size="5" class="default_view" readonly value="{oper_num}">
+                    <td><input name="oper_num" type="text" id="oper_num" size="5" class="default_view" readonly
+                            value="{oper_num}">
                         &nbsp;&nbsp;WC:
                         <input name="wc" type="text" id="wc" size="7" class="default_view" readonly value="{wc}">
-                        <input name="description" type="text" id="description" size="25" class="default_view" readonly value="{description}"></td>
+                        <input name="description" type="text" id="description" size="25" class="default_view" readonly
+                            value="{description}">
+                    </td>
                 </tr>
                 <tr>
                     <td align="right">Remark</td>
-                    <td><textarea style="font-size: 14px; background: #e5e5e5; border: 1px solid #C7CEFE; color: blue; resize: none;" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly cols="55">{Uf_remark}</textarea> </td>
+                    <td><textarea
+                            style="font-size: 14px; background: #e5e5e5; border: 1px solid #C7CEFE; color: blue; resize: none;"
+                            class="form-control" id="exampleFormControlTextarea1" rows="3" readonly
+                            cols="55">{Uf_remark}</textarea> </td>
                 </tr>
                 <tr>
                     <td align="right">Qty Issued:</td>
-                    <td><input name="qty_issued" type="text" id="qty_issued" size="7" class="default_view" readonly value="{qty_issued}"> {matl_um}.
-                    <span style="color: red; margin-left: 15px;">เส้น/มัด:</span>
-                    <input style="color: red;" name="uf_pack" type="text" id="uf_pack" size="7" class="default_view" value="{uf_pack}" readonly></td>
-                </tr>      
+                    <td><input name="qty_issued" type="text" id="qty_issued" size="7" class="default_view" readonly
+                            value="{qty_issued}"> {matl_um}.
+                        <span style="color: red; margin-left: 15px;">เส้น/มัด:</span>
+                        <input style="color: red;" name="uf_pack" type="text" id="uf_pack" size="7" class="default_view"
+                            value="{uf_pack}" readonly>
+                    </td>
+                </tr>
             </table>
             <table width="100%" border="0" cellspacing="0" cellpadding="2" class="font14">
                 <tr>
                     <td align="right">ยอดสั่งผลิต</td>
-                    <td><input name="qty_released" type="text" id="qty_released" value="{qty_released}" size="7" class="default_view" readonly>
+                    <td><input name="qty_released" type="text" id="qty_released" value="{qty_released}" size="7"
+                            class="default_view" readonly>
                         เส้น</td>
-                    <td><input name="weight_released" type="text" id="weight_released" value="{weight_released}" size="9" class="default_view" readonly>
+                    <td><input name="weight_released" type="text" id="weight_released" value="{weight_released}"
+                            size="9" class="default_view" readonly>
                         KG.</td>
-                    <td><input name="pack_released" type="text" id="pack_released" value="{pack_released}" size="7" class="default_view" readonly>
+                    <td><input name="pack_released" type="text" id="pack_released" value="{pack_released}" size="7"
+                            class="default_view" readonly>
                         มัด</td>
                 </tr>
                 <tr>
-                    <td colspan="4" height="10"><hr></td>
+                    <td colspan="4" height="10">
+                        <hr>
+                    </td>
                 </tr>
                 <tr>
                     <td align="right"><strong>Grade A</strong> </td>
-                    <td><input name="qty1_a" type="text" id="qty1_a" value="{qty1_a}" size="7" class="default_view" readonly>
+                    <td><input name="qty1_a" type="text" id="qty1_a" value="{qty1_a}" size="7" class="default_view"
+                            readonly>
                         เส้น</td>
-                    <td><input name="qty2_a" type="text" id="qty2_a" value="{qty2_a}" size="9" class="default_view" readonly>
+                    <td><input name="qty2_a" type="text" id="qty2_a" value="{qty2_a}" size="9" class="default_view"
+                            readonly>
                         KG.</td>
-                    <td><input name="uf_pack_a" type="text" id="uf_pack_a" value="{uf_pack_a}" size="7" class="default_view" readonly>
+                    <td><input name="uf_pack_a" type="text" id="uf_pack_a" value="{uf_pack_a}" size="7"
+                            class="default_view" readonly>
                         มัด</td>
                 </tr>
                 <tr>
                     <td align="right"><strong>Grade B</strong> </td>
-                    <td><input name="qty1_b" type="text" id="qty1_b" value="{qty1_b}" size="7" class="default_view" readonly>
+                    <td><input name="qty1_b" type="text" id="qty1_b" value="{qty1_b}" size="7" class="default_view"
+                            readonly>
                         เส้น</td>
-                    <td><input name="qty2_b" type="text" id="qty2_b" value="{qty2_b}" size="9" class="default_view" readonly>
+                    <td><input name="qty2_b" type="text" id="qty2_b" value="{qty2_b}" size="9" class="default_view"
+                            readonly>
                         KG.</td>
-                    <td><input name="uf_pack_b" type="text" id="uf_pack_b" value="{uf_pack_b}" size="7" class="default_view" readonly>
+                    <td><input name="uf_pack_b" type="text" id="uf_pack_b" value="{uf_pack_b}" size="7"
+                            class="default_view" readonly>
                         มัด</td>
                 </tr>
                 <tr>
                     <td align="right"><strong>Grade C</strong> </td>
-                    <td><input name="qty1_c" type="text" id="qty1_b" value="{qty1_c}" size="7" class="default_view" readonly>
+                    <td><input name="qty1_c" type="text" id="qty1_b" value="{qty1_c}" size="7" class="default_view"
+                            readonly>
                         เส้น</td>
-                    <td><input name="qty2_c" type="text" id="qty2_c" value="{qty2_c}" size="9" class="default_view" readonly>
+                    <td><input name="qty2_c" type="text" id="qty2_c" value="{qty2_c}" size="9" class="default_view"
+                            readonly>
                         KG.</td>
-                    <td><input name="uf_pack_c" type="text" id="uf_pack_c" value="{uf_pack_c}" size="7" class="default_view" readonly>
+                    <td><input name="uf_pack_c" type="text" id="uf_pack_c" value="{uf_pack_c}" size="7"
+                            class="default_view" readonly>
                         มัด</td>
                 </tr>
                 <tr>
                     <td align="right"><strong>Grade R</strong> </td>
-                    <td><input name="qty1_r" type="text" id="qty1_r" value="{qty1_r}" size="7" class="default_view" readonly>
+                    <td><input name="qty1_r" type="text" id="qty1_r" value="{qty1_r}" size="7" class="default_view"
+                            readonly>
                         เส้น</td>
-                    <td><input name="qty2_r" type="text" id="qty2_r" value="{qty2_r}" size="9" class="default_view" readonly>
+                    <td><input name="qty2_r" type="text" id="qty2_r" value="{qty2_r}" size="9" class="default_view"
+                            readonly>
                         KG.</td>
-                    <td><input name="uf_pack_r" type="text" id="uf_pack_r" value="{uf_pack_r}" size="7" class="default_view" readonly>
+                    <td><input name="uf_pack_r" type="text" id="uf_pack_r" value="{uf_pack_r}" size="7"
+                            class="default_view" readonly>
                         มัด</td>
                 </tr>
                 <tr>
                     <td align="right"><strong>รวม</strong></td>
-                    <td><input name="total_qty1" type="text" id="total_qty1" value="{total_qty1}" size="7" class="default_view" readonly>
+                    <td><input name="total_qty1" type="text" id="total_qty1" value="{total_qty1}" size="7"
+                            class="default_view" readonly>
                         เส้น</td>
-                    <td><input name="total_qty2" type="text" id="total_qty2" value="{total_qty2}" size="9" class="default_view" readonly>
+                    <td><input name="total_qty2" type="text" id="total_qty2" value="{total_qty2}" size="9"
+                            class="default_view" readonly>
                         KG.</td>
-                    <td><input name="total_pack" type="text" id="total_pack" value="{total_pack}" size="7" class="default_view" readonly>
+                    <td><input name="total_pack" type="text" id="total_pack" value="{total_pack}" size="7"
+                            class="default_view" readonly>
                         มัด</td>
                 </tr>
                 <tr>
                     <td align="right"><strong>qty mat</strong></td>
                     <td>
-                        <input name="qty_mat" type="text" id="qty_mat" value="{qty_mat}" size="7" class="default_view" readonly>
+                        <input name="qty_mat" type="text" id="qty_mat" value="{qty_mat}" size="7" class="default_view"
+                            readonly>
                     </td>
                     <td align="right"><strong>qty mat Purchase</strong></td>
                     <td>
-                        <input name="qty_mat_r" type="text" id="qty_mat" value="{qty_mat_r}" size="7" class="default_view" readonly>
+                        <input name="qty_mat_r" type="text" id="qty_mat" value="{qty_mat_r}" size="7"
+                            class="default_view" readonly>
                     </td>
-<td></td>
-<td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
-            </table></td>
-        <td width="60%" rowspan="3" valign="top"><div style='overflow:auto; height:450px;'><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14" id="tblist">
+            </table>
+        </td>
+        <td width="60%" rowspan="3" valign="top">
+            <div style='overflow:auto; height:450px;'>
+                <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#6f6f6f" class="font14"
+                    id="tblist">
                     <tr bgcolor="#c4e1ff">
                         <td align="center" width="2%"><strong>#</strong></td>
                         <td align="center"><strong>Tag no.</strong></td>
@@ -432,19 +486,25 @@ function saveOperation() {
                         <td width="2%"> </td>
                         <td width="10%">ตรวจสอบ</td>
                     </tr>
-                    {list}		
-                </table></div>
+                    {list}
+                </table>
+            </div>
             <table width="100%" border="0" cellpadding="5" cellspacing="0" class="font14">
                 <tr>
-                    <td align="center"><input name="print_tag" type="button" id="print_tag" value=" พิมพ์ซ้ำ " class="ui-button ui-widget ui-corner-all" onClick="{funcprint}
-                            ();"> <!-- <input name="del_tag" type="button" id="del_tag" value=" ลบ Tag " class="ui-button ui-widget ui-corner-all" onClick="DeleteTag();"> --></td>
+                    <td align="center"><input name="print_tag" type="button" id="print_tag" value=" พิมพ์ซ้ำ "
+                            class="ui-button ui-widget ui-corner-all" onClick="{funcprint}
+                            ();">
+                        <!-- <input name="del_tag" type="button" id="del_tag" value=" ลบ Tag " class="ui-button ui-widget ui-corner-all" onClick="DeleteTag();"> -->
+                    </td>
                 </tr>
             </table>
         </td>
     </tr>
     <tr>
-        <td align="center" ><input name="print_a" type="button" id="print_a" value="พิมพ์ A" class="ui-button ui-widget ui-corner-all" onClick="LinkTagA();">
-            <input name="print_b" type="button" id="print_b" value="พิมพ์ B" class="ui-button ui-widget ui-corner-all" onClick="LinkTagB();">
+        <td align="center"><input name="print_a" type="button" id="print_a" value="พิมพ์ A"
+                class="ui-button ui-widget ui-corner-all" onClick="LinkTagA();">
+            <input name="print_b" type="button" id="print_b" value="พิมพ์ B" class="ui-button ui-widget ui-corner-all"
+                onClick="LinkTagB();">
             <!--<input name="print_c" type="button" id="print_c" value="พิมพ์ B" class="ui-button ui-widget ui-corner-all" onClick="LinkTagC();">-->
             <!--<input name="print_r" type="button" id="print_r" value="พิมพ์ R" class="ui-button ui-widget ui-corner-all" onClick="LinkTagR();"></td>-->
     </tr>
