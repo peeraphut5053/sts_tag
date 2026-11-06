@@ -48,7 +48,7 @@
                         $("#data_lot").html(data.lot)
                         $("#data_qty1").html(data.qty1)
                         $("#data_ship_stat").val(data.ship_stat)
-                        $("#data_do_num").val(data.do_num)
+                        $("#data_do_num").val(data.do_num || "")
                         validateDoNum();
                         $("#notfound").hide();
                     } else {
@@ -68,26 +68,38 @@
     function LinkUnpost() {
         var tag_id = $('#tag_id').val();
         var data_ship_stat = $('#data_ship_stat').val();
-        var data_do_num = $('#data_do_num').val();
+        var data_do_num = $.trim($('#data_do_num').val());
         let updateVal = ""
         if (data_ship_stat == '1') {
             updateVal = "0"
         } else {
             updateVal = "1"
         }
+
+        if (updateVal == '1' && data_do_num == '') {
+            alert('กรุณาใส่เลข do_num ก่อนเปลี่ยนสถานะ ship เป็น 1');
+            $('#data_do_num').focus(); 
+            return false;
+        }
+
+        if (updateVal == '0') {
+            data_do_num = '';
+        }
+
         $.ajax({
-            url: `./module/reset_tag_id_shiped_update_tag.php?tag_id=${tag_id}&updateVal=${updateVal}&do_num=${data_do_num}`,
+            url: `./module/reset_tag_id_shiped_update_tag.php?tag_id=${encodeURIComponent(tag_id)}&updateVal=${updateVal}&do_num=${encodeURIComponent(data_do_num)}`,
             dataType: 'json',
             type: 'get',
             contentType: 'application/json',
             processData: false,
             success: function (data, textStatus, jQxhr) {
                 if (data) {
-
-                    console.log(data)
                     $("#data_tag_id").html(data.id)
                     $("#data_ship_stat").val(data.ship_stat)
+                    $("#data_do_num").val(data.do_num || "")
+                    validateDoNum();
                     $("#notfound").hide();
+                    alert('เปลี่ยนสถานะ tag เรียบร้อยแล้ว');
 
                 } else {
                     $("#notfound").show();

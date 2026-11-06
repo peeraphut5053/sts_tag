@@ -4,8 +4,18 @@ while (list($key, $data) = each($_GET) OR list($key, $data) = each($_POST)) {
 }
 include "./initial.php";
 
+$do_num = isset($do_num) ? trim($do_num) : '';
+if ($updateVal == '0') {
+	$doNumSql = "NULL";
+} else {
+	if ($do_num == '') {
+		echo false;
+		exit;
+	}
+	$doNumSql = "'".$do_num."'";
+}
 
-$sql = "update mv_bc_tag set ship_stat = '".$updateVal."', do_num = '".$do_num."'  where id = '".$tag_id."' ";
+$sql = "update mv_bc_tag set ship_stat = '".$updateVal."', do_num = ".$doNumSql."  where id = '".$tag_id."' ";
 $cSql = new SqlSrv();
 $rs = $cSql->SqlQuery($conn, $sql);
 
