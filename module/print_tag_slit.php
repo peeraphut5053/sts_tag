@@ -53,7 +53,7 @@ where id = '" . $rs_id_tag[1]["sl_tag_id"] . "';";
 		//$temp->setReplace("{job}", "".$rs[1]["job"]."");
 		$temp->setReplace("{Uf_manu}", "".$rs[1]["Uf_manu"]."");
 		$temp->setReplace("{uf_spec}", "".$rs[1]["uf_spec"]."");
-		$temp->setReplace("{lot}", "".$rs[1]["lot"]."");
+		$temp->setReplace("{lot}", substr("".$rs[1]["lot"], -4));
 		$temp->setReplace("{item}", "".$rs[1]["item"]."");
 		$temp->setReplace("{Uf_Grade}", "".$rs[1]["itemgrade"]."");
 		$sql2 = "select Uf_qty_slit from job_mst where job = '".$rs[1]["job"]."' AND suffix = '".$rs[1]["suffix"]."';";
@@ -135,7 +135,7 @@ where id = '" . $rs_id_tag[1]["sl_tag_id"] . "';";
         }
 	
 	$temp->setReplace("{Uf_Grade}", "".$rs1[1]["Uf_Grade"]."");
-	$temp->setReplace("{lot}", "".$slot[0].$lot."");
+	$temp->setReplace("{lot}", substr("".$slot[0].$lot, -4));
 	$temp->setReplace("{barcode}", "".$id."");
 	$temp->setReplace("{uf_Width}", $rs1[1]["Uf_thickness"].$ufwidth);
 	$temp->setReplace("{qty_rec}", "".total_format($uf_act_Weight)."");
