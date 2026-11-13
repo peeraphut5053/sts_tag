@@ -35,6 +35,13 @@ if (isset($uf_spec) AND $uf_spec != '') {
 if (isset($lot) AND $lot != '') $wh .= " and lot LIKE '".$lot."%'";
 else $lot = "";
 
+if (isset($sts_no) AND $sts_no != '') {
+	$wh .= " and sts_no LIKE '%".str_replace("'", "''", $sts_no)."%'";
+	$top = "";
+} else {
+	$sts_no = "";
+}
+
 if(isset($wh2)) {
 	$temp->setReplace("{selected".$wh2."}", " selected");
 	if ($wh2==1) $wh .= " and receipt is null";
@@ -70,6 +77,7 @@ for($i=1; $i<=$rs[0][0]; $i++) {
 	$list .= '<td>'.$rs[$i]["id"].'</td>
 		<td>'.$jobso.'</td>		
         <td>'.$rs[$i]["lot"].'</td>
+		<td>'.htmlspecialchars($rs[$i]["sts_no"] ?? '', ENT_QUOTES, 'UTF-8').'</td>
 		<td><div id="d_item_'.$rs[$i]["id"].'">'.$rs[$i]["item"].'</div></td>		
 		<td>'.$recimg.'</td>
         <td align="right">'.total_format($rs[$i]["qty1"]).'</div></td>        
@@ -83,4 +91,5 @@ $temp->setReplace("{list}", $list);
 $temp->setReplace("{id}", "".$id."");
 $temp->setReplace("{uf_spec}", "".$uf_spec."");
 $temp->setReplace("{lot}", "".$lot."");
+$temp->setReplace("{sts_no}", htmlspecialchars($sts_no, ENT_QUOTES, 'UTF-8'));
 ?>
